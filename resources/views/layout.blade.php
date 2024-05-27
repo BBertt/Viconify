@@ -7,10 +7,11 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-    <div id="sidebar"></div>
+    <div id="sidebar" style="z-index: 1"></div>
     <main>
         @yield('content')
     </main>
     @vite('resources/js/app.tsx')
+    @stack('scripts')
 </body>
 </html>
