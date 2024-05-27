@@ -19,7 +19,7 @@ html, body {
 
   main {
     margin-left: 64px;
-    padding: 1rem;
+    padding: 0;
     height: 100%;
     overflow: auto;
   }
