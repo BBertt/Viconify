@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MsProductController;
 use App\Http\Controllers\MsUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RouteController;
@@ -17,3 +18,6 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/', [MsUserController::class, 'logout'])->name('logout');
 });
+
+// Routing to Shop Pages
+Route::get('/shop', [MsProductController::class, 'index'])->name('shop');
