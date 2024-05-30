@@ -20,4 +20,5 @@ Route::middleware('auth')->group(function () {
 });
 
 // Routing to Shop Pages
-Route::get('/shop', [MsProductController::class, 'index'])->name('shop');
+// Route::get('/shop', [MsProductController::class, 'index'])->name('shop');
+Route::resource('shop', MsProductController::class);

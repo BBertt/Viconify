@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Login')
+@section('title', 'Home')
 @section('content')
 <body class="bg-gray-100 text-gray-900">
 

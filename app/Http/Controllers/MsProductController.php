@@ -12,7 +12,9 @@ class MsProductController extends Controller
      */
     public function index()
     {
-        return view('shop');
+        $products = MsProduct::with('pictures')->latest()->paginate(6);
+
+        return view('shop', ['products' => $products]);
     }
 
     /**
