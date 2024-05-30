@@ -33,5 +33,10 @@ class MsPictureSeeder extends Seeder
             'ProductID' => 4,
             'PictureData' => 'https://picsum.photos/200'
         ]);
+        MsPicture::create([
+            'PictureID' => 5,
+            'ProductID' => 4,
+            'PictureData' => 'https://source.unsplash.com/random'
+        ]);
     }
 }
