@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class MsVideo extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['VideoID'];
+
+    public function user() {
+        return $this->belongsTo(MsUser::class, 'UserID');
+    }
 }

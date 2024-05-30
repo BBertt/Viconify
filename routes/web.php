@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MsUserController;
+use App\Http\Controllers\MsVideoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RouteController;
 
@@ -17,3 +18,5 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/', [MsUserController::class, 'logout'])->name('logout');
 });
+
+Route::resource('/videos', MsVideoController::class);

@@ -12,7 +12,9 @@ class MsVideoController extends Controller
      */
     public function index()
     {
-        //
+        return view('videos', [
+            'videos' => MsVideo::all()
+        ]);
     }
 
     /**
