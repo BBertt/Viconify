@@ -39,7 +39,23 @@
      -->
 
     <div class="right-column-chat">
+        <div class="header-chat">
+            <img src="" alt="" id="profileImage">
+            <a href="">Zenosite</a>
+        </div>
 
+        <!-- Chat box and bubble chat -->
+
+        <!-- 
+            Notes:
+            Nanti ubah button jadi pakai icon
+         -->
+        <div class="chat-bar">
+            <button id="addFileButton">+</button>
+            <button id="emoticonButton">Emoticon</button>
+            <input type="text">
+            <button id="sendButton">Send</button>
+        </div>
     </div>
 </body>
 </html>
