@@ -9,6 +9,7 @@ class MsVideo extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'VideoID';
     protected $guarded = ['VideoID'];
 
     public function user() {

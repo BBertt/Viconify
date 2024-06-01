@@ -21,7 +21,7 @@ class MsVideoFactory extends Factory
             'VideoImage' => 'Assets/images/videos/sample_image.jpg',
             'VideoLinkEmbedded' => 'Assets/videos/sample_video.mp4',
             'Title' => $this->faker->text(),
-            'Description' => $this->faker->text(),
+            'Description' => $this->faker->text(800),
             'PostTime' => $this->faker->time(),
             'Views' => $this->faker->randomNumber(),
             'Like' => $this->faker->randomNumber(),

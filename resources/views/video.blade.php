@@ -5,7 +5,7 @@
     <header class="bg-[#E6F5FF] text-black p-4 flex flex-col items-center">
         <div class="flex items-center justify-between w-full">
             <div class="flex items-center space-x-4">
-                <a href= {{ route('HomePage') }}>
+                <a href= {{route('videos.index')}}>
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>
@@ -59,88 +59,101 @@
         </div>
     </header>
 
-    <div class="container mx-auto py-4 max-w-screen-2xl px-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            @php 
-            $videoCount = 0; 
-            $dbCount = 0;
-            @endphp
-            @for ($i = $videoCount; $i < count($videos); $i++)
-                @if($videos[$i]->VideoType === 'Videos' && $videoCount < 8)
-                <a href="{{ route('videos.show', $videos[$i]->VideoID)}}">
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden m-2">
-                            <img src="{{ asset($videos[$i]->VideoImage) }}" alt="{{ $videos[$i]->Title }}" class="w-full h-48 object-cover">
-                            <div class="p-4">
-                                <div class="flex items-center">
-                                    <img src="{{ asset($videos[$i]->user->ProfileImage) }}" alt="{{ $videos[$i]->user->name }}" class="w-10 h-10 rounded-full mr-4">
-                                    <div class="flex flex-col truncate w-full">
-                                        <h3 class="text-lg font-bold text-black truncate">{{ $videos[$i]->Title }}</h3>
-                                        <p class="text-gray-600">{{ $videos[$i]->user->Name }}</p>
-                                    </div>
+    <main class="container mx-auto py-6 max-w-screen-2xl px-6">
+        <section class="flex flex-col lg:flex-row gap-4">
+            <div class="w-full lg:w-2/3">
+                <div class="bg-white shadow rounded-lg overflow-hidden">
+                    <img src="https://via.placeholder.com/800x400" alt="Video Thumbnail" class="w-full">
+                    <div class="p-4">
+                        <h1 class="text-2xl font-bold mb-2">{{ $video->Title }}</h1>
+                        <div class="flex items-center space-x-4 mb-4">
+                            <img src="{{ $video->user->ProfileImage }}" alt="{{ $video->user->Name }}" class="w-10 h-10 rounded-full">
+                            <div class="flex-grow">
+                                <h2 class="font-bold">{{ $video->user->Name }}</h2>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="flex items-center bg-white text-black px-4 py-2 border border-black rounded-full">
+                                    <button class="flex items-center space-x-2">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                    </button>
+                                    <span class="mx-2">|</span>
+                                    <button class="flex items-center space-x-2">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 13l-4-4L5 17"></path>
+                                        </svg>
+                                    </button>
                                 </div>
+                                <button class="bg-white text-black px-4 py-2 rounded-full flex items-center space-x-2 border border-black">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Share</span>
+                                </button>
                             </div>
                         </div>
-                        @php $videoCount++; @endphp
-                        @php $dbCount = $i; @endphp
-                    @endif
-                </a>
-            @endfor
-        </div>
-    </div>
-
-    <div class="container mx-auto py-4 max-w-screen-2xl mt-8 px-4">
-        <div class="flex items-center mb-4">
-            <svg viewBox="0 0 24 24" class="w-6 h-6 mr-2" xmlns="http://www.w3.org/2000/svg">
-                <path fill="currentColor" d="M10 9V5l7 7-7 7v-4H4V9h6z"/>
-            </svg>
-            <span class="text-black font-bold text-xl">Shorts</span>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 shorts-container">
-            @php $shortCount = 0; @endphp
-            @foreach ($videos as $video)
-                @if($video->VideoType === 'Shorts' && $shortCount < 6)
-                    <div class="short-item relative bg-gray-200 rounded-lg overflow-hidden h-96 m-2 transform transition-transform duration-300 hover:scale-110 hover:shadow-lg hover:bg-[#f0f0f0]">
-                        <img src="{{ asset($video->VideoImage) }}" alt="{{ $video->Title }}" class="w-full h-full object-cover">
-                        <div class="hover-content absolute inset-0 p-4 flex flex-col justify-end opacity-0 transition-opacity duration-300 hover:opacity-100">
-                            <div class="flex items-center">
-                                <img src="{{ asset($video->user->ProfileImage) }}" alt="{{ $video->user->name }}" class="w-12 h-12 rounded-full mr-4">
-                                <div class="flex flex-col truncate w-full">
-                                    <h3 class="text-lg font-bold text-black truncate">{{ $video->Title }}</h3>
-                                    <p class="text-black-600">{{ $video->user->Name }}</p>
-                                    <p class="text-black-600 text-sm">{{ $video->Description }}</p>
-                                </div>  
+                        <div class="bg-[#C1E5FF] p-4 rounded-lg">
+                            <p class="mb-4">{{ $video->Views }} Views • {{ $video->created_at->format('d M Y') }}</p>
+                            <div id="description-container" class="relative">
+                                <p id="description" class="mb-4 overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
+                                    {{ $video->Description }}
+                                </p>
+                                <button id="more-button" class="text-blue-500 inline" style="display: none;">...more</button>
                             </div>
                         </div>
                     </div>
-                    @php $shortCount++; @endphp
-                @endif
-            @endforeach
-        </div>
-    </div>
+                </div>
+            </div>
 
-    <div class="container mx-auto py-24 max-w-screen-2xl px-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            @for ($i = $dbCount + 1; $i < count($videos); $i++)
-                @if($videos[$i]->VideoType === 'Videos')
-                <a href="{{ route('videos.show', $videos[$i]->VideoID)}}">
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden m-2">
-                        <img src="{{ $videos[$i]->VideoImage }}" alt="{{ $videos[$i]->Title }}" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <div class="flex items-center">
-                                <img src="{{ asset($videos[$i]->user->ProfileImage) }}" alt="{{ $videos[$i]->user->name }}" class="w-10 h-10 rounded-full mr-4">
-                                <div class="flex flex-col truncate w-full">
-                                    <h3 class="text-lg font-bold text-black truncate">{{ $videos[$i]->Title }}</h3>
-                                    <p class="text-gray-600">{{ $videos[$i]->user->Name }}</p>
-                                </div>
-                            </div>
+            <!-- Video suggestions -->
+            <div class="w-full lg:w-1/3 mt-4 lg:mt-0">
+                <div class="flex flex-col space-y-4">
+                    <div class="flex items-start space-x-4">
+                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
+                        <div>
+                            <h3 class="font-bold">Uplifting Music</h3>
+                            <p class="text-gray-600">6K views • 1 hour ago</p>
                         </div>
                     </div>
-                </a>
-                @endif
-            @endfor
-        </div>
-    </div>
+                    <div class="flex items-start space-x-4">
+                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
+                        <div>
+                            <h3 class="font-bold">Valorant Episode 7</h3>
+                            <p class="text-gray-600">1M views • 2 months ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
+                        <div>
+                            <h3 class="font-bold">Character Demo - Xiao</h3>
+                            <p class="text-gray-600">3M views • 4 years ago</p>
+                        </div>
+                    </div>
+                    <!-- Add more suggested videos here -->
+                </div>
+            </div>
+        </section>
+    </main>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const description = document.getElementById('description');
+            const moreButton = document.getElementById('more-button');
+
+            // Check if the description text is longer than three lines
+            if (description.scrollHeight > description.clientHeight) {
+                moreButton.style.display = 'inline';
+            }
+
+            moreButton.addEventListener('click', function () {
+                description.style.webkitLineClamp = 'unset';
+                description.style.overflow = 'visible';
+                moreButton.remove();
+            });
+        });
+    </script>
+</body>
 @endsection
 
 @push('scripts')
