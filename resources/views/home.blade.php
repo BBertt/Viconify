@@ -149,23 +149,22 @@
         </div>
     </div>
 
-    <div class="container mx-auto p-4 flex flex-col">
-        <div class="relative w-full" style="background-image: url('Assets/PopularCategories.jpg'); background-size: cover; background-position: center; aspect-ratio: 3 / 1;">
-            <div class="absolute inset-0 flex flex-col items-center justify-center p-8">
-                <div class="flex overflow-x-auto pb-4">
+    <div class="container mx-auto p-0 flex flex-col">
+        <div class="flex justify-center w-full h-full">
+            <div class="w-11/12 flex justify-center h-[27rem]" style="background-image: url('Assets/PopularCategories.jpg'); background-size: cover; background-position: center; aspect-ratio: 3 / 1;">
+                <div class="flex pb-4">
                     <div class="flex-none bg-white rounded-lg shadow-lg p-4 mx-2">
-                        <img src="/path/to/your/product1.png" alt="Product 1" class="w-full h-48 object-cover rounded-lg mb-2">
+                        <img src="/path/to/your/product1.png" alt="Product 1" class="w-full h-20 object-cover rounded-lg mb-2">
                         <h2 class="text-lg font-bold">Xiao Mini Figure</h2>
                         <p class="text-sm text-gray-600">Genshin Impact</p>
                         <p class="text-orange-500 font-bold">Rp 500.000</p>
                     </div>
                     <div class="flex-none bg-white rounded-lg shadow-lg p-4 mx-2">
-                        <img src="/path/to/your/product2.png" alt="Product 2" class="w-full h-48 object-cover rounded-lg mb-2">
+                        <img src="/path/to/your/product2.png" alt="Product 2" class="w-full h-20 object-cover rounded-lg mb-2">
                         <h2 class="text-lg font-bold">Hutao Figurine</h2>
                         <p class="text-sm text-gray-600">Genshin Impact</p>
                         <p class="text-orange-500 font-bold">Rp 550.000</p>
                     </div>
-                    <!-- Add more products as needed -->
                 </div>
             </div>
         </div>

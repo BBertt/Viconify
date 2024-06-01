@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\MsUser;
 use App\Models\User;
+use App\Models\MsVideo;
+use App\Models\MsProduct;
+use App\Models\MsPicture;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

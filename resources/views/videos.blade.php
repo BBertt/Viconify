@@ -61,8 +61,8 @@
 
     <div class="container mx-auto py-4 max-w-screen-2xl px-4">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            @php 
-            $videoCount = 0; 
+            @php
+            $videoCount = 0;
             $dbCount = 0;
             @endphp
             @for ($i = $videoCount; $i < count($videos); $i++)
@@ -108,7 +108,7 @@
                                     <h3 class="text-lg font-bold text-black truncate">{{ $video->Title }}</h3>
                                     <p class="text-black-600">{{ $video->user->Name }}</p>
                                     <p class="text-black-600 text-sm">{{ $video->Description }}</p>
-                                </div>  
+                                </div>
                             </div>
                         </div>
                     </div>
