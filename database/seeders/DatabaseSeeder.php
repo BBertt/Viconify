@@ -21,6 +21,6 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        MsVideo::factory(20)->create();
+        MsVideo::factory(40)->create();
     }
 }

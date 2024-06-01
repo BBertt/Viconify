@@ -39,7 +39,8 @@ class MsVideoController extends Controller
     public function show(int $VideoID)
     {
         return view('video', [
-            'video' => MsVideo::findOrFail($VideoID)
+            'video' => MsVideo::findOrFail($VideoID),
+            'videos' => MsVideo::all()
         ]);
     }
 

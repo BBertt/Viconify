@@ -59,11 +59,13 @@
         </div>
     </header>
 
-    <main class="container mx-auto py-6 max-w-screen-2xl px-6">
+    <main>
         <section class="flex flex-col lg:flex-row gap-4">
             <div class="w-full lg:w-2/3">
-                <div class="bg-white shadow rounded-lg overflow-hidden">
-                    <img src="https://via.placeholder.com/800x400" alt="Video Thumbnail" class="w-full">
+                <div class="bg-white shadow rounded-lg">
+                    <video controls class="w-full rounded-lg">
+                        <source src="{{ asset($video->VideoLinkEmbedded) }}" type="video/mp4">
+                    </video>
                     <div class="p-4">
                         <h1 class="text-2xl font-bold mb-2">{{ $video->Title }}</h1>
                         <div class="flex items-center space-x-4 mb-4">
@@ -85,7 +87,7 @@
                                         </svg>
                                     </button>
                                 </div>
-                                <button class="bg-white text-black px-4 py-2 rounded-full flex items-center space-x-2 border border-black">
+                                <button class="bg-white text-black px-4 py-2 border border-black rounded-full flex items-center space-x-2">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
@@ -93,15 +95,15 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="bg-[#C1E5FF] p-4 rounded-lg">
-                            <p class="mb-4">{{ $video->Views }} Views • {{ $video->created_at->format('d M Y') }}</p>
-                            <div id="description-container" class="relative">
-                                <p id="description" class="mb-4 overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
-                                    {{ $video->Description }}
-                                </p>
-                                <button id="more-button" class="text-blue-500 inline" style="display: none;">...more</button>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+                <div class="bg-[#C1E5FF] py-4 px-6 rounded-lg w-full">
+                    <p class="mb-4 font-bold">{{ $video->Views }} Views • {{ $video->created_at->format('d M Y') }}</p>
+                    <div id="description-container" class="relative">
+                        <p id="description" class="mb-4 overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
+                            {{ $video->Description }}
+                        </p>
+                        <button id="more-button" class="text-black-500 font-bold inline" style="display: none;">...more</button>
                     </div>
                 </div>
             </div>
@@ -130,7 +132,87 @@
                             <p class="text-gray-600">3M views • 4 years ago</p>
                         </div>
                     </div>
-                    <!-- Add more suggested videos here -->
+                    <div class="flex items-start space-x-4">
+                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
+                        <div>
+                            <h3 class="font-bold">Uplifting Music</h3>
+                            <p class="text-gray-600">6K views • 1 hour ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
+                        <div>
+                            <h3 class="font-bold">Valorant Episode 7</h3>
+                            <p class="text-gray-600">1M views • 2 months ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
+                        <div>
+                            <h3 class="font-bold">Character Demo - Xiao</h3>
+                            <p class="text-gray-600">3M views • 4 years ago</p>
+                        </div>
+                    </div>                    <div class="flex items-start space-x-4">
+                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
+                        <div>
+                            <h3 class="font-bold">Uplifting Music</h3>
+                            <p class="text-gray-600">6K views • 1 hour ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
+                        <div>
+                            <h3 class="font-bold">Valorant Episode 7</h3>
+                            <p class="text-gray-600">1M views • 2 months ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
+                        <div>
+                            <h3 class="font-bold">Character Demo - Xiao</h3>
+                            <p class="text-gray-600">3M views • 4 years ago</p>
+                        </div>
+                    </div>                    <div class="flex items-start space-x-4">
+                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
+                        <div>
+                            <h3 class="font-bold">Uplifting Music</h3>
+                            <p class="text-gray-600">6K views • 1 hour ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
+                        <div>
+                            <h3 class="font-bold">Valorant Episode 7</h3>
+                            <p class="text-gray-600">1M views • 2 months ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
+                        <div>
+                            <h3 class="font-bold">Character Demo - Xiao</h3>
+                            <p class="text-gray-600">3M views • 4 years ago</p>
+                        </div>
+                    </div>                    <div class="flex items-start space-x-4">
+                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
+                        <div>
+                            <h3 class="font-bold">Uplifting Music</h3>
+                            <p class="text-gray-600">6K views • 1 hour ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
+                        <div>
+                            <h3 class="font-bold">Valorant Episode 7</h3>
+                            <p class="text-gray-600">1M views • 2 months ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
+                        <div>
+                            <h3 class="font-bold">Character Demo - Xiao</h3>
+                            <p class="text-gray-600">3M views • 4 years ago</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -147,9 +229,23 @@
             }
 
             moreButton.addEventListener('click', function () {
-                description.style.webkitLineClamp = 'unset';
-                description.style.overflow = 'visible';
-                moreButton.remove();
+                if (moreButton.innerText === '...more') {
+                    description.style.webkitLineClamp = 'unset';
+                    description.style.overflow = 'visible';
+                    moreButton.innerText = 'Show less';
+                } else {
+                    description.style.webkitLineClamp = '3';
+                    description.style.overflow = 'hidden';
+                    moreButton.innerText = '...more';
+                }
+            });
+
+            description.addEventListener('scroll', function () {
+                if (description.scrollTop + description.clientHeight >= description.scrollHeight) {
+                    moreButton.style.display = 'inline';
+                } else {
+                    moreButton.style.display = 'none';
+                }
             });
         });
     </script>
