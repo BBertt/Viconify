@@ -3,11 +3,13 @@
     <div class="container mx-auto py-8">
         <div class="flex flex-wrap md:flex-nowrap">
             <div class="w-full md:w-1/2 p-4 flex flex-col items-center">
-                <div class="relative w-full flex justify-center items-center">
-                    <button id="prevBtn" class="absolute left-0 bg-gray-300 text-gray-700 px-2 py-1 rounded-l transform -translate-y-1/2">Prev</button>
+                <div class="relative w-full flex flex-col items-center">
                     <img id="productImage" src="{{ asset('storage/' . $product->pictures->first()->PictureData) }}"
-                         alt="{{ $product->ProductName }}" class="mx-auto" style="width: 30rem; height: 36rem; object-cover;">
-                    <button id="nextBtn" class="absolute right-0 bg-gray-300 text-gray-700 px-2 py-1 rounded-r transform -translate-y-1/2">Next</button>
+                    alt="{{ $product->ProductName }}" class="mx-auto mb-4" style="width: 30rem; height: 36rem; object-cover;">
+                    <div class="flex justify-between w-full">
+                        <button id="prevBtn" class="bg-gray-300 text-gray-700 px-2 py-1 rounded-l">&larr;</button>
+                        <button id="nextBtn" class="bg-gray-300 text-gray-700 px-2 py-1 rounded-r">&rarr;</button>
+                    </div>
                 </div>
             </div>
             <div class="w-full md:w-1/2 p-4 flex flex-col">
@@ -30,10 +32,10 @@
                         <label for="quantity" class="block text-gray-700 text-sm font-bold mb-2">Atur jumlah dan catatan</label>
                         <div class="flex items-center">
                             <button type="button" class="btn btn-default btn-number bg-gray-300 text-gray-700 px-2 py-1 rounded-l" data-type="minus" data-field="quantity">-</button>
-                            <input type="text" name="quantity" class="form-control input-number w-16 text-center border-gray-300" value="1" min="1" max="{{ $product->quantity }}">
+                            <input type="text" name="quantity" class="form-control input-number w-16 text-center border-gray-300" value="1" min="1" max="{{ $product->Quantity }}">
                             <button type="button" class="btn btn-default btn-number bg-gray-300 text-gray-700 px-2 py-1 rounded-r" data-type="plus" data-field="quantity">+</button>
                         </div>
-                        <small class="text-gray-600">Stock total: {{ $product->quantity }}</small>
+                        <small class="text-gray-600">Stock total: {{ $product->Quantity }}</small>
                     </div>
                     <div class="mb-4">
                         <label for="notes" class="block text-gray-700 text-sm font-bold mb-2">Catatan</label>
@@ -54,6 +56,7 @@
 
     <script>
         window.productImages = {!! json_encode($product->pictures->pluck('PictureData')->all()) !!};
+        window.productPrice = {{ $product->ProductPrice }};
     </script>
 
     @push('scripts')

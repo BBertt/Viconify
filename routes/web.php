@@ -12,6 +12,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/register', [RouteController::class, 'Register'])->name('Register');
     Route::post('/register', [MsUserController::class, 'register'])->name('registerform');
 
+    Route::get('/login', [RouteController::class, 'Login'])->name('login');
     Route::get('/login', [RouteController::class, 'Login'])->name('Login');
     Route::post('/login', [MsUserController::class, 'login'])->name('loginform');
 });
