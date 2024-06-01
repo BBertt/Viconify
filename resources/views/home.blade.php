@@ -67,77 +67,109 @@
 
     <div class="container mx-auto p-4 flex flex-col">
         <div class="flex justify-center w-full h-full">
-        <div class="w-11/12 flex justify-center space-x-4">
-            <!-- Left Image -->
-            <div class="w-3/12 h-12/12 overflow-hidden">
-                <img src="{{ asset('Assets/TestImg1.jpg') }}" alt="" class="rounded-xl h-full w-full object-cover">
-            </div>
-            <!-- Carousel -->
-            <div id="carousel" class="w-6/12 relative h-full">
-                <div class="carousel-inner relative w-full h-full overflow-hidden rounded-xl">
-                    <div class="carousel-item active">
-                        <img src="{{ asset('Assets/TestImg.jpg') }}" class="block h-full object-cover w-full rounded-xl" alt="First slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ asset('Assets/TestImg1.jpg') }}" class="block h-full object-cover w-full rounded-xl" alt="Second slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{ asset('Assets/HomeBanner.png') }}" class="block h-full object-cover w-full rounded-xl" alt="Third slide">
-                    </div>
-                </div>
-                <button id="prev" class="absolute top-0 bottom-0 left-0 flex items-center justify-center p-0 text-center border-0 bg-transparent" style="transform: translateY(-50%); top: 50%;" type="button">
-                    <span class="carousel-control-prev-icon inline-block bg-no-repeat" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </button>
-                <button id="next" class="absolute top-0 bottom-0 right-0 flex items-center justify-center p-0 text-center border-0 bg-transparent" style="transform: translateY(-50%); top: 50%;" type="button">
-                    <span class="carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </button>
-            </div>
-            <!-- Right Images -->
-            <div class="w-3/12 h-12/12 flex flex-col space-y-4">
-                <div class="w-full h-full overflow-hidden">
+            <div class="w-11/12 flex justify-center space-x-4">
+                <!-- Left Image -->
+                <div class="w-3/12 h-12/12 overflow-hidden">
                     <img src="{{ asset('Assets/TestImg1.jpg') }}" alt="" class="rounded-xl h-full w-full object-cover">
                 </div>
-                <div class="h-full overflow-hidden">
-                    <img src="{{ asset('Assets/TestImg1.jpg') }}" alt="" class="rounded-xl h-full w-full object-cover">
+                <!-- Carousel -->
+                <div id="carousel" class="w-6/12 relative h-full">
+                    <div class="carousel-inner relative w-full h-full overflow-hidden rounded-xl">
+                        <div class="carousel-item active">
+                            <img src="{{ asset('Assets/TestImg.jpg') }}" class="block h-full object-cover w-full rounded-xl" alt="First slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('Assets/TestImg1.jpg') }}" class="block h-full object-cover w-full rounded-xl" alt="Second slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('Assets/HomeBanner.png') }}" class="block h-full object-cover w-full rounded-xl" alt="Third slide">
+                        </div>
+                    </div>
+                    <button id="prev" class="absolute top-0 bottom-0 left-0 flex items-center justify-center p-0 text-center border-0 bg-transparent" style="transform: translateY(-50%); top: 50%;" type="button">
+                        <span class="carousel-control-prev-icon inline-block bg-no-repeat" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </button>
+                    <button id="next" class="absolute top-0 bottom-0 right-0 flex items-center justify-center p-0 text-center border-0 bg-transparent" style="transform: translateY(-50%); top: 50%;" type="button">
+                        <span class="carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </button>
+                </div>
+                <!-- Right Images -->
+                <div class="w-3/12 h-12/12 flex flex-col space-y-4">
+                    <div class="w-full h-full overflow-hidden">
+                        <img src="{{ asset('Assets/TestImg1.jpg') }}" alt="" class="rounded-xl h-full w-full object-cover">
+                    </div>
+                    <div class="h-full overflow-hidden">
+                        <img src="{{ asset('Assets/TestImg1.jpg') }}" alt="" class="rounded-xl h-full w-full object-cover">
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
 
         <!-- New Collection -->
         <div class="relative mt-8 flex justify-center">
             <img src="{{ asset('Assets/HomeBanner.png') }}" alt="New Collection 2018" class="rounded-xl w-11/12 h-max">
         </div>
-
-        <div class="container mx-auto p-16">
-            <div class="flex flex-wrap -mx-4">
-                @foreach($videos as $video)
-                <div class="w-full md:w-1/3 lg:w-1/4 px-4 mb-8">
-                    <div class="bg-white rounded-lg overflow-hidden h-12/12">
-                        <div class="overflow-hidden w-full h-48 md:h-24 lg:h-32 xl:h-48  rounded-lg">
-                            <img src="{{$video->VideoImage}}" alt="{{ $video->VideoImage }}" class="w-full h-full object-cover">
-                        </div>
-                        <div class="flex flex-row p-2 pt-3">
-                            <div class="mt-1 overflow-hidden rounded-full h-10 w-10 flex-shrink-0">
-                                <img src="{{ asset('Assets/TestImg.jpg') }}" alt="{{ $video->VideoImage }}" class="h-full object-cover w-full rounded-xl">
-                            </div>
-                            <div class="pl-2 flex-1 max-w-full">
-                                <h2 class="text-base font-bold whitespace-nowrap overflow-hidden text-ellipsis p-0 m-0">{{ $video->Title }}</h2>
-                                <p class="text-sm text-gray-600">{{ $video->user->Name }}</p>
-                                <span class="text-sm text-gray-600">{{ $video->Views }} views</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
-
     </div>
 
+    <div class="container mx-auto p-4 flex flex-col">
+        <div class="flex justify-center w-full h-full">
+            <div class="w-11/12 flex justify-center space-x-4">
+                <div class="flex flex-wrap -mx-4">
+                    @foreach($videos as $video)
+                        @if($video->VideoType === 'video')
+                        <div class="w-full md:w-1/2 lg:w-1/4 px-4 mb-8">
+                            <div class="videocontainer bg-white rounded-lg overflow-hidden h-full hover:bg-gray-300 transition duration-300">
+                                <div class="relative overflow-hidden w-full h-50 sm:h-50 md:h-44 lg:h-32 xl:h-44 rounded-lg">
+                                    <img src="{{$video->VideoImage}}" alt="{{ $video->VideoImage }}" class="w-full h-full object-cover">
+                                    <div class="w-full h-full absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 hover:bg-opacity-50 transition duration-300">
+                                        <div class="flex items-center justify-center w-full h-full text-white text-lg font-bold opacity-0 hover:opacity-100">Watch Now</div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-row p-2 pt-3">
+                                    <div class="mt-1 overflow-hidden rounded-full h-10 w-10 flex-shrink-0">
+                                        @if($video->user->ProfileImage)
+                                            <img src="{{$video->user->ProfileImage}}" alt="{{ $video->VideoImage }}" class="h-full object-cover w-full rounded-full">
+                                        @else
+                                            <img src="{{asset('Assets/DefaultProfile.png')}}" alt="{{ $video->VideoImage }}" class="h-full object-cover w-full rounded-full">
+                                        @endif
+                                    </div>
+                                    <div class="pl-2 flex-1 max-w-full">
+                                        <h2 class="text-base font-bold whitespace-nowrap overflow-hidden text-ellipsis p-0 m-0">{{ $video->Title }}</h2>
+                                        <p class="text-sm text-gray-600">{{ $video->user->Name }}</p>
+                                        <span class="text-sm text-gray-600">{{ $video->Views }} views</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="container mx-auto p-4 flex flex-col">
+        <div class="relative w-full" style="background-image: url('Assets/PopularCategories.jpg'); background-size: cover; background-position: center; aspect-ratio: 3 / 1;">
+            <div class="absolute inset-0 flex flex-col items-center justify-center p-8">
+                <div class="flex overflow-x-auto pb-4">
+                    <div class="flex-none bg-white rounded-lg shadow-lg p-4 mx-2">
+                        <img src="/path/to/your/product1.png" alt="Product 1" class="w-full h-48 object-cover rounded-lg mb-2">
+                        <h2 class="text-lg font-bold">Xiao Mini Figure</h2>
+                        <p class="text-sm text-gray-600">Genshin Impact</p>
+                        <p class="text-orange-500 font-bold">Rp 500.000</p>
+                    </div>
+                    <div class="flex-none bg-white rounded-lg shadow-lg p-4 mx-2">
+                        <img src="/path/to/your/product2.png" alt="Product 2" class="w-full h-48 object-cover rounded-lg mb-2">
+                        <h2 class="text-lg font-bold">Hutao Figurine</h2>
+                        <p class="text-sm text-gray-600">Genshin Impact</p>
+                        <p class="text-orange-500 font-bold">Rp 550.000</p>
+                    </div>
+                    <!-- Add more products as needed -->
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection
 

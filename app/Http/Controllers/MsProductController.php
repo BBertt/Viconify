@@ -12,7 +12,7 @@ class MsProductController extends Controller
      */
     public function index()
     {
-        $products = MsProduct::with(['pictures', 'user'])->latest()->paginate(12);
+        $products = MsProduct::with(['pictures', 'user'])->latest()->paginate(2);
         // $product = MsProduct::with(['pictures', 'user'])->where('ProductID', 4)->first();
         // dd($product->pictures->count());
         return view('shop', ['products' => $products]);
@@ -26,9 +26,6 @@ class MsProductController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
