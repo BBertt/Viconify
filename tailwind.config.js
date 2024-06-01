@@ -8,6 +8,7 @@ module.exports = {
     './resources/views/**/*.blade.php',
     './resources/js/**/*.{js,ts,tsx}',
     './resources/css/**/*.css',
+    "vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php"
   ],
   darkMode: "class",
   theme: {

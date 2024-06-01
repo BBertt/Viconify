@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class MsUser extends Authenticatable
 {
@@ -70,7 +71,7 @@ class MsUser extends Authenticatable
     /**
      * Get the products for the user.
      */
-    public function products()
+    public function products() : HasMany
     {
         return $this->hasMany(MsProduct::class, 'UserID');
     }
