@@ -12,7 +12,9 @@ class MsVideoController extends Controller
      */
     public function index()
     {
-        //
+        return view('videos', [
+            'videos' => MsVideo::all()
+        ]);
     }
 
     /**
@@ -34,9 +36,12 @@ class MsVideoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MsVideo $msVideo)
+    public function show(int $VideoID)
     {
-        //
+        return view('video', [
+            'video' => MsVideo::findOrFail($VideoID),
+            'videos' => MsVideo::all()
+        ]);
     }
 
     /**

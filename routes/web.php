@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MsProductController;
 use App\Http\Controllers\MsUserController;
+use App\Http\Controllers\MsVideoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RouteController;
 
@@ -22,3 +23,4 @@ Route::middleware('auth')->group(function () {
 // Routing to Shop Pages
 // Route::get('/shop', [MsProductController::class, 'index'])->name('shop');
 Route::resource('shop', MsProductController::class);
+Route::resource('/videos', MsVideoController::class);
