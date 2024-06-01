@@ -38,12 +38,9 @@ class MsUser extends Authenticatable
         'password','remember_token',
     ];
 
-    /**
-     * Get the videos for the user.
-     */
     public function videos()
     {
-        return $this->hasMany(MsVideo::class, 'UserID');
+        return $this->hasMany(MsVideo::class, 'UserID', 'UserID');
     }
 
     /**

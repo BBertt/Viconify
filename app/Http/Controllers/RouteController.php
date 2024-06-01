@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\MsVideo;
 
 class RouteController extends Controller
 {
     public function HomePage()
     {
-        return view('home');
+        $videos = MsVideo::with('user')->get();
+        return view('home', compact('videos'));
     }
 
     public function Register()

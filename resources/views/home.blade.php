@@ -1,7 +1,7 @@
 @extends('layout')
-@section('title', 'Login')
+@section('title', 'Home')
 @section('content')
-<body class="bg-gray-100 text-gray-900">
+<body class="text-gray-900">
 
     <header class="bg-[#E6F5FF] text-black p-4 flex flex-col items-center">
         <div class="flex items-center justify-between w-full">
@@ -15,9 +15,6 @@
                     <svg class="text-black h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M15.5 9a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" />
                     </svg>
-                </div>
-                <div id="recommendations" class="absolute mt-1 bg-white text-black rounded-md shadow-lg w-full max-h-60 overflow-y-auto hidden">
-                    <!-- Recommendations will be dynamically added here -->
                 </div>
             </div>
 
@@ -40,8 +37,18 @@
         <div class="mt-2 w-full relative overflow-x-hidden">
             <button id="scrollLeft" class="absolute left-0 top-0 bottom-0 z-10 bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 hidden">&lt;</button>
             <div id="scrollContainer" class="flex space-x-2 py-2 overflow-x-auto scrollbar-hide">
-                <!-- Add recommendation items here -->
                 <div class="bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 flex-shrink-0 flex-grow-0 inline-flex items-center h-8 whitespace-nowrap">All</div>
+                <div class="bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 flex-shrink-0 flex-grow-0 inline-flex items-center h-8 whitespace-nowrap">Mixes</div>
+                <div class="bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 flex-shrink-0 flex-grow-0 inline-flex items-center h-8 whitespace-nowrap">Music</div>
+                <div class="bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 flex-shrink-0 flex-grow-0 inline-flex items-center h-8 whitespace-nowrap">Games</div>
+                <div class="bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 flex-shrink-0 flex-grow-0 inline-flex items-center h-8 whitespace-nowrap">Valorant</div>
+                <div class="bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 flex-shrink-0 flex-grow-0 inline-flex items-center h-8 whitespace-nowrap">Python</div>
+                <div class="bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 flex-shrink-0 flex-grow-0 inline-flex items-center h-8 whitespace-nowrap">Visual Studio 2022</div>
+                <div class="bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 flex-shrink-0 flex-grow-0 inline-flex items-center h-8 whitespace-nowrap">Genshin Impact</div>
+                <div class="bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 flex-shrink-0 flex-grow-0 inline-flex items-center h-8 whitespace-nowrap">Laravel 9</div>
+                <div class="bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 flex-shrink-0 flex-grow-0 inline-flex items-center h-8 whitespace-nowrap">Adobe Photoshop</div>
+                <div class="bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 flex-shrink-0 flex-grow-0 inline-flex items-center h-8 whitespace-nowrap">Blender</div>
+                <div class="bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 flex-shrink-0 flex-grow-0 inline-flex items-center h-8 whitespace-nowrap">Unreal Engine</div>
                 <div class="bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 flex-shrink-0 flex-grow-0 inline-flex items-center h-8 whitespace-nowrap">Mixes</div>
                 <div class="bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 flex-shrink-0 flex-grow-0 inline-flex items-center h-8 whitespace-nowrap">Music</div>
                 <div class="bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 flex-shrink-0 flex-grow-0 inline-flex items-center h-8 whitespace-nowrap">Games</div>
@@ -56,8 +63,82 @@
             </div>
             <button id="scrollRight" class="absolute right-0 top-0 bottom-0 z-10 bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400">&gt;</button>
         </div>
-
     </header>
+
+    <div class="container mx-auto p-4 flex flex-col">
+        <div class="flex justify-center w-full h-full">
+        <div class="w-11/12 flex justify-center space-x-4">
+            <!-- Left Image -->
+            <div class="w-3/12 h-12/12 overflow-hidden">
+                <img src="{{ asset('Assets/TestImg1.jpg') }}" alt="" class="rounded-xl h-full w-full object-cover">
+            </div>
+            <!-- Carousel -->
+            <div id="carousel" class="w-6/12 relative h-full">
+                <div class="carousel-inner relative w-full h-full overflow-hidden rounded-xl">
+                    <div class="carousel-item active">
+                        <img src="{{ asset('Assets/TestImg.jpg') }}" class="block h-full object-cover w-full rounded-xl" alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{ asset('Assets/TestImg1.jpg') }}" class="block h-full object-cover w-full rounded-xl" alt="Second slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{ asset('Assets/HomeBanner.png') }}" class="block h-full object-cover w-full rounded-xl" alt="Third slide">
+                    </div>
+                </div>
+                <button id="prev" class="absolute top-0 bottom-0 left-0 flex items-center justify-center p-0 text-center border-0 bg-transparent" style="transform: translateY(-50%); top: 50%;" type="button">
+                    <span class="carousel-control-prev-icon inline-block bg-no-repeat" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </button>
+                <button id="next" class="absolute top-0 bottom-0 right-0 flex items-center justify-center p-0 text-center border-0 bg-transparent" style="transform: translateY(-50%); top: 50%;" type="button">
+                    <span class="carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </button>
+            </div>
+            <!-- Right Images -->
+            <div class="w-3/12 h-12/12 flex flex-col space-y-4">
+                <div class="w-full h-full overflow-hidden">
+                    <img src="{{ asset('Assets/TestImg1.jpg') }}" alt="" class="rounded-xl h-full w-full object-cover">
+                </div>
+                <div class="h-full overflow-hidden">
+                    <img src="{{ asset('Assets/TestImg1.jpg') }}" alt="" class="rounded-xl h-full w-full object-cover">
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- New Collection -->
+        <div class="relative mt-8 flex justify-center">
+            <img src="{{ asset('Assets/HomeBanner.png') }}" alt="New Collection 2018" class="rounded-xl w-11/12 h-max">
+        </div>
+
+        <div class="container mx-auto p-16">
+            <div class="flex flex-wrap -mx-4">
+                @foreach($videos as $video)
+                <div class="w-full md:w-1/3 lg:w-1/4 px-4 mb-8">
+                    <div class="bg-white rounded-lg overflow-hidden h-12/12">
+                        <div class="overflow-hidden w-full h-48 md:h-24 lg:h-32 xl:h-48  rounded-lg">
+                            <img src="{{$video->VideoImage}}" alt="{{ $video->VideoImage }}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex flex-row p-2 pt-3">
+                            <div class="mt-1 overflow-hidden rounded-full h-10 w-10 flex-shrink-0">
+                                <img src="{{ asset('Assets/TestImg.jpg') }}" alt="{{ $video->VideoImage }}" class="h-full object-cover w-full rounded-xl">
+                            </div>
+                            <div class="pl-2 flex-1 max-w-full">
+                                <h2 class="text-base font-bold whitespace-nowrap overflow-hidden text-ellipsis p-0 m-0">{{ $video->Title }}</h2>
+                                <p class="text-sm text-gray-600">{{ $video->user->Name }}</p>
+                                <span class="text-sm text-gray-600">{{ $video->Views }} views</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+
+    </div>
+
+
+
 @endsection
 
 @push('scripts')

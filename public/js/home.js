@@ -78,4 +78,23 @@ document.addEventListener('DOMContentLoaded', () => {
         // For example, you might want to submit a form or redirect the user to a search results page
         // window.location.href = `/search?q=${encodeURIComponent(query)}`;
     };
+
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-item');
+    const totalSlides = slides.length;
+
+    document.getElementById('next').addEventListener('click', function() {
+        console.log('clicked')
+        goToSlide(currentSlide + 1);
+    });
+
+    document.getElementById('prev').addEventListener('click', function() {
+        goToSlide(currentSlide - 1);
+    });
+
+    function goToSlide(n) {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (n + totalSlides) % totalSlides;
+        slides[currentSlide].classList.add('active');
+    }
 });
