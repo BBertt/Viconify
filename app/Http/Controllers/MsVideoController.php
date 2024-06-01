@@ -12,8 +12,9 @@ class MsVideoController extends Controller
      */
     public function index()
     {
-        $videos = MsVideo::where('VideoType', 'shorts')->get();
-        return view('shorts', compact('videos'));
+        return view('videos', [
+            'videos' => MsVideo::all()
+        ]);
     }
 
     /**
@@ -35,38 +36,12 @@ class MsVideoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MsVideo $msVideo)
+    public function show(int $VideoID)
     {
-        
-    }
-
-    public function like($id)
-    {
-        // Increment the like count
-        $video = MsVideo::findOrFail($id);
-        $video->increment('Like');
-        return back();
-    }
-    public function dislike($id)
-    {
-        // Increment the dislike count
-        $video = MsVideo::findOrFail($id);
-        $video->increment('Dislike');
-        return back();
-    }
-
-    public function firstShort()
-    {
-        // Get the first video of type 'shorts'
-        $video = MsVideo::where('VideoType', 'shorts')->first();
-
-        if (!$video) {
-            // Handle the case where there are no short videos
-            return view('shorts')->with('message', 'No short videos available.');
-        }
-
-        $video->increment('Views');
-        return view('shorts', compact('video'));
+        return view('video', [
+            'video' => MsVideo::findOrFail($VideoID),
+            'videos' => MsVideo::all()
+        ]);
     }
 
     /**

@@ -1,0 +1,29 @@
+#This Docker configuration utilizes Docker Compose to manage containers for a MariaDB server and an Adminer interface for database management. 
+#Docker images, essentially pre-packaged software environments, are used to create containers that isolate and run these applications.
+
+#MariaDB: It uses password authentication with the root password set via an environment variable. The MySQL service is exposed on port 3306.
+#Adminer: An administrative interface accessible via port 8080, allowing easy database management through a web browser.
+
+#To run this setup:
+#1. Ensure Docker Desktop is running.
+#2. Place the docker-compose.yml in our project's root directory.
+#3. Execute docker-compose up in the terminal within your project directory to start the containers.
+#4. Access the Adminer interface at localhost:8080 using 'mysql' as the server, 'root' as the username, and 'root' as the password.
+
+version: "3.9"
+services:
+  mysql:
+    image: mariadb:10.8.3
+    # Uncomment below when on Mac M1
+    # platform: linux/arm64/v8
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

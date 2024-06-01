@@ -17,16 +17,16 @@ class MsVideoFactory extends Factory
     public function definition(): array
     {
         return [
-            'UserID' => \App\Models\User::factory(),
-            'VideoImage' => $this->faker->imageUrl(),
-            'VideoLinkEmbedded' => $this->faker->url(),
-            'Title' => $this->faker->sentence,
-            'Description' => $this->faker->paragraph,
-            'PostTime' => now(),
-            'Views' => 0,
-            'Like' => 0,
-            'Dislike' => 0,
-            'VideoType' => $this->faker->randomElement(['Shorts', 'Videos']),
+            'UserID' => 1,
+            'VideoImage' => 'Assets/images/videos/sample_image.jpg',
+            'VideoLinkEmbedded' => 'Assets/videos/sample_video.mp4',
+            'Title' => $this->faker->text(),
+            'Description' => $this->faker->text(800),
+            'PostTime' => $this->faker->time(),
+            'Views' => $this->faker->randomNumber(),
+            'Like' => $this->faker->randomNumber(),
+            'Dislike' => $this->faker->randomNumber(),
+            'VideoType' => $this->faker->randomElement(['Videos', 'Shorts']),
         ];
     }
 }

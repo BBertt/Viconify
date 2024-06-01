@@ -3,10 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\MsUser;
+use App\Models\MsVideo;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\MsVideo;
-
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,12 +14,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = MsUser::factory()->create();
+        MsUser::factory(1)->create();
 
-        // Generate 10 videos for the created user
-        MsVideo::factory(10)->create([
-            'UserID' => $user->id,
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
 
+        MsVideo::factory(40)->create();
     }
 }

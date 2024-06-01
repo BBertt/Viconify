@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\MsUser>
@@ -19,10 +18,14 @@ class MsUserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
+            'Name' => $this->faker->name(),
+            'email' => $this->faker->email(),
             'password' => Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'PhoneNumber' => $this->faker->phoneNumber(),
+            'Address' => $this->faker->address(),
+            'Role' => 'user',
+            'Balance' => 0,
+            'LockedBalance' => 0
         ];
     }
 }
