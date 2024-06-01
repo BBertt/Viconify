@@ -19,7 +19,7 @@
                 </div>
                 <p class="mb-4">{{ $product->ProductDescription }}</p>
                 <div class="flex items-center mb-4">
-                    <img src="{{ asset('storage/' . $product->pictures->first()->PictureData) }}"
+                    <img src="{{ asset('storage/' . $product->user->ProfileImage) }}"
                          alt="{{ $product->user->Name }}" class="w-10 h-10 rounded-full mr-4">
                     <div>
                         <span class="font-bold">{{ $product->user->Name }}</span>
@@ -29,25 +29,23 @@
                 <form action="{{ route('cart.store', $product->ProductID) }}" method="POST" class="bg-white p-4 rounded-lg shadow-md w-full">
                     @csrf
                     <div class="mb-4">
-                        <label for="quantity" class="block text-gray-700 text-sm font-bold mb-2">Atur jumlah dan catatan</label>
                         <div class="flex items-center">
                             <button type="button" class="btn btn-default btn-number bg-gray-300 text-gray-700 px-2 py-1 rounded-l" data-type="minus" data-field="quantity">-</button>
                             <input type="text" name="quantity" class="form-control input-number w-16 text-center border-gray-300" value="1" min="1" max="{{ $product->Quantity }}">
                             <button type="button" class="btn btn-default btn-number bg-gray-300 text-gray-700 px-2 py-1 rounded-r" data-type="plus" data-field="quantity">+</button>
                         </div>
-                        <small class="text-gray-600">Stock total: {{ $product->Quantity }}</small>
+                        <small class="text-gray-600">Stock's left: {{ $product->Quantity }}</small>
                     </div>
                     <div class="mb-4">
-                        <label for="notes" class="block text-gray-700 text-sm font-bold mb-2">Catatan</label>
+                        <label for="notes" class="block text-gray-700 text-sm font-bold mb-2">Notes</label>
                         <textarea name="notes" id="notes" class="form-control w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" rows="3"></textarea>
                     </div>
                     <div class="mb-4">
                         <label for="subtotal" class="block text-gray-700 text-sm font-bold mb-2">Subtotal</label>
                         <input type="text" name="subtotal" id="subtotal" class="form-control w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" value="Rp {{ number_format($product->ProductPrice, 0, ',', '.') }}" readonly>
                     </div>
-                    <div class="flex items-center justify-between">
+                    <div class="flex items-center justify-center">
                         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600">Add Cart</button>
-                        <button type="button" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600">Purchase</button>
                     </div>
                 </form>
             </div>

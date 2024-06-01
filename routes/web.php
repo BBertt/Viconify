@@ -20,6 +20,9 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('/', [MsUserController::class, 'logout'])->name('logout');
+
+    Route::get('/cart', [MsCartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/{ProductID}', [MsCartController::class, 'store'])->name('cart.store');
 });
 
 Route::resource('/videos', MsVideoController::class);
@@ -29,4 +32,3 @@ Route::get('/shop', [MsProductController::class, 'index'])->name('shop.index');
 Route::get('/shop/{msProduct}', [MsProductController::class, 'show'])->name('shop.show');
 
 // Routingto Cart Pages
-Route::post('/cart', [MsCartController::class, 'store'])->name('cart.store');

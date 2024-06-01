@@ -135,7 +135,7 @@
                                         @endif
                                     </div>
                                     <div class="pl-2 flex-1 max-w-full">
-                                        <h2 class="text-base font-bold whitespace-nowrap overflow-hidden text-ellipsis p-0 m-0"><span>{{ Str::words($video->Title, 6, ' ...') }}</span></h2>
+                                        <h2 class="text-base font-bold whitespace-nowrap overflow-hidden text-ellipsis p-0 m-0"><span>{{ Str::limit($video->Title, 30, ' ...') }}</span></h2>
                                         <p class="text-sm text-gray-600">{{ $video->user->Name }}</p>
                                         <span class="text-sm text-gray-600">{{ $video->Views }} views</span>
                                     </div>

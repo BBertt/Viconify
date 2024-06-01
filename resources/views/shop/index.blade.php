@@ -5,7 +5,7 @@
                 <a href="{{ route('shop.show', $product) }}" class="product-link">
                     <div class="bg-white p-4 rounded-lg shadow-md">
                         @if ($product->pictures->isNotEmpty())
-                            <div class="product-image h-60 w-full mb-4 rounded-lg overflow-hidden">
+                            <div class="product-image h-60 w-full mb-4 rounded-lg">
                                 <img src="{{ asset('storage/' . $product->pictures->first()->PictureData) }}" alt="{{ $product->ProductName }}" class="h-60 w-full object-cover image1">
                                 @if ($product->pictures->count() > 1)
                                     <img src="{{ asset('storage/' . $product->pictures->skip(1)->first()->PictureData) }}" alt="{{ $product->ProductName }}" class="h-60 w-full object-cover image2">
@@ -14,7 +14,7 @@
                                 @endif
                             </div>
                         @endif
-                        <h2 class="text-lg font-bold">{{ $product->ProductName }}</h2>
+                        <h2 class="text-lg font-bold">{{ Str::limit($product->ProductName, 30, '...') }}</h2>
                         <p class="text-gray-500">{{ $product->user->Name }}</p>
                         <p class="text-red-500 font-bold mt-2">Rp {{ number_format($product->ProductPrice, 0, ',', '.') }}</p>
                     </div>
@@ -25,4 +25,5 @@
             {{ $products->links() }}
         </div>
     </div>
+
 </x-shop-layout>

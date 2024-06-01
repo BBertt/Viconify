@@ -34,7 +34,7 @@ class MsProductSeeder extends Seeder
         MsProduct::create([
             'ProductID' => 3,
             'UserID' => 1,
-            'ProductName' => 'Product 3',
+            'ProductName' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus voluptatum est ducimus, enim nemo provident sapiente tempore aliquid facilis a impedit nostrum, dolorem architecto cupiditate quo tenetur porro! Debitis, tempora.',
             'ProductPrice' => 300,
             'ProductDescription' => 'Description for Product 3',
             'Quantity' => 10,
@@ -42,6 +42,42 @@ class MsProductSeeder extends Seeder
 
         MsProduct::create([
             'ProductID' => 4,
+            'UserID' => 1,
+            'ProductName' => 'Product 4',
+            'ProductPrice' => 400,
+            'ProductDescription' => 'Description for Product 4',
+            'Quantity' => 10,
+        ]);
+
+        MsProduct::create([
+            'ProductID' => 5,
+            'UserID' => 1,
+            'ProductName' => 'Product 4',
+            'ProductPrice' => 400,
+            'ProductDescription' => 'Description for Product 4',
+            'Quantity' => 10,
+        ]);
+
+        MsProduct::create([
+            'ProductID' => 6,
+            'UserID' => 1,
+            'ProductName' => 'Product 4',
+            'ProductPrice' => 400,
+            'ProductDescription' => 'Description for Product 4',
+            'Quantity' => 10,
+        ]);
+
+        MsProduct::create([
+            'ProductID' => 7,
+            'UserID' => 1,
+            'ProductName' => 'Product 4',
+            'ProductPrice' => 400,
+            'ProductDescription' => 'Description for Product 4',
+            'Quantity' => 10,
+        ]);
+
+        MsProduct::create([
+            'ProductID' => 8,
             'UserID' => 1,
             'ProductName' => 'Product 4',
             'ProductPrice' => 400,

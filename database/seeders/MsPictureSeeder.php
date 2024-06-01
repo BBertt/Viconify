@@ -43,5 +43,25 @@ class MsPictureSeeder extends Seeder
             'ProductID' => 4,
             'PictureData' => 'product_images/Goblin.png'
         ]);
+        MsPicture::create([
+            'PictureID' => 7,
+            'ProductID' => 5,
+            'PictureData' => 'product_images/default.jpg'
+        ]);
+        MsPicture::create([
+            'PictureID' => 8,
+            'ProductID' => 6,
+            'PictureData' => 'product_images/default.jpg'
+        ]);
+        MsPicture::create([
+            'PictureID' => 9,
+            'ProductID' => 7,
+            'PictureData' => 'product_images/default.jpg'
+        ]);
+        MsPicture::create([
+            'PictureID' => 10,
+            'ProductID' => 8,
+            'PictureData' => 'product_images/default.jpg'
+        ]);
     }
 }
