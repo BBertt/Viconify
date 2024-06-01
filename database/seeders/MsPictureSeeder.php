@@ -38,5 +38,10 @@ class MsPictureSeeder extends Seeder
             'ProductID' => 4,
             'PictureData' => 'product_images/Nico.png'
         ]);
+        MsPicture::create([
+            'PictureID' => 6,
+            'ProductID' => 4,
+            'PictureData' => 'product_images/Goblin.png'
+        ]);
     }
 }

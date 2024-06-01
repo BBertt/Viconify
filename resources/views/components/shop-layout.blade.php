@@ -35,35 +35,14 @@
         </div>
     </header>
 
-    <div class="container mx-auto px-4 py-8">
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            @foreach ($products as $product)
-                <div class="bg-white p-4 rounded-lg shadow-md">
-                    @if ($product->pictures->isNotEmpty())
-                        <div class="product-image h-60 w-full mb-4 rounded-lg overflow-hidden">
-                            <img src="{{ asset('storage/' . $product->pictures->first()->PictureData) }}" alt="{{ $product->ProductName }}" class="h-60 w-full object-cover image1">
-                            @if ($product->pictures->count() > 1)
-                                <img src="{{ asset('storage/' . $product->pictures->skip(1)->first()->PictureData) }}" alt="{{ $product->ProductName }}" class="h-60 w-full object-cover image2">
-                            @else
-                                <img src="{{ asset('storage/' . $product->pictures->first()->PictureData) }}" alt="{{ $product->ProductName }}" class="h-60 w-full object-cover image2">
-                            @endif
-                        </div>
-                    @endif
-                    <h2 class="text-lg font-bold">{{ $product->ProductName }}</h2>
-                    <p class="text-gray-500">{{ $product->user->Name }}</p>
-                    <p class="text-red-500 font-bold mt-2">Rp {{ number_format($product->ProductPrice, 0, ',', '.') }}</p>
-                </div>
-            @endforeach
-        </div>
-        <div class="mt-6 text-right">
-            {{ $products->links() }}
-        </div>
-    </div>
+    <main>
+        {{ $slot }}
+    </main>
 </body>
 
 @endsection
 
 
 @push('scripts')
-    <link rel="stylesheet" href="{{ asset('css/shop.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/shop/layout.css') }}">
 @endpush

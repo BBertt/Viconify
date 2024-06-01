@@ -15,7 +15,7 @@ class MsProductController extends Controller
         $products = MsProduct::with(['pictures', 'user'])->latest()->paginate(2);
         // $product = MsProduct::with(['pictures', 'user'])->where('ProductID', 4)->first();
         // dd($product->pictures->count());
-        return view('shop', ['products' => $products]);
+        return view('shop.index', ['products' => $products]);
     }
 
     /**
@@ -36,7 +36,8 @@ class MsProductController extends Controller
      */
     public function show(MsProduct $msProduct)
     {
-        //
+        $msProduct->load('pictures', 'user');
+        return view('shop.show', ['product' => $msProduct]);
     }
 
     /**
