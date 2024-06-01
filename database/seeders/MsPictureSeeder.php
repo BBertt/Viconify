@@ -16,27 +16,27 @@ class MsPictureSeeder extends Seeder
         MsPicture::create([
             'PictureID' => 1,
             'ProductID' => 1,
-            'PictureData' => 'https://source.unsplash.com/random'
+            'PictureData' => 'product_images/default.jpg'
         ]);
         MsPicture::create([
             'PictureID' => 2,
             'ProductID' => 2,
-            'PictureData' => 'https://picsum.photos/200'
+            'PictureData' => 'product_images/default.jpg'
         ]);
         MsPicture::create([
             'PictureID' => 3,
             'ProductID' => 3,
-            'PictureData' => 'https://source.unsplash.com/random'
+            'PictureData' => 'product_images/default.jpg'
         ]);
         MsPicture::create([
             'PictureID' => 4,
             'ProductID' => 4,
-            'PictureData' => 'https://picsum.photos/200'
+            'PictureData' => 'product_images/default.jpg'
         ]);
         MsPicture::create([
             'PictureID' => 5,
             'ProductID' => 4,
-            'PictureData' => 'https://source.unsplash.com/random'
+            'PictureData' => 'product_images/Nico.png'
         ]);
     }
 }

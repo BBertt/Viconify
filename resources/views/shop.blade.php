@@ -2,42 +2,68 @@
 @section('title', 'Shop')
 @section('content')
 
-<h1>Hello</h1>
-<div class="bg-gray-100">
-    <div class="container mx-auto mt-10">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            @foreach($products as $product)
+<body class="bg-gray-100">
+    <header class="bg-[#E6F5FF] text-black p-4 flex flex-col items-center">
+        <div class="flex items-center justify-between w-full">
+            <div class="flex items-center space-x-4">
+                <img src="{{ asset('Assets/ViConifyLogo.png') }}" alt="ViConify Logo" class="h-8 w-auto">
+            </div>
+
+            <div class="relative flex-grow mx-4">
+                <input type="text" id="searchBar" class="bg-white text-black rounded-full px-4 py-2 pl-10 w-full" placeholder="Search">
+                <div class="absolute top-0 left-0 flex items-center h-full pl-3">
+                    <svg class="text-black h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M15.5 9a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <svg class="text-black h-6 w-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18l-2 13H5L3 3zM5 6h14M9 9v6M15 9v6M6 21a1 1 0 100-2 1 1 0 000 2zm12 0a1 1 0 100-2 1 1 0 000 2z" />
+                </svg>
+                @if(Auth::check())
+                    <form action="{{ route('logout') }}" method="POST" class="inline">
+                        @csrf
+                        <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded">Logout</button>
+                    </form>
+                @else
+                    <a href="{{ route('Login') }}" class="text-black">Login</a>
+                    <a href="{{ route('Register') }}" class="text-black">Register</a>
+                @endif
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            @foreach ($products as $product)
                 <div class="bg-white p-4 rounded-lg shadow-md">
-                    @if($product->pictures->isNotEmpty())
-                        <div id="carouselExampleIndicators{{ $product->ProductID }}" class="carousel slide" data-ride="carousel">
-                            <div class="carousel-inner">
-                                @foreach($product->pictures as $index => $picture)
-                                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                        <img src="{{ $picture->PictureData }}" alt="{{ $product->ProductName }}" class="w-full h-48 object-cover mb-4 rounded">
-                                    </div>
-                                @endforeach
-                            </div>
-                            <a class="carousel-control-prev" href="#carouselExampleIndicators{{ $product->ProductID }}" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#carouselExampleIndicators{{ $product->ProductID }}" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
+                    @if ($product->pictures->isNotEmpty())
+                        <div class="product-image h-60 w-full mb-4 rounded-lg overflow-hidden">
+                            <img src="{{ asset('storage/' . $product->pictures->first()->PictureData) }}" alt="{{ $product->ProductName }}" class="h-60 w-full object-cover image1">
+                            @if ($product->pictures->count() > 1)
+                                <img src="{{ asset('storage/' . $product->pictures->skip(1)->first()->PictureData) }}" alt="{{ $product->ProductName }}" class="h-60 w-full object-cover image2">
+                            @else
+                                <img src="{{ asset('storage/' . $product->pictures->first()->PictureData) }}" alt="{{ $product->ProductName }}" class="h-60 w-full object-cover image2">
+                            @endif
                         </div>
-                    @else
-                        <img src="https://source.unsplash.com/random/800x600" alt="Random image from Unsplash" class="w-full h-48 object-cover mb-4 rounded">
                     @endif
-                    <h2 class="text-lg font-semibold">{{ $product->ProductName }}</h2>
-                    <p class="text-gray-600">{{ $product->ProductDescription }}</p>
-                    <p class="text-orange-500 text-lg font-bold">Rp {{ number_format($product->ProductPrice, 0, ',', '.') }}</p>
+                    <h2 class="text-lg font-bold">{{ $product->ProductName }}</h2>
+                    <p class="text-gray-500">{{ $product->user->Name }}</p>
+                    <p class="text-red-500 font-bold mt-2">Rp {{ number_format($product->ProductPrice, 0, ',', '.') }}</p>
                 </div>
             @endforeach
         </div>
-        <div class="mt-6">
+        <div class="mt-6 text-right">
             {{ $products->links() }}
         </div>
     </div>
-</div>
+</body>
+
 @endsection
+
+
+@push('scripts')
+    <link rel="stylesheet" href="{{ asset('css/shop.css') }}">
+@endpush
