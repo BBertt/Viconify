@@ -50,7 +50,7 @@ export function Sidebar() {
             </div>
             {isOpen && <span>Videos</span>}
           </li>
-          <li className="flex items-center space-x-2 rounded-lg hover:bg-[#C1E5FF] cursor-pointer pl-4 pt-4 pb-4" onClick={() => handleNavigation('/shorts')}>
+          <li className="flex items-center space-x-2 rounded-lg hover:bg-[#C1E5FF] cursor-pointer pl-4 pt-4 pb-4" onClick={() => handleNavigation('/shorts-first')}>
             <div className='flex flex-col justify-center items-center'>
                 <FiVideo className="text-2xl" />
                 <span style={{ fontSize: '0.6rem' }} className={` pt-0.5 ${isOpen ? 'hidden' : 'block'}`}>Shorts</span>

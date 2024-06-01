@@ -19,4 +19,8 @@ class RouteController extends Controller
     public function Login(){
         return view('login');
     }
+
+    public function Shorts(){
+        return view('shorts');
+    }
 }
