@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MsCartController;
 use App\Http\Controllers\MsProductController;
 use App\Http\Controllers\MsUserController;
 use Illuminate\Support\Facades\Route;
@@ -20,5 +21,8 @@ Route::middleware('auth')->group(function () {
 });
 
 // Routing to Shop Pages
-// Route::get('/shop', [MsProductController::class, 'index'])->name('shop');
-Route::resource('shop', MsProductController::class);
+Route::get('/shop', [MsProductController::class, 'index'])->name('shop.index');
+Route::get('/shop/{msProduct}', [MsProductController::class, 'show'])->name('shop.show');
+
+// Routingto Cart Pages
+Route::post('/cart', [MsCartController::class, 'store'])->name('cart.store');

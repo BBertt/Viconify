@@ -11,6 +11,13 @@ class MsProduct extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'ProductID';
+
+    public function getRouteKeyName()
+    {
+        return 'ProductID';
+    }
+
     protected $fillable = [
         'ProductName',
         'ProductPrice',
