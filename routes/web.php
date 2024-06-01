@@ -22,6 +22,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/', [MsUserController::class, 'logout'])->name('logout');
 });
 
+Route::resource('/videos', MsVideoController::class);
+
 // Routing to Shop Pages
 Route::get('/shop', [MsProductController::class, 'index'])->name('shop.index');
 Route::get('/shop/{msProduct}', [MsProductController::class, 'show'])->name('shop.show');
