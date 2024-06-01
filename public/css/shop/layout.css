@@ -1,0 +1,23 @@
+.product-image {
+    position: relative;
+}
+.product-image img {
+    transition: opacity 0.3s ease;
+}
+.product-image .image2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+.product-image:hover .image1 {
+    opacity: 0;
+}
+.product-image:hover .image2 {
+    opacity: 1;
+}
+
+.product-link {
+    text-decoration: none; /* Remove underline from links */
+    color: inherit; /* Inherit text color */
+}

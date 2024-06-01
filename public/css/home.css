@@ -1,0 +1,30 @@
+#scrollContainer {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.carousel-item {
+    display: none;
+    height: 28rem;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+.carousel-item.active {
+    display: block;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-size: 100%, 100%;
+    margin: 10px;
+    background-image: url('../Assets/Arrow.png');
+    width: 2rem;
+    height: 2rem;
+}
+.carousel-control-prev-icon {
+    transform: rotate(180deg);
+}
