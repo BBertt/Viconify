@@ -110,109 +110,18 @@
 
             <!-- Video suggestions -->
             <div class="w-full lg:w-1/3 mt-4 lg:mt-0">
-                <div class="flex flex-col space-y-4">
-                    <div class="flex items-start space-x-4">
-                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
-                        <div>
-                            <h3 class="font-bold">Uplifting Music</h3>
-                            <p class="text-gray-600">6K views • 1 hour ago</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
-                        <div>
-                            <h3 class="font-bold">Valorant Episode 7</h3>
-                            <p class="text-gray-600">1M views • 2 months ago</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
-                        <div>
-                            <h3 class="font-bold">Character Demo - Xiao</h3>
-                            <p class="text-gray-600">3M views • 4 years ago</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
-                        <div>
-                            <h3 class="font-bold">Uplifting Music</h3>
-                            <p class="text-gray-600">6K views • 1 hour ago</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
-                        <div>
-                            <h3 class="font-bold">Valorant Episode 7</h3>
-                            <p class="text-gray-600">1M views • 2 months ago</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
-                        <div>
-                            <h3 class="font-bold">Character Demo - Xiao</h3>
-                            <p class="text-gray-600">3M views • 4 years ago</p>
-                        </div>
-                    </div>                    <div class="flex items-start space-x-4">
-                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
-                        <div>
-                            <h3 class="font-bold">Uplifting Music</h3>
-                            <p class="text-gray-600">6K views • 1 hour ago</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
-                        <div>
-                            <h3 class="font-bold">Valorant Episode 7</h3>
-                            <p class="text-gray-600">1M views • 2 months ago</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
-                        <div>
-                            <h3 class="font-bold">Character Demo - Xiao</h3>
-                            <p class="text-gray-600">3M views • 4 years ago</p>
-                        </div>
-                    </div>                    <div class="flex items-start space-x-4">
-                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
-                        <div>
-                            <h3 class="font-bold">Uplifting Music</h3>
-                            <p class="text-gray-600">6K views • 1 hour ago</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
-                        <div>
-                            <h3 class="font-bold">Valorant Episode 7</h3>
-                            <p class="text-gray-600">1M views • 2 months ago</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
-                        <div>
-                            <h3 class="font-bold">Character Demo - Xiao</h3>
-                            <p class="text-gray-600">3M views • 4 years ago</p>
-                        </div>
-                    </div>                    <div class="flex items-start space-x-4">
-                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
-                        <div>
-                            <h3 class="font-bold">Uplifting Music</h3>
-                            <p class="text-gray-600">6K views • 1 hour ago</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
-                        <div>
-                            <h3 class="font-bold">Valorant Episode 7</h3>
-                            <p class="text-gray-600">1M views • 2 months ago</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                        <img src="https://via.placeholder.com/120x80" alt="Suggested Video Thumbnail" class="rounded-lg">
-                        <div>
-                            <h3 class="font-bold">Character Demo - Xiao</h3>
-                            <p class="text-gray-600">3M views • 4 years ago</p>
-                        </div>
-                    </div>
+                <div class="flex flex-col space-y-4 overflow-hidden">
+                    @foreach ($videos as $vid)
+                        @if ($vid->VideoType === 'Videos' && $vid->VideoID !== $video->VideoID)
+                            <div class="flex items-start space-x-4">
+                                <img src="{{ asset($vid->VideoImage) }}" alt="{{ $vid->Title }}" class="rounded-lg w-[120px] h-[80px] object-cover">
+                                <div class="w-full">
+                                    <h3 class="font-bold truncate">{{ $vid->Title }}</h3>
+                                    <p class="text-gray-600">{{ $vid->Views }} Views • {{ $vid->created_at->format('d M Y') }}</p>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </section>
