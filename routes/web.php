@@ -6,15 +6,14 @@ use App\Http\Controllers\MsUserController;
 use App\Http\Controllers\MsVideoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RouteController;
+use App\Http\Controllers\TransactionHeaderController;
 
 Route::get('/', [RouteController::class, 'HomePage'])->name('HomePage');
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RouteController::class, 'Register'])->name('Register');
     Route::post('/register', [MsUserController::class, 'register'])->name('registerform');
-
     Route::get('/login', [RouteController::class, 'Login'])->name('login');
-    Route::get('/login', [RouteController::class, 'Login'])->name('Login');
     Route::post('/login', [MsUserController::class, 'login'])->name('loginform');
 });
 
@@ -23,6 +22,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/cart', [MsCartController::class, 'index'])->name('cart.index');
     Route::post('/cart/{ProductID}', [MsCartController::class, 'store'])->name('cart.store');
+
+    Route::post('/purchase', [TransactionHeaderController::class, 'store'])->name('purchase');
 });
 
 Route::resource('/videos', MsVideoController::class);

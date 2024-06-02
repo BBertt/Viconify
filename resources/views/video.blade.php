@@ -32,7 +32,7 @@
                         <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded">Logout</button>
                     </form>
                 @else
-                    <a href="{{ route('Login') }}" class="text-black">Login</a>
+                    <a href="{{ route('login') }}" class="text-black">Login</a>
                     <a href="{{ route('Register') }}" class="text-black">Register</a>
                 @endif
             </div>

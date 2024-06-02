@@ -58,7 +58,6 @@
     </script>
 
     @push('scripts')
-        <!-- Include jQuery from a CDN or your local files -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="{{ asset('js/shop/show.js') }}"></script>
     @endpush
