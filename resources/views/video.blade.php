@@ -59,71 +59,124 @@
         </div>
     </header>
 
-    <section class="flex flex-col lg:flex-row gap-4">
-        <div class="w-full lg:w-2/3">
-            <div class="bg-white shadow rounded-lg">
-                <video controls class="w-full rounded-lg">
-                    <source src="{{ asset($video->VideoLinkEmbedded) }}" type="video/mp4">
-                </video>
-                <div class="p-4">
-                    <h1 class="text-2xl font-bold mb-2">{{ $video->Title }}</h1>
-                    <div class="flex items-center space-x-4 mb-4">
-                        <img src="{{ $video->user->ProfileImage }}" alt="{{ $video->user->Name }}" class="w-10 h-10 rounded-full">
-                        <div class="flex-grow">
-                            <h2 class="font-bold">{{ $video->user->Name }}</h2>
-                        </div>
-                        <div class="flex items-center space-x-4">
-                            <div class="flex items-center bg-white text-black px-4 py-2 border border-black rounded-full">
-                                <button class="flex items-center space-x-2">
+    <div class="container mx-auto py-6 max-w-screen-2xl px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div class="col-span-1 lg:col-span-3">
+                <div class="bg-white shadow rounded-lg overflow-hidden">
+                    <video controls class="w-full rounded-lg">
+                        <source src="{{ asset($video->VideoLinkEmbedded) }}">
+                    </video>
+                    <div class="p-4">
+                        <h1 class="text-2xl font-bold mb-2">{{ $video->Title }}</h1>
+                        <div class="flex items-center space-x-4 mb-4">
+                            <img src="{{ $video->user->ProfileImage }}" alt="{{ $video->user->Name }}" class="w-10 h-10 rounded-full">
+                            <div class="flex-grow">
+                                <h2 class="font-bold">{{ $video->user->Name }}</h2>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="flex items-center bg-white text-black px-4 py-2 border border-black rounded-full">
+                                    <button class="flex items-center space-x-2">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                    </button>
+                                    <span class="mx-2">|</span>
+                                    <button class="flex items-center space-x-2">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 13l-4-4L5 17"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <button class="bg-white text-black px-4 py-2 border border-black rounded-full flex items-center space-x-2">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
-                                </button>
-                                <span class="mx-2">|</span>
-                                <button class="flex items-center space-x-2">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 13l-4-4L5 17"></path>
-                                    </svg>
+                                    <span>Share</span>
                                 </button>
                             </div>
-                            <button class="bg-white text-black px-4 py-2 border border-black rounded-full flex items-center space-x-2">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span>Share</span>
-                            </button>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="bg-[#C1E5FF] py-4 px-6 rounded-lg w-full">
-                <p class="mb-4 font-bold">{{ $video->Views }} Views • {{ $video->created_at->format('d M Y') }}</p>
-                <div id="description-container" class="relative">
-                    <p id="description" class="mb-4 overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
-                        {{ $video->Description }}
-                    </p>
-                    <button id="more-button" class="text-black-500 font-bold inline" style="display: none;">...more</button>
-                </div>
-            </div>
-        </div>
+                    <div class="bg-[#C1E5FF] py-4 px-6">
+                        <p class="mb-4 font-bold">{{ $video->Views }} Views • {{ $video->created_at->format('d M Y') }}</p>
+                        <div id="description-container" class="relative">
+                            <p id="description" class="mb-4 overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">{{ $video->Description }}</p>
+                            <button id="more-button" class="text-black-500 font-bold inline" style="display: none;">...more</button>
+                        </div>
+                    </div>
 
-        <!-- Video suggestions -->
-        <div class="w-full lg:w-1/3 mt-4 lg:mt-0">
-            <div class="flex flex-col space-y-4 overflow-hidden">
-                @foreach ($videos as $vid)
-                    @if ($vid->VideoType === 'Videos' && $vid->VideoID !== $video->VideoID)
-                        <div class="flex items-start space-x-4">
-                            <img src="{{ asset($vid->VideoImage) }}" alt="{{ $vid->Title }}" class="rounded-lg w-[120px] h-[80px] object-cover">
-                            <div class="w-full">
-                                <h3 class="font-bold truncate">{{ $vid->Title }}</h3>
-                                <p class="text-gray-600">{{ $vid->Views }} Views • {{ $vid->created_at->format('d M Y') }}</p>
+                    <!-- Comment Section -->
+                    <div class="bg-white p-4 mt-4 rounded-lg">
+                        <h2 class="text-xl font-bold mb-4">7,543 Comments</h2>
+                        <div class="flex items-center mb-4">
+                            <img src="https://via.placeholder.com/40" alt="User" class="w-10 h-10 rounded-full">
+                            <textarea class="w-full p-2 ml-4 border rounded-lg" placeholder="Add a comment..."></textarea>
+                        </div>
+                        <!-- Example comment -->
+                        <div class="mb-4">
+                            <div class="flex items-start mb-2">
+                                <img src="https://via.placeholder.com/40" alt="User" class="w-10 h-10 rounded-full">
+                                <div class="ml-4">
+                                    <div class="bg-gray-100 p-3 rounded-lg">
+                                        <div class="flex items-center justify-between">
+                                            <span class="font-bold">@sinnns3647</span>
+                                            <span class="text-gray-500 text-sm">1 year ago (edited)</span>
+                                        </div>
+                                        <p class="mt-2">2:14 manca is now MOTIVATED</p>
+                                    </div>
+                                    <div class="flex items-center mt-2 text-gray-500">
+                                        <button class="mr-2 flex items-center"><i class="far fa-thumbs-up"></i><span class="ml-1">5K</span></button>
+                                        <button class="mr-2 flex items-center"><i class="far fa-thumbs-down"></i></button>
+                                        <button class="flex items-center">Reply</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Replies -->
+                            <div class="ml-12">
+                                <div class="flex items-start mb-2">
+                                    <img src="https://via.placeholder.com/40" alt="User" class="w-10 h-10 rounded-full">
+                                    <div class="ml-4">
+                                        <div class="bg-gray-100 p-3 rounded-lg">
+                                            <div class="flex items-center justify-between">
+                                                <span class="font-bold">@user2</span>
+                                                <span class="text-gray-500 text-sm">1 year ago</span>
+                                            </div>
+                                            <p class="mt-2">Yes, it's quite exciting!</p>
+                                        </div>
+                                        <div class="flex items-center mt-2 text-gray-500">
+                                            <button class="mr-2 flex items-center"><i class="far fa-thumbs-up"></i></button>
+                                            <button class="mr-2 flex items-center"><i class="far fa-thumbs-down"></i></button>
+                                            <button class="flex items-center">Reply</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    @endif
-                @endforeach
+                        <!-- Repeat similar block for more comments -->
+                    </div>
+                    <!-- End Comment Section -->
+                </div>
+            </div>
+
+            <!-- Video suggestions -->
+            <div class="col-span-1 lg:col-span-1 mt-4 lg:mt-0">
+                <div class="flex flex-col space-y-4 overflow-hidden">
+                    @foreach ($videos as $vid)
+                        @if ($vid->VideoType === 'Videos' && $vid->VideoID !== $video->VideoID)
+                            <a href="{{ route('videos.show', $vid->VideoID) }}">
+                                <div class="flex items-start space-x-4">
+                                    <img src="{{ asset($vid->VideoImage) }}" alt="{{ $vid->Title }}" class="rounded-lg w-[120px] h-[80px] object-cover">
+                                    <div class="w-full">
+                                        <h3 class="font-bold line-clamp-2">{{ $vid->Title }}</h3>
+                                        <p class="text-gray-600">{{ $vid->Views }} Views • {{ $vid->created_at->format('d M Y') }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        @endif
+                    @endforeach
+                </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {

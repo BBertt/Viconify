@@ -117,7 +117,7 @@
             <div class="w-11/12 flex justify-center space-x-4">
                 <div class="flex flex-wrap -mx-4">
                     @foreach($videos as $video)
-                        @if($video->VideoType === 'video')
+                        @if($video->VideoType === 'Videos')
                         <div class="w-full md:w-1/2 lg:w-1/4 px-4 mb-8">
                             <div class="videocontainer bg-white rounded-lg overflow-hidden h-full hover:bg-gray-300 transition duration-300">
                                 <div class="relative overflow-hidden w-full h-50 sm:h-50 md:h-44 lg:h-32 xl:h-44 rounded-lg">
@@ -135,9 +135,9 @@
                                         @endif
                                     </div>
                                     <div class="pl-2 flex-1 max-w-full">
-                                        <h2 class="text-base font-bold whitespace-nowrap overflow-hidden text-ellipsis p-0 m-0">{{ $video->Title }}</h2>
+                                        <h2 class="text-base font-bold whitespace-nowrap overflow-hidden text-ellipsis p-0 m-0"><span>{{ Str::words($video->Title, 6, ' ...') }}</span></h2>
                                         <p class="text-sm text-gray-600">{{ $video->user->Name }}</p>
-                                        <span class="text-sm text-gray-600">{{ $video->Views }} views</span>
+                                        <span class="text-sm text-gray-600">{{ $video->Views }} Views</span>
                                     </div>
                                 </div>
                             </div>
