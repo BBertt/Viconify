@@ -67,4 +67,16 @@ class MsUserController extends Controller
         Auth::logout();
         return redirect()->route('HomePage');
     }
+
+    public function processTopUp(Request $request)
+    {
+        $request->validate([
+            'amount' => 'required|numeric|min:1',
+        ]);
+        $user = Auth::user();
+        $user->Balance += $request->input('amount');
+        $user->save();
+        return redirect()->route('topup.form')->with('success', 'Top-up successful! Your new balance is Rp.' . $user->Balance);
+    }
+
 }

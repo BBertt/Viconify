@@ -19,13 +19,12 @@ class DatabaseSeeder extends Seeder
     {
 
         MsUser::factory(1)->create();
-
+        MsVideo::factory(40)->create();
         $this->call([
+            MsVideoSeeder::class,
             MsProductSeeder::class,
             MsPictureSeeder::class
         ]);
-
-        MsVideo::factory(40)->create();
 
     }
 }

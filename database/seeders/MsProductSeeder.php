@@ -14,7 +14,6 @@ class MsProductSeeder extends Seeder
     public function run(): void
     {
         MsProduct::create([
-            'ProductID' => 1,
             'UserID' => 1,
             'ProductName' => 'Product 1',
             'ProductPrice' => 100,
@@ -23,7 +22,6 @@ class MsProductSeeder extends Seeder
         ]);
 
         MsProduct::create([
-            'ProductID' => 2,
             'UserID' => 1,
             'ProductName' => 'Product 2',
             'ProductPrice' => 200,
@@ -32,7 +30,6 @@ class MsProductSeeder extends Seeder
         ]);
 
         MsProduct::create([
-            'ProductID' => 3,
             'UserID' => 1,
             'ProductName' => 'Product 3',
             'ProductPrice' => 300,
@@ -41,7 +38,6 @@ class MsProductSeeder extends Seeder
         ]);
 
         MsProduct::create([
-            'ProductID' => 4,
             'UserID' => 1,
             'ProductName' => 'Product 4',
             'ProductPrice' => 400,
