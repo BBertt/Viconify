@@ -26,3 +26,32 @@ function updateSubtotal() {
 
     document.getElementById('subtotal').textContent = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(subtotal);
 }
+
+function deleteCartItem(button) {
+    const cartItem = button.closest('.cart-item');
+    cartItem.remove();
+    updateSubtotal();
+}
+
+function prepareAndSubmitForm() {
+    const form = document.getElementById('purchaseForm');
+    document.querySelectorAll('.cart-item').forEach(item => {
+        const cartId = item.getAttribute('data-cart-id');
+        const quantity = item.querySelector('.quantity').value;
+
+        const inputCartId = document.createElement('input');
+        inputCartId.type = 'hidden';
+        inputCartId.name = `products[${cartId}][CartID]`;
+        inputCartId.value = cartId;
+
+        const inputQuantity = document.createElement('input');
+        inputQuantity.type = 'hidden';
+        inputQuantity.name = `products[${cartId}][Quantity]`;
+        inputQuantity.value = quantity;
+
+        form.appendChild(inputCartId);
+        form.appendChild(inputQuantity);
+    });
+
+    form.submit();
+}
