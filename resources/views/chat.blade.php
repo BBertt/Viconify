@@ -57,6 +57,6 @@
             <button id="sendButton">Send</button>
         </div>
     </div>
+@endsection
 </body>
 </html>
-@endsection

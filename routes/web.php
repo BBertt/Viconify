@@ -6,6 +6,9 @@ use App\Http\Controllers\RouteController;
 
 Route::get('/', [RouteController::class, 'HomePage'])->name('HomePage');
 
+//Try routing
+Route::get('/chat', [RouteController::class, 'ChatPage'])->name('ChatPage');
+
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RouteController::class, 'Register'])->name('Register');
     Route::post('/register', [MsUserController::class, 'register'])->name('registerform');
