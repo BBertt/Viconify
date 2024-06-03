@@ -1,0 +1,126 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #ddd;
+}
+
+.chat-header .left, .chat-header .right {
+    display: flex;
+    align-items: center;
+}
+
+.chat-header .left h2 {
+    margin-left: 10px;
+}
+
+.chat-body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.left-column-chat {
+    width: 300px;
+    border-right: 1px solid #ddd;
+    background-color: #f9f9f9;
+    overflow-y: auto;
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    background-color: #e9ecef;
+}
+
+.contact img {
+    margin-right: 10px;
+}
+
+.lists-contact {
+    padding: 10px;
+}
+
+.person {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.person:hover {
+    background-color: #ddd;
+}
+
+.person img {
+    margin-right: 10px;
+}
+
+.person-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.right-column-chat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-chat {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    background-color: #f1f1f1;
+}
+
+.header-chat img {
+    margin-right: 10px;
+}
+
+.chat-box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+
+.chat-placeholder {
+    text-align: center;
+}
+
+.chat-bar {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background-color: #f1f1f1;
+}
+
+.chat-bar button, .chat-bar input {
+    margin: 0 5px;
+}
+
+.chat-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
