@@ -25,4 +25,9 @@ class MsCart extends Model
     {
         return $this->belongsTo(MsProduct::class, 'ProductID');
     }
+
+    public function transactionDetail() : BelongsTo
+    {
+        return $this->belongsTo(TransactionDetail::class, 'CartID');
+    }
 }

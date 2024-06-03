@@ -87,7 +87,7 @@ class MsUser extends Authenticatable
     /**
      * Get the transaction headers for the user.
      */
-    public function transactions()
+    public function transactionHeaders()
     {
         return $this->hasMany(TransactionHeader::class, 'UserID');
     }
