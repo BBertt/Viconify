@@ -17,7 +17,7 @@ class MsVideoFactory extends Factory
     public function definition(): array
     {
         return [
-            'UserID' => 1,
+            'UserID' => $this->faker->numberBetween(1, 5),
             'VideoImage' => 'Assets/images/videos/sample_image.jpg',
             'VideoLinkEmbedded' => 'Assets/videos/sample_video.mp4',
             'Title' => $this->faker->text(),

@@ -104,34 +104,80 @@
                         </div>
                     </div>
 
-                    <!-- Comment Section -->
-                    <div class="bg-white p-4 mt-4 rounded-lg">
-                        <h2 class="text-xl font-bold mb-4">7,543 Comments</h2>
-                        <div class="flex items-center mb-4">
-                            <img src="https://via.placeholder.com/40" alt="User" class="w-10 h-10 rounded-full">
-                            <textarea class="w-full p-2 ml-4 border rounded-lg" placeholder="Add a comment..."></textarea>
-                        </div>
-                        <!-- Example comment -->
-                        <div class="mb-4">
-                            <div class="flex items-start mb-2">
-                                <img src="https://via.placeholder.com/40" alt="User" class="w-10 h-10 rounded-full">
-                                <div class="ml-4">
-                                    <div class="bg-gray-100 p-3 rounded-lg">
-                                        <div class="flex items-center justify-between">
-                                            <span class="font-bold">@sinnns3647</span>
-                                            <span class="text-gray-500 text-sm">1 year ago (edited)</span>
-                                        </div>
-                                        <p class="mt-2">2:14 manca is now MOTIVATED</p>
-                                    </div>
-                                    <div class="flex items-center mt-2 text-gray-500">
-                                        <button class="mr-2 flex items-center"><i class="far fa-thumbs-up"></i><span class="ml-1">5K</span></button>
-                                        <button class="mr-2 flex items-center"><i class="far fa-thumbs-down"></i></button>
-                                        <button class="flex items-center">Reply</button>
+                    <div class="container mx-auto mt-9 p-0 flex flex-col">
+                        <div class="background-div">
+                            <img src="{{ asset('Assets/PopularCategories.jpg') }}" alt="Popular Categories" class="rounded-lg">
+                            <div class="overlay-content p-14">
+                                <div class="container mx-auto px-4 py-4">
+                                    <div class="grid grid-cols-4 gap-6">
+                                        @foreach ($products->slice(0, 4) as $product)
+                                            <a href="{{ route('shop.show', $product) }}" class="product-link">
+                                                <div class="bg-white rounded-md shadow-md">
+                                                    @if ($product->pictures->isNotEmpty())
+                                                        <div class="product-image relative overflow-hidden w-full h-50 sm:h-15 md:h-20 lg:h-32 xl:h-44 rounded-t-md">
+                                                            <img src="{{ asset('storage/' . $product->pictures->first()->PictureData) }}" alt="{{ $product->ProductName }}" class="h-full w-full object-cover">
+                                                        </div>
+                                                    @endif
+                                                    <div class="flex w-full overflow-hidden">
+                                                        <div class="mt-1 ml-1 overflow-hidden rounded-full h-10 w-10 flex-shrink-0">
+                                                            @if($product->user->ProfileImage)
+                                                                <img src="{{ $product->user->ProfileImage }}" alt="{{ $product->user->Name }}" class="h-full object-cover w-full rounded-full">
+                                                            @else
+                                                                <img src="{{ asset('Assets/DefaultProfile.png') }}" alt="{{ $product->user->Name }}" class="h-full object-cover w-full rounded-full">
+                                                            @endif
+                                                        </div>
+                                                        <div class="pl-2 flex-1 max-w-full pr-2">
+                                                            <h2 class="text-base whitespace-nowrap font-bold">{{ $product->ProductName }}</h2>
+                                                            <p class="text-sm whitespace-nowrap text-gray-500">{{ $product->user->Name }}</p>
+                                                            <p class="text-sm whitespace-nowrap text-red-500 font-bold">Rp {{ number_format($product->ProductPrice, 0, ',', '.') }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Comment Section -->
+                    <div class="bg-white p-4 mt-4 rounded-lg">
+                        <h2 class="text-xl font-bold mb-4">{{ $video->comments->count() }} Comments</h2>
+                        <div class="flex items-center mb-4">
+                            <img src="{{ $video->user->ProfileImage }}" alt="{{ $video->user->Name }}" class="w-10 h-10 rounded-full">
+                            <textarea class="comment-textarea w-full ml-4 border-b border-gray-300 focus:outline-none focus:border-gray-600" placeholder="Add your comment..."></textarea>
+                        </div>
+    
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2 text-gray-400">
+                                <button class="hover:text-gray-600">
+                                    <i class="fas fa-paperclip"></i>
+                                </button>
+                                <button class="hover:text-gray-600">
+                                    <i class="fas fa-smile"></i>
+                                </button>
+                            </div>
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Comment</button>
+                        </div>
+
+                        <!-- Example comment -->
+                        <div class="mt-4 mb-4">
+                            @foreach ($video->comments as $comment)
+                                <div class="flex items-start mb-2">
+                                    <img src= {{ $comment->user->ProfileImage }} alt="{{ $comment->user->Name }}" class="w-10 h-10 rounded-full">
+                                    <div class="ml-4">
+                                        <div class="bg-gray-100 p-3 rounded-lg">
+                                            <div class="flex items-center justify-between">
+                                                <span class="font-bold">{{ $comment->user->Name }}</span>
+                                            </div>
+                                            <p class="mt-2"> {{ $comment->Comments }}</p>
+                                        </div>
+                                    </div>
+                                </div>                                
+                            @endforeach
                             <!-- Replies -->
-                            <div class="ml-12">
+                            {{-- <div class="ml-12">
                                 <div class="flex items-start mb-2">
                                     <img src="https://via.placeholder.com/40" alt="User" class="w-10 h-10 rounded-full">
                                     <div class="ml-4">
@@ -149,7 +195,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <!-- Repeat similar block for more comments -->
                     </div>
