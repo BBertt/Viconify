@@ -44,5 +44,37 @@ class MsProductSeeder extends Seeder
             'ProductDescription' => 'Description for Product 4',
             'Quantity' => 10,
         ]);
+
+        MsProduct::create([
+            'UserID' => 1,
+            'ProductName' => 'Product 5',
+            'ProductPrice' => 500,
+            'ProductDescription' => 'Description for Product 4',
+            'Quantity' => 10,
+        ]);
+
+        MsProduct::create([
+            'UserID' => 1,
+            'ProductName' => 'Product 6',
+            'ProductPrice' => 600,
+            'ProductDescription' => 'Description for Product 4',
+            'Quantity' => 10,
+        ]);
+
+        MsProduct::create([
+            'UserID' => 1,
+            'ProductName' => 'Product 7',
+            'ProductPrice' => 700,
+            'ProductDescription' => 'Description for Product 4',
+            'Quantity' => 10,
+        ]);
+
+        MsProduct::create([
+            'UserID' => 1,
+            'ProductName' => 'Product 8',
+            'ProductPrice' => 800,
+            'ProductDescription' => 'Description for Product 4',
+            'Quantity' => 10,
+        ]);
     }
 }
