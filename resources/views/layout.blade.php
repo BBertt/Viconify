@@ -7,7 +7,7 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-    <div id="sidebar" style="z-index: 10"></div>
+    <div id="sidebar" style="z-index: 20"></div>
     <main>
         @yield('content')
     </main>
