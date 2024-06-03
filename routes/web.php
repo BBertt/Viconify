@@ -30,3 +30,8 @@ Route::get('/shop/{msProduct}', [MsProductController::class, 'show'])->name('sho
 
 // Routingto Cart Pages
 Route::post('/cart', [MsCartController::class, 'store'])->name('cart.store');
+
+Route::get('/shorts', [MsVideoController::class, 'showShorts'])->name('shorts');
+Route::post('/short/{video}/like', [MsVideoController::class, 'like'])->name('short.like');
+Route::post('/short/{video}/dislike', [MsVideoController::class, 'dislike'])->name('short.dislike');
+Route::post('/short/{video}/share', [MsVideoController::class, 'share'])->name('short.share');

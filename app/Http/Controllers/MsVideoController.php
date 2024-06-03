@@ -44,6 +44,31 @@ class MsVideoController extends Controller
         ]);
     }
 
+    public function showShorts()
+    {
+        // Fetch only videos with VideoType 'shorts'
+        $videos = MsVideo::where('VideoType', 'shorts')->get();
+        // dd($videos);
+        return view('short', compact('videos'));
+    }
+    public function like(MsVideo $video)
+    {
+        $video->increment('Like');
+        return response()->json(['success' => true]);
+    }
+
+    public function dislike(MsVideo $video)
+    {
+        $video->increment('Dislike');
+        return response()->json(['success' => true]);
+    }
+
+    public function share(MsVideo $video)
+    {
+        // Implement the share logic, e.g., generating a shareable link
+        return response()->json(['success' => true]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
