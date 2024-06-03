@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MsProduct;
 use Illuminate\Http\Request;
 use App\Models\MsVideo;
 
@@ -9,8 +10,9 @@ class RouteController extends Controller
 {
     public function HomePage()
     {
+        $products = MsProduct::all();
         $videos = MsVideo::with('user')->get();
-        return view('home', compact('videos'));
+        return view('home', compact('videos', 'products'));
     }
 
     public function Register()
@@ -20,5 +22,10 @@ class RouteController extends Controller
 
     public function Login(){
         return view('login');
+    }
+
+    public function showForm()
+    {
+        return view('topup');
     }
 }
