@@ -69,8 +69,9 @@ class MsCartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MsCart $msCart)
+    public function destroy(MsCart $cart)
     {
-        //
+        $cart->delete();
+        return back()->with('delete', 'your post was deleted');
     }
 }

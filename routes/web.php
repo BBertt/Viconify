@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/cart', [MsCartController::class, 'index'])->name('cart.index');
     Route::post('/cart/{ProductID}', [MsCartController::class, 'store'])->name('cart.store');
+    Route::delete('/cart/{cart}', [MsCartController::class, 'destroy'])->name('cart.destroy');
 
     Route::post('/purchase', [TransactionHeaderController::class, 'store'])->name('purchase');
 });

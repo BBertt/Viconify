@@ -10,6 +10,9 @@ class MsCart extends Model
 {
     use HasFactory;
 
+    protected $table = 'ms_carts';
+    protected $primaryKey = 'CartID';
+
     protected $fillable = [
         'UserID',
         'ProductID',

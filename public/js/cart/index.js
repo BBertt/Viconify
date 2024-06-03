@@ -27,12 +27,6 @@ function updateSubtotal() {
     document.getElementById('subtotal').textContent = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(subtotal);
 }
 
-function deleteCartItem(button) {
-    const cartItem = button.closest('.cart-item');
-    cartItem.remove();
-    updateSubtotal();
-}
-
 function prepareAndSubmitForm() {
     const form = document.getElementById('purchaseForm');
     document.querySelectorAll('.cart-item').forEach(item => {

@@ -28,7 +28,12 @@ class TransactionHeaderController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $cartItems = $request->input('products', []);
+
+        // Check if there are no cart items
+        if (empty($cartItems)) {
+            return redirect()->back()->withErrors(['error' => 'There are no items in your cart.']);
+        }
     }
 
     /**

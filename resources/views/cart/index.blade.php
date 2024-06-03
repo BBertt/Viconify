@@ -14,6 +14,16 @@
             <h2 class="text-2xl font-bold">Subtotal: <span id="subtotal" class="text-red-500 font-bold mt-2"> Rp {{ number_format($subtotal, 0, ',', '.') }},00</span></h2>
         </div>
 
+        @if ($errors->any())
+            <div class="mb-4">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li class="text-red-500 text-xl">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form action="{{ route('purchase') }}" method="POST" id="purchaseForm">
             @csrf
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -33,7 +43,7 @@
                         </div>
 
                         <div class="flex items-center justify-center mt-4">
-                            <button type="button" class="bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600" onclick="deleteCartItem(this)">Delete</button>
+                            <button type="button" class="bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600" onclick="deleteCartItem(this, '{{ route('cart.destroy', ['cart' => $cart->CartID]) }}')">Delete</button>
                         </div>
                     </div>
                 @endforeach
@@ -46,6 +56,73 @@
     </div>
 
     @push('scripts')
-        <script src="{{ asset('js/cart/index.js') }}"></script>
+        {{-- <script src="{{ asset('js/cart/index.js') }}"></script> --}}
+        <script>
+            function changeQuantity(button, delta) {
+                const cartItem = button.closest('.cart-item');
+                const quantityInput = cartItem.querySelector('.quantity');
+                const price = parseFloat(cartItem.getAttribute('data-price'));
+                const maxQuantity = parseInt(cartItem.getAttribute('data-max-quantity'));
+                let quantity = parseInt(quantityInput.value);
+
+                quantity += delta;
+                if (quantity < 1) {
+                    quantity = 1;
+                } else if (quantity > maxQuantity) {
+                    quantity = maxQuantity;
+                }
+                quantityInput.value = quantity;
+
+                updateSubtotal();
+            }
+
+            function updateSubtotal() {
+                let subtotal = 0;
+                document.querySelectorAll('.cart-item').forEach(item => {
+                    const price = parseFloat(item.getAttribute('data-price'));
+                    const quantity = parseInt(item.querySelector('..quantity').value);
+                    subtotal += price * quantity;
+                });
+
+                document.getElementById('subtotal').textContent = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(subtotal);
+            }
+
+            function deleteCartItem(button, url) {
+                const form = document.createElement('form');
+                form.action = url;
+                form.method = 'POST';
+                const csrfToken = '{{ csrf_token() }}';
+                form.innerHTML = `
+                    <input type="hidden" name="_token" value="${csrfToken}">
+                    <input type="hidden" name="_method" value="DELETE">
+                `;
+                document.body.appendChild(form);
+                form.submit();
+            }
+
+            function prepareAndSubmitForm() {
+                const form = document.getElementById('purchaseForm');
+                document.querySelectorAll('.cart-item').forEach(item => {
+                    const cartId = item.getAttribute('data-cart-id');
+                    const quantity = item.querySelector('.quantity').value;
+
+                    const inputCartId = document.createElement('input');
+                    inputCartId.type = 'hidden';
+                    inputCartId.name = `products[${cartId}][CartID]`;
+                    inputCartId.value = cartId;
+
+                    const inputQuantity = document.createElement('input');
+                    inputQuantity.type = 'hidden';
+                    inputQuantity.name = `products[${cartId}][Quantity]`;
+                    inputQuantity.value = quantity;
+
+                    form.appendChild(inputCartId);
+                    form.appendChild(inputQuantity);
+                });
+
+                form.submit();
+            }
+        </script>
     @endpush
 </x-shop-layout>
+
