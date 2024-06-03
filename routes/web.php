@@ -3,11 +3,12 @@
 use App\Http\Controllers\MsUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RouteController;
+use App\Http\Controllers\ChatController;
 
 Route::get('/', [RouteController::class, 'HomePage'])->name('HomePage');
 
-//Try routing
-Route::get('/chat', [RouteController::class, 'ChatPage'])->name('ChatPage');
+//Try route the chat page
+Route::get('/chat', [ChatController::class, 'showChatPage']);
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RouteController::class, 'Register'])->name('Register');
