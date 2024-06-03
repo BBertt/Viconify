@@ -14,12 +14,13 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [MsUserController::class, 'register'])->name('registerform');
 
     Route::get('/login', [RouteController::class, 'Login'])->name('login');
-    Route::get('/login', [RouteController::class, 'Login'])->name('Login');
     Route::post('/login', [MsUserController::class, 'login'])->name('loginform');
 });
 
 Route::middleware('auth')->group(function () {
     Route::post('/', [MsUserController::class, 'logout'])->name('logout');
+    Route::get('/topup', [RouteController::class, 'showForm'])->name('topup.form');
+    Route::post('/topup', [MsUserController::class, 'processTopUp'])->name('topup.process');
 });
 
 Route::resource('/videos', MsVideoController::class);
