@@ -113,14 +113,11 @@ class MsUser extends Authenticatable
      */
     public function friends()
     {
-        return $this->hasMany(MsFriend::class, 'UserID');
+        return $this->hasMany(MsFriend::class, 'UserID', 'UserID');
     }
 
-    /**
-     * Get the messages sent by the user.
-     */
     public function messages()
     {
-        return $this->hasMany(MsMessage::class, 'SenderID');
+        return $this->hasMany(MsMessage::class, 'SenderID', 'UserID');
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MsCartController;
+use App\Http\Controllers\MsMessageController;
 use App\Http\Controllers\MsProductController;
 use App\Http\Controllers\MsUserController;
 use App\Http\Controllers\MsVideoController;
@@ -21,6 +22,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/', [MsUserController::class, 'logout'])->name('logout');
     Route::get('/topup', [RouteController::class, 'showForm'])->name('topup.form');
     Route::post('/topup', [MsUserController::class, 'processTopUp'])->name('topup.process');
+    Route::get('/chat', [MsMessageController::class, 'index'])->name('chat.index');
+    Route::get('/chat/messages', [MsMessageController::class, 'fetchMessages'])->name('chat.fetchMessages');
+    Route::post('/chat/messages', [MsMessageController::class, 'sendMessage'])->name('chat.sendMessage');
+    Route::post('/chat/add-friend', [MsMessageController::class, 'addFriend'])->name('chat.addFriend');
 });
 
 Route::resource('/videos', MsVideoController::class);

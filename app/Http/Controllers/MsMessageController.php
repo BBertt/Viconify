@@ -2,64 +2,68 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MsFriend;
 use App\Models\MsMessage;
+use App\Models\MsUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MsMessageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $friends = MsFriend::where('UserID', Auth::id())->get();
+        return view('chat', compact('friends'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function fetchMessages(Request $request)
     {
-        //
+        $friendListId = $request->input('friend_list_id');
+        $messages = MsMessage::where('FriendListID', $friendListId)
+                    ->with('sender')
+                    ->get();
+        return response()->json($messages);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function sendMessage(Request $request)
     {
-        //
+        $message = MsMessage::create([
+            'FriendListID' => $request->input('friend_list_id'),
+            'SenderID' => Auth::id(),
+            'Message' => $request->input('message'),
+            'Status' => 'sent',
+        ]);
+
+        return response()->json($message);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(MsMessage $msMessage)
+    public function addFriend(Request $request)
     {
-        //
-    }
+        $friendId = $request->input('friend_id');
+        $userId = Auth::id();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(MsMessage $msMessage)
-    {
-        //
-    }
+        // Check if the user exists
+        $friend = MsUser::find($friendId);
+        if (!$friend) {
+            return redirect()->back()->with('error', 'User not found.');
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, MsMessage $msMessage)
-    {
-        //
-    }
+        // Check if they are already friends
+        $existingFriend = MsFriend::where('UserID', $userId)
+            ->where('FriendID', $friendId)
+            ->first();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(MsMessage $msMessage)
-    {
-        //
+        if ($existingFriend) {
+            return redirect()->back()->with('error', 'You are already friends.');
+        }
+
+        // Add the friend
+        MsFriend::create([
+            'UserID' => $userId,
+            'FriendID' => $friendId,
+            'Status' => 'accepted'
+        ]);
+
+        return redirect()->back()->with('success', 'Friend added successfully.');
     }
 }
