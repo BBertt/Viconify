@@ -92,7 +92,16 @@ class MsUserController extends Controller
 
         $request->validate([
             'profile_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'name' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required',
+            'address' => 'required',
         ]);
+
+        $user->Name = $request->name;
+        $user->email = $request->email;
+        $user->Address = $request->address;
+        $user->PhoneNumber = $request->phone_number;
 
         $path = null;
         if ($request->hasFile('profile_image')) {

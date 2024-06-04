@@ -28,7 +28,22 @@
             <input type="file" name="profile_image" id="profile_image" class="block w-full mt-1">
             <img src="{{ asset($user->ProfileImage) }}" alt="{{ $user->ProfileImage }}" class="w-20 h-20 rounded-full mt-2">
         </div>
-
+        <div class="mb-4">
+            <label for="name" class="block text-gray-700">Name</label>
+            <input type="text" name="name" id="name" value="{{ $user->Name }}" class="block w-full mt-1">
+        </div>
+        <div class="mb-4">
+            <label for="email" class="block text-gray-700">Email</label>
+            <input type="email" name="email" id="email" value="{{ $user->email }}" class="block w-full mt-1">
+        </div>
+        <div class="mb-4">
+            <label for="address" class="block text-gray-700">Address</label>
+            <input type="text" name="address" id="address" value="{{ $user->Address }}" class="block w-full mt-1">
+        </div>
+        <div class="mb-4">
+            <label for="phone_number" class="block text-gray-700">Phone Number</label>
+            <input type="text" name="phone_number" id="phone_number" value="{{ $user->PhoneNumber }}" class="block w-full mt-1">
+        </div>
         <div class="mb-4">
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Update Profile</button>
         </div>
