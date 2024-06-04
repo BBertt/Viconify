@@ -25,7 +25,7 @@
                 @if(Auth::check())
                     <form action="{{ route('logout') }}" method="POST" class="inline">
                         @csrf
-                        <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded">Logout</button>
+                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-700">Logout</button>
                     </form>
                     <a href="/profile">
                         <div class="mt-1 overflow-hidden rounded-full h-11 w-11 flex-shrink-0">
@@ -37,14 +37,18 @@
                         </div>
                     </a>
                 @else
-                    <a href="{{ route('login') }}" class="text-black"><button class="headerbtn" id="book_now">Login</button></a>
-                    <a href="{{ route('Register') }}" class="text-black"><button class="headerbtn" id="book_now">Register</button></a>
+                    <a href="{{ route('login') }}" class="text-black">
+                        <button class="px-4 py-2 bg-white text-black font-bold rounded border hover:bg-gray-200">Login</button>
+                    </a>
+                    <a href="{{ route('Register') }}" class="text-black">
+                        <button class="px-4 py-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-700">Register</button>
+                    </a>
                 @endif
             </div>
         </div>
 
         <div class="mt-2 w-full relative overflow-x-hidden">
-            <button id="scrollLeft" class="absolute left-0 top-0 bottom-0 z-10 bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 hidden">&lt;</button>
+            <button id="scrollLeft" class="carousel-control-prev-icon absolute left-0 top-0 bottom-0 z-10 bg-white text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 hidden"> </button>
             <div id="scrollContainer" class="flex space-x-2 py-2 overflow-x-auto scrollbar-hide">
                 <div class="bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 flex-shrink-0 flex-grow-0 inline-flex items-center h-8 whitespace-nowrap">All</div>
                 <div class="bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 flex-shrink-0 flex-grow-0 inline-flex items-center h-8 whitespace-nowrap">Mixes</div>
@@ -70,7 +74,7 @@
                 <div class="bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 flex-shrink-0 flex-grow-0 inline-flex items-center h-8 whitespace-nowrap">Blender</div>
                 <div class="bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400 flex-shrink-0 flex-grow-0 inline-flex items-center h-8 whitespace-nowrap">Unreal Engine</div>
             </div>
-            <button id="scrollRight" class="absolute right-0 top-0 bottom-0 z-10 bg-gray-300 text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400">&gt;</button>
+            <button id="scrollRight" class="carousel-control-next-icon absolute right-0 top-0 bottom-0 z-10 bg-white text-black px-3 py-1 rounded-full cursor-pointer hover:bg-gray-400"></button>
         </div>
     </header>
 
