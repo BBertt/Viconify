@@ -12,7 +12,7 @@
             <span class="text-black font-bold text-xl">Chat</span>
         </div>
 </header>
-<div class="container mx-auto p-4 flex" style="background-color: #E6F5FF;">
+<div class="w-full h-[94%] flex" style="background-color: #E6F5FF;">
     <div class="w-1/4 p-4">
         <h2 class="text-xl font-bold mb-4">Contact</h2>
         <ul id="friendList" class="mb-4">
