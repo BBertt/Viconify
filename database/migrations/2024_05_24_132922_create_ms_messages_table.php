@@ -10,10 +10,10 @@ return new class extends Migration
     {
         Schema::create('ms_messages', function (Blueprint $table) {
             $table->id('MessageID');
-            $table->foreignId('FriendListID')->constrained('ms_friends', 'FriendListID')->onDelete('cascade');
+            $table->foreignId('ReceiverID')->constrained('ms_users', 'UserID')->onDelete('cascade'); // Corrected spelling
             $table->foreignId('SenderID')->constrained('ms_users', 'UserID')->onDelete('cascade');
-            $table->string('Status', 255);
-            $table->time('CreatedAt');
+            $table->text('message');
+            $table->string('Status', 255)->default('unread');
             $table->timestamps();
         });
     }

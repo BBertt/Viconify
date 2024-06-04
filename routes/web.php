@@ -23,9 +23,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/topup', [RouteController::class, 'showForm'])->name('topup.form');
     Route::post('/topup', [MsUserController::class, 'processTopUp'])->name('topup.process');
     Route::get('/chat', [MsMessageController::class, 'index'])->name('chat.index');
-    Route::get('/chat/messages', [MsMessageController::class, 'fetchMessages'])->name('chat.fetchMessages');
+    Route::get('/chat/messages/{friendId}', [MsMessageController::class, 'fetchMessages'])->name('chat.fetchMessages');
     Route::post('/chat/messages', [MsMessageController::class, 'sendMessage'])->name('chat.sendMessage');
     Route::post('/chat/add-friend', [MsMessageController::class, 'addFriend'])->name('chat.addFriend');
+    Route::post('/chat/accept-friend/{friendListId}', [MsMessageController::class, 'acceptFriend'])->name('chat.acceptFriend');
 });
 
 Route::resource('/videos', MsVideoController::class);

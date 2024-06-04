@@ -1,5 +1,5 @@
 @extends('layout')
-
+@section('title', 'Top Up')
 @section('content')
 
 <header class="bg-[#E6F5FF] text-black p-4 flex flex-col items-center">

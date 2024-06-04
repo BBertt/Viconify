@@ -13,9 +13,9 @@ class MsMessage extends Model
     protected $primaryKey = 'MessageID';
 
     protected $fillable = [
-        'FriendListID',
+        'ReceiverID',
         'SenderID',
-        'Message',
+        'message',
         'Status',
     ];
 
@@ -24,8 +24,8 @@ class MsMessage extends Model
         return $this->belongsTo(MsUser::class, 'SenderID', 'UserID');
     }
 
-    public function friendList()
+    public function reciever()
     {
-        return $this->belongsTo(MsFriend::class, 'FriendListID', 'FriendListID');
+        return $this->belongsTo(MsUser::class, 'RecieverID', 'UserID');
     }
 }
