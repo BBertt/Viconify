@@ -59,7 +59,7 @@
         </div>
     </header>
 
-    <div class="container mx-auto py-6 max-w-screen-2xl px-6">
+    <div class="container mx-auto py-4 max-w-screen-2xl px-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             <div class="col-span-1 lg:col-span-3">
                 <div class="bg-white shadow rounded-lg overflow-hidden">
@@ -145,7 +145,7 @@
                     <div class="bg-white p-4 mt-4 rounded-lg">
                         <h2 class="text-xl font-bold mb-4">{{ $video->comments->count() }} Comments</h2>
                         <div class="flex items-center mb-4">
-                            <img src="{{ $video->user->ProfileImage }}" alt="{{ $video->user->Name }}" class="w-10 h-10 rounded-full">
+                            <img src="{{ auth()->check() ? asset(auth()->user()->ProfileImage) : '' }}" alt="{{ auth()->check() ? auth()->user()->Name : '' }}" class="w-10 h-10 rounded-full">
                             <textarea class="comment-textarea w-full ml-4 border-b border-gray-300 focus:outline-none focus:border-gray-600" placeholder="Add your comment..."></textarea>
                         </div>
     
@@ -164,32 +164,32 @@
                         <!-- Example comment -->
                         <div class="mt-4 mb-4">
                             @foreach ($video->comments as $comment)
-                                <div class="flex items-start mb-4">
-                                    <img src="{{ $comment->user->ProfileImage }}" alt="{{ $comment->user->Name }}" class="rounded-full" style="width: 40px; height: 40px;">
-                                    <div class="ml-4 bg-white p-3 rounded-lg flex-1">
-                                        <div class="flex items-center mb-1">
-                                            <span class="font-bold mr-2">{{ $comment->user->Name }}</span>
-                                            <span class="text-sm text-gray-500">{{ $comment->created_at->format('d M Y') }}</span>
-                                        </div>
-                                        <p class="text-gray-800 comment-text">{{ $comment->Comments }}</p>
-                                        <div class="flex items-center mt-2">
-                                            <button class="like-button flex items-center">
-                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                                </svg>
-                                            </button>
-                                            <button class="dislike-button flex items-center ml-4">
-                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 13l-4-4L5 17"></path>
-                                                </svg>
-                                            </button>
-                                            <button class="reply-button ml-4">Reply</button>
+                                @if ($comment->CommentParentID === null)
+                                    <div class="flex items-start mb-4">
+                                        <img src="{{ asset($comment->user->ProfileImage) }}" alt="{{ $comment->user->Name }}" class="w-10 h-10 rounded-full">
+                                        <div class="ml-4 bg-white p-3 rounded-lg flex-1">
+                                            <div class="flex items-center mb-1">
+                                                <span class="font-bold mr-2">{{ $comment->user->Name }}</span>
+                                                <span class="text-sm text-gray-500">{{ $comment->created_at->format('d M Y') }}</span>
+                                            </div>
+                                            <p class="text-gray-800 comment-text">{{ $comment->Comments }}</p>
+                                            <div class="flex items-center mt-2">
+                                                <button class="like-button flex items-center">
+                                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                </button>
+                                                <button class="dislike-button flex items-center ml-4">
+                                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 13l-4-4L5 17"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
                             @endforeach
                         </div>
-                        <!-- Repeat similar block for more comments -->
                     </div>
                     <!-- End Comment Section -->
                 </div>
@@ -244,6 +244,22 @@
                 } else {
                     moreButton.style.display = 'none';
                 }
+            });
+
+            document.querySelectorAll('.reply-button').forEach(button => {
+                button.addEventListener('click', function () {
+                    const commentId = this.getAttribute('data-comment-id');
+                    const replyForm = document.getElementById(`reply-form-${commentId}`);
+                    replyForm.classList.toggle('hidden');
+                });
+            });
+
+            document.querySelectorAll('.toggle-replies-button').forEach(button => {
+                button.addEventListener('click', function () {
+                    const commentId = this.getAttribute('data-comment-id');
+                    const repliesDiv = document.getElementById(`replies-${commentId}`);
+                    repliesDiv.classList.toggle('hidden');
+                });
             });
         });
     </script>

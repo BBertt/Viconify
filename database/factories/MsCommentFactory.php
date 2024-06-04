@@ -17,13 +17,11 @@ class MsCommentFactory extends Factory
      */
     public function definition(): array
     {
-        $existingCommentIDs = MsComment::pluck('CommentID')->toArray();
-
         return [
             'PostID' => null,
-            'VideoID' => $this->faker->numberBetween(1, 40),
+            'VideoID' => $this->faker->numberBetween(1, 16),
             'ForumID' => null,
-            'CommentParentID' => $this->faker->optional()->randomElement($existingCommentIDs),
+            'CommentParentID' => null,
             'UserID' => $this->faker->numberBetween(1, 5),
             'Comments' => $this->faker->text,
             'Like' => $this->faker->randomNumber(),

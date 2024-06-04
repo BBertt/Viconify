@@ -18,6 +18,7 @@ class MsUserFactory extends Factory
     public function definition(): array
     {
         return [
+            'ProfileImage' => 'Assets/DefaultProfile.png',
             'Name' => $this->faker->name(),
             'email' => $this->faker->email(),
             'password' => Hash::make('password'),
