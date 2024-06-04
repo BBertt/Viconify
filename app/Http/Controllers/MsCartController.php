@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MsCart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MsCartController extends Controller
 {
@@ -12,7 +13,9 @@ class MsCartController extends Controller
      */
     public function index()
     {
-        //
+        $carts = MsCart::with('product')->where('UserID', auth()->id())->get();
+
+        return view('cart.index', compact('carts'));
     }
 
     /**
@@ -26,9 +29,17 @@ class MsCartController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $ProductID)
     {
-        //
+        // Create cart for that User
+        MsCart::create([
+            'UserID' => auth()->id(),
+            'ProductID' => $ProductID,
+            'Quantity' => $request->quantity
+        ]);
+
+        // Redirect to User's Cart
+        return redirect()->route('shop.index');
     }
 
     /**
@@ -58,8 +69,16 @@ class MsCartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MsCart $msCart)
+    public function destroy(MsCart $cart)
     {
-        //
+        $cart->delete();
+        return back()->with('delete', 'your post was deleted');
+    }
+
+    public function deleteAll(array $cartIds) {
+        foreach ($cartIds as $cartId) {
+            $cart = MsCart::where('CartID', $cartId)->first();
+            $cart->delete();
+        }
     }
 }

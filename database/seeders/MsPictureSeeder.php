@@ -15,27 +15,47 @@ class MsPictureSeeder extends Seeder
     {
         MsPicture::create([
             'ProductID' => 1,
-            'PictureData' => 'product_images/default.jpg'
+            'PictureData' => 'product_images/product_1_1.png'
         ]);
+
         MsPicture::create([
             'ProductID' => 2,
-            'PictureData' => 'product_images/default.jpg'
+            'PictureData' => 'product_images/product_2_1.png'
         ]);
+
         MsPicture::create([
+            'PictureID' => 3,
+            'ProductID' => 2,
+            'PictureData' => 'product_images/product_2_2.png'
+        ]);
+
+        MsPicture::create([
+            'PictureID' => 4,
             'ProductID' => 3,
-            'PictureData' => 'product_images/default.jpg'
+            'PictureData' => 'product_images/product_3_1.png'
         ]);
+
+        MsPicture::create([
+            'PictureID' => 5,
+            'ProductID' => 3,
+            'PictureData' => 'product_images/product_3_2.png'
+        ]);
+
         MsPicture::create([
             'ProductID' => 4,
-            'PictureData' => 'product_images/default.jpg'
+            'PictureData' => 'product_images/product_4_1.png'
         ]);
+
         MsPicture::create([
+            'PictureID' => 7,
             'ProductID' => 4,
-            'PictureData' => 'product_images/Nico.png'
+            'PictureData' => 'product_images/product_4_2.png'
         ]);
+
         MsPicture::create([
-            'ProductID' => 4,
-            'PictureData' => 'product_images/Goblin.png'
+            'PictureID' => 8,
+            'ProductID' => 5,
+            'PictureData' => 'product_images/product_5_1.png'
         ]);
     }
 }
