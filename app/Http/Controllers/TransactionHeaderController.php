@@ -15,7 +15,9 @@ class TransactionHeaderController extends Controller
      */
     public function index()
     {
-        //
+        $transactionHeader = TransactionHeader::with('transactionDetails')->where('UserID', Auth::id())->get();
+
+        return view('transaction', compact('transactionHeader'));
     }
 
     /**
@@ -38,13 +40,14 @@ class TransactionHeaderController extends Controller
             return redirect()->back()->withErrors(['error' => 'There are no items in your cart.']);
         }
 
-        $subTotal = 0;
+        $total = 0;
         foreach ($cartItems as $item) {
             $cart = MsCart::with('product')->find($item['CartID']);
-            $subTotal += $cart->product->ProductPrice;
+            $subTotal = $cart->Quantity * $cart->product->ProductPrice;
+            $total += $subTotal;
         }
 
-        if (Auth::user()->Balance == 0 || $subTotal > Auth::user()->Balance) {
+        if (Auth::user()->Balance == 0 || $total > Auth::user()->Balance) {
             return redirect()->back()->withErrors(['error' => 'You Currently Do not have enough balance.']);
         }
 
@@ -75,9 +78,13 @@ class TransactionHeaderController extends Controller
         $cartController = new MsCartController();
         $cartController->deleteAll($cartIds);
 
-        // Additional logic for storing transaction header can go here
+        // Call the update Balance in MsUserController
+        $userController = new MsUserController();
+        $userController->updateBalance($total);
 
-        return back()->with('success', 'Purchase successful');
+
+        // Additional logic for storing transaction header can go here
+        return redirect()->route('transaction');
 
     }
 

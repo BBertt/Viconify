@@ -1,4 +1,6 @@
-<x-shop-layout>
+@extends('shop-layout')
+@section('title', 'Shop')
+@section('content')
     <div class="container mx-auto px-4 py-8">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             @foreach ($products as $product)
@@ -25,5 +27,4 @@
             {{ $products->links() }}
         </div>
     </div>
-
-</x-shop-layout>
+@endsection

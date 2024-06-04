@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/cart/{cart}', [MsCartController::class, 'destroy'])->name('cart.destroy');
 
     Route::post('/purchase', [TransactionHeaderController::class, 'store'])->name('purchase');
+    Route::get('/transaction', [TransactionHeaderController::class, 'index'])->name('transaction');
 });
 
 Route::resource('/videos', MsVideoController::class);

@@ -1,4 +1,6 @@
-<x-shop-layout>
+@extends('shop-layout')
+@section('title', 'Cart')
+@section('content')
     <div class="container mx-auto px-4 py-8">
         @php
             $subtotal = 0;
@@ -11,7 +13,7 @@
         @endforeach
 
         <div class="mb-8">
-            <h2 class="text-2xl font-bold">Subtotal: <span id="subtotal" class="text-red-500 font-bold mt-2"> Rp {{ number_format($subtotal, 0, ',', '.') }},00</span></h2>
+            <h2 class="text-2xl font-bold">Total: <span id="subtotal" class="text-red-500 font-bold mt-2"> Rp {{ number_format($subtotal, 0, ',', '.') }},00</span></h2>
         </div>
 
         @if ($errors->any())
@@ -33,7 +35,7 @@
                 @foreach ($carts as $cart)
                     <div class="bg-white p-4 rounded-lg shadow-md cart-item" data-cart-id="{{ $cart->CartID }}" data-price="{{ $cart->product->ProductPrice }}" data-max-quantity="{{ $cart->product->Quantity }}">
                         <div class="h-60 w-full mb-4 rounded-lg overflow-hidden">
-                            <img src="{{ asset('storage/' . $cart->product->pictures->first()->PictureData) }}" alt="{{ $cart->product->ProductName }}" class="h-60 w-full object-cover">
+                            <img src="{{ asset('storage/' . $cart->product->pictures->first()->c) }}" alt="{{ $cart->product->ProductName }}" class="h-60 w-full object-cover">
                         </div>
                         <h2 class="text-lg font-bold">{{ Str::limit($cart->product->ProductName, 30, '...') }}</h2>
                         <p class="text-gray-500">{{ $cart->product->user->Name }}</p>
@@ -127,5 +129,5 @@
             }
         </script>
     @endpush
-</x-shop-layout>
+@endsection
 

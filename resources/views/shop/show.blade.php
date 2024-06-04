@@ -1,4 +1,6 @@
-<x-shop-layout>
+@extends('shop-layout')
+@section('title', 'Product')
+@section('content')
     <a href="{{ route('shop.index') }}" class="block text-blue-500 mt-2">&larr; Back to shops</a>
     <div class="container mx-auto py-8">
         <div class="flex flex-wrap md:flex-nowrap">
@@ -58,4 +60,4 @@
         <script src="{{ asset('js/shop/show.js') }}"></script>
     @endpush
 
-</x-shop-layout>
+@endsection
