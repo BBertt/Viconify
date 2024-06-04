@@ -17,15 +17,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        MsUser::factory(1)->create();
-        MsVideo::factory(40)->create();
+        // MsUser::factory(1)->create();
 
         $this->call([
+            MsUserSeeder::class,
             MsProductSeeder::class,
             MsPictureSeeder::class,
-            MsUserSeeder::class
         ]);
 
+        MsVideo::factory(40)->create();
 
 
     }

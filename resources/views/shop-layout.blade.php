@@ -15,7 +15,7 @@
                     <div class="flex items-center space-x-4">
                         <img src="{{ asset('Assets/ViConifyLogo.png') }}" alt="ViConify Logo" class="h-8 w-auto">
                     </div>
-        
+
                     <div class="relative flex-grow mx-4">
                         <input type="text" id="searchBar" class="bg-white text-black rounded-full px-4 py-2 pl-10 w-full" placeholder="Search">
                         <div class="absolute top-0 left-0 flex items-center h-full pl-3">
@@ -24,7 +24,7 @@
                             </svg>
                         </div>
                     </div>
-        
+
                     <div class="flex items-center space-x-4">
                         <a href="{{ route('cart.index') }}">
                             <svg class="text-black h-6 w-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -32,11 +32,15 @@
                             </svg>
                         </a>
                         <a href="{{ route('transaction') }}">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4 6h16v12H4z" fill="#E0E0E0" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M9 12l4 4 4-4" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M15 12L11 8 11 16" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <svg class="text-black h-6 w-6 cursor-pointer" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 2H14L18 6V22H6V2Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 2V6H18" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 12H16" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 16H16" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 8H10" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
+
+
                         </a>
                         @if(Auth::check())
                             <form action="{{ route('logout') }}" method="POST" class="inline">
@@ -50,9 +54,9 @@
                     </div>
                 </div>
             </header>
-        
+
            @yield('content')
-        
+
         </body>
 
         @push('scripts')

@@ -43,7 +43,7 @@ class TransactionHeaderController extends Controller
         $total = 0;
         foreach ($cartItems as $item) {
             $cart = MsCart::with('product')->find($item['CartID']);
-            $subTotal = $cart->Quantity * $cart->product->ProductPrice;
+            $subTotal = $item['Quantity'] * $cart->product->ProductPrice;
             $total += $subTotal;
         }
 

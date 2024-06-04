@@ -24,7 +24,7 @@
                     <img src="{{ asset('storage/' . $product->user->ProfileImage) }}"
                          alt="{{ $product->user->Name }}" class="w-10 h-10 rounded-full mr-4">
                     <div>
-                        <span class="font-bold">{{ $product->user->Name }}</span>
+                        <span class="font-bold">{{ $product->user->StoreName }}</span>
                         <span class="text-gray-600">({{ $product->user->StoreRating }} Rata-rata ulasan)</span>
                     </div>
                 </div>

@@ -35,7 +35,7 @@
                 @foreach ($carts as $cart)
                     <div class="bg-white p-4 rounded-lg shadow-md cart-item" data-cart-id="{{ $cart->CartID }}" data-price="{{ $cart->product->ProductPrice }}" data-max-quantity="{{ $cart->product->Quantity }}">
                         <div class="h-60 w-full mb-4 rounded-lg overflow-hidden">
-                            <img src="{{ asset('storage/' . $cart->product->pictures->first()->c) }}" alt="{{ $cart->product->ProductName }}" class="h-60 w-full object-cover">
+                            <img src="{{ asset('storage/' . $cart->product->pictures->first()->PictureData) }}" alt="{{ $cart->product->ProductName }}" class="h-60 w-full object-cover">
                         </div>
                         <h2 class="text-lg font-bold">{{ Str::limit($cart->product->ProductName, 30, '...') }}</h2>
                         <p class="text-gray-500">{{ $cart->product->user->Name }}</p>
@@ -59,8 +59,9 @@
             </div>
         </form>
     </div>
+@endsection
 
-    @push('scripts')
+@push('scripts')
         {{-- <script src="{{ asset('js/cart/index.js') }}"></script> --}}
         <script>
             function changeQuantity(button, delta) {
@@ -85,7 +86,7 @@
                 let subtotal = 0;
                 document.querySelectorAll('.cart-item').forEach(item => {
                     const price = parseFloat(item.getAttribute('data-price'));
-                    const quantity = parseInt(item.querySelector('..quantity').value);
+                    const quantity = parseInt(item.querySelector('.quantity').value);
                     subtotal += price * quantity;
                 });
 
@@ -129,5 +130,3 @@
             }
         </script>
     @endpush
-@endsection
-

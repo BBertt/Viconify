@@ -16,9 +16,9 @@
                 </div>
             </div>
             <div class="flex items-center mb-4">
-                <img src="{{ asset('storage/' . $header->user->ProfileImage) }}" alt="{{ $header->user->StoreName }}" class="w-10 h-10 rounded-full mr-3">
+                <img src="{{ asset('storage/' . $detail->product->user->ProfileImage) }}" alt="{{ $detail->product->user->StoreName }}" class="w-10 h-10 rounded-full mr-3">
                 <div>
-                    <p class="text-gray-700 font-bold">{{ $header->user->StoreName }}</p>
+                    <p class="text-gray-700 font-bold">{{ $detail->product->user->StoreName }}</p>
                 </div>
             </div>
             <div class="flex justify-between">
@@ -36,9 +36,9 @@
                     <h2 class="text-2xl font-bold">Total: <span class="text-red-500 font-bold mt-2"> Rp {{ number_format($total, 0, ',', '.') }},00</span></h2>
                 </div>
             </div>
-            
+
         </div>
-        @endforeach 
+        @endforeach
     @endforeach
 </div>
 @endsection

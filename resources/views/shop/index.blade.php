@@ -17,7 +17,7 @@
                             </div>
                         @endif
                         <h2 class="text-lg font-bold">{{ Str::limit($product->ProductName, 30, '...') }}</h2>
-                        <p class="text-gray-500">{{ $product->user->Name }}</p>
+                        <p class="text-gray-500">{{ $product->user->StoreName }}</p>
                         <p class="text-red-500 font-bold mt-2">Rp {{ number_format($product->ProductPrice, 0, ',', '.') }}</p>
                     </div>
                 </a>
