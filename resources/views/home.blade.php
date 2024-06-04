@@ -229,9 +229,6 @@
             <div class="w-11/12 flex justify-center space-x-4">
                 <div class="container max-w-screen-2xl">
                     <div class="flex items-center">
-                        <svg viewBox="0 0 24 24" class="w-6 h-6 mr-2" xmlns="http://www.w3.org/2000/svg">
-                            <path fill="currentColor" d="M10 9V5l7 7-7 7v-4H4V9h6z"/>
-                        </svg>
                         <span class="text-black font-bold text-xl">Shorts</span>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 shorts-container">

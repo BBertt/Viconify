@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MsVideo;
+use App\Models\MsProduct;
 use Illuminate\Http\Request;
 
 class MsVideoController extends Controller
@@ -40,7 +41,8 @@ class MsVideoController extends Controller
     {
         return view('video', [
             'video' => MsVideo::findOrFail($VideoID),
-            'videos' => MsVideo::all()
+            'videos' => MsVideo::all(),
+            'products' => MsProduct::all()
         ]);
     }
 

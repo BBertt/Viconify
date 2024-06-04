@@ -28,4 +28,9 @@ class MsVideo extends Model
     {
         return $this->belongsTo(MsUser::class, 'UserID', 'UserID');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(MsComment::class, 'VideoID', 'VideoID');
+    }
 }
