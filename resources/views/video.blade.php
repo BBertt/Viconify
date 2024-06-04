@@ -164,38 +164,30 @@
                         <!-- Example comment -->
                         <div class="mt-4 mb-4">
                             @foreach ($video->comments as $comment)
-                                <div class="flex items-start mb-2">
-                                    <img src= {{ $comment->user->ProfileImage }} alt="{{ $comment->user->Name }}" class="w-10 h-10 rounded-full">
-                                    <div class="ml-4">
-                                        <div class="bg-gray-100 p-3 rounded-lg">
-                                            <div class="flex items-center justify-between">
-                                                <span class="font-bold">{{ $comment->user->Name }}</span>
-                                            </div>
-                                            <p class="mt-2"> {{ $comment->Comments }}</p>
+                                <div class="flex items-start mb-4">
+                                    <img src="{{ $comment->user->ProfileImage }}" alt="{{ $comment->user->Name }}" class="rounded-full" style="width: 40px; height: 40px;">
+                                    <div class="ml-4 bg-white p-3 rounded-lg flex-1">
+                                        <div class="flex items-center mb-1">
+                                            <span class="font-bold mr-2">{{ $comment->user->Name }}</span>
+                                            <span class="text-sm text-gray-500">{{ $comment->created_at->format('d M Y') }}</span>
                                         </div>
-                                    </div>
-                                </div>                                
-                            @endforeach
-                            <!-- Replies -->
-                            {{-- <div class="ml-12">
-                                <div class="flex items-start mb-2">
-                                    <img src="https://via.placeholder.com/40" alt="User" class="w-10 h-10 rounded-full">
-                                    <div class="ml-4">
-                                        <div class="bg-gray-100 p-3 rounded-lg">
-                                            <div class="flex items-center justify-between">
-                                                <span class="font-bold">@user2</span>
-                                                <span class="text-gray-500 text-sm">1 year ago</span>
-                                            </div>
-                                            <p class="mt-2">Yes, it's quite exciting!</p>
-                                        </div>
-                                        <div class="flex items-center mt-2 text-gray-500">
-                                            <button class="mr-2 flex items-center"><i class="far fa-thumbs-up"></i></button>
-                                            <button class="mr-2 flex items-center"><i class="far fa-thumbs-down"></i></button>
-                                            <button class="flex items-center">Reply</button>
+                                        <p class="text-gray-800 comment-text">{{ $comment->Comments }}</p>
+                                        <div class="flex items-center mt-2">
+                                            <button class="like-button flex items-center">
+                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="dislike-button flex items-center ml-4">
+                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 13l-4-4L5 17"></path>
+                                                </svg>
+                                            </button>
+                                            <button class="reply-button ml-4">Reply</button>
                                         </div>
                                     </div>
                                 </div>
-                            </div> --}}
+                            @endforeach
                         </div>
                         <!-- Repeat similar block for more comments -->
                     </div>
