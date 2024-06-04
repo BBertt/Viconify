@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             MsUserSeeder::class,
             MsProductSeeder::class,
+            MsVideoSeeder::class,
             MsPictureSeeder::class,
         ]);
         MsComment::factory(200)->create();

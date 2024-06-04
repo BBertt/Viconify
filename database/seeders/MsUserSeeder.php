@@ -15,7 +15,6 @@ class MsUserSeeder extends Seeder
     public function run(): void
     {
         MsUser::create([
-            'UserID' => 1,
             'ProfileImage' => 'profile_images/Nico.png',
             'Name' => 'Jerenico Franssen Imannuel',
             'password' => Hash::make('password'),
@@ -27,7 +26,6 @@ class MsUserSeeder extends Seeder
         ]);
 
         MsUser::create([
-            'UserID' => 2,
             'ProfileImage' => 'profile_images/Botak.jpg',
             'Name' => 'Hairy Sebastian Putra',
             'password' => Hash::make('password'),
