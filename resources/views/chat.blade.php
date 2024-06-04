@@ -12,14 +12,14 @@
             <span class="text-black font-bold text-xl">Chat</span>
         </div>
 </header>
-<div class="w-full h-[94%] flex" style="background-color: #E6F5FF;">
-    <div class="w-1/4 p-4">
+<div class="w-full h-[94%] flex">
+    <div class="w-1/4 p-4 bg-white border-r border-gray-200">
         <h2 class="text-xl font-bold mb-4">Contact</h2>
         <ul id="friendList" class="mb-4">
             @foreach ($friends as $friend)
                 <li class="flex items-center p-2 border rounded mb-2 cursor-pointer hover:bg-blue-100" onclick="selectFriend({{ $friend->FriendID == Auth::id() ? $friend->UserID : $friend->FriendID }}, '{{ $friend->UserID == Auth::id() ? $friend->friend->Name : $friend->user->Name }}')">
-                    @if ($friend->ProfileImage)
-                        <img src="$friend->ProfileImage" alt="Avatar" class="w-10 h-10 rounded-full mr-2">
+                    @if ($friend->user->ProfileImage)
+                        <img src="{{$friend->user->ProfileImage}}" alt="Avatar" class="w-10 h-10 rounded-full mr-2">
                     @else
                         <img src="{{asset('Assets/DefaultProfile.png')}}" alt="img" class="w-10 h-10 rounded-full mr-2">
                     @endif
@@ -34,8 +34,8 @@
         <ul id="friendRequestList" class="mb-4">
             @foreach ($friendRequests as $friendRequest)
                 <li class="flex items-center p-2 border rounded mb-2">
-                    @if ($friendRequests->ProfileImage)
-                        <img src="$friendRequests->ProfileImage" alt="Avatar" class="w-10 h-10 rounded-full mr-2">
+                    @if ($friendRequests->user->ProfileImage)
+                        <img src="{{ $friendRequests->user->ProfileImage }}" alt="Avatar" class="w-10 h-10 rounded-full mr-2">
                     @else
                         <img src="{{asset('Assets/DefaultProfile.png')}}" alt="img" class="w-10 h-10 rounded-full mr-2">
                     @endif
@@ -53,8 +53,8 @@
         <ul id="sentFriendRequestList" class="mb-4">
             @foreach ($sentFriendRequests as $sentRequest)
                 <li class="flex items-center p-2 border rounded mb-2">
-                    @if ($sentRequest->ProfileImage)
-                        <img src="$sentRequest->ProfileImage" alt="Avatar" class="w-10 h-10 rounded-full mr-2">
+                    @if ($sentRequest->user->ProfileImage)
+                        <img src="{{ $sentRequest->user->ProfileImage }}" alt="Avatar" class="w-10 h-10 rounded-full mr-2">
                     @else
                         <img src="{{asset('Assets/DefaultProfile.png')}}" alt="img" class="w-10 h-10 rounded-full mr-2">
                     @endif
@@ -70,7 +70,7 @@
                 <input type="number" name="friend_id" placeholder="Enter Friend ID" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
             </div>
             <div class="mb-4">
-                <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Friend</button>
+                <button type="submit" class="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Friend</button>
             </div>
         </form>
         @if (session('success'))
@@ -84,15 +84,22 @@
             </div>
         @endif
     </div>
-    <div class="w-3/4 flex flex-col items-center p-4">
-        <h1 class="text-3xl font-bold mb-4">Chat with <span id="selectedFriendName"></span></h1>
-        <div id="chatBox" class="flex-grow mb-4 w-full h-64 border rounded p-4 overflow-y-scroll bg-white">
+    <div class="w-3/4 flex flex-col items-center">
+        <div class="w-full header-chat flex items-center bg-white border-b border-gray-200 p-4">
+            <img src="{{asset('Assets/DefaultProfile.png')}}" alt="img" class="w-10 h-10 rounded-full mr-2">
+            <a href="#" class="text-3xl text-gray-800 font-semibold" id="selectedFriendName">Pick User</a>
         </div>
-        <form id="messageForm" class="w-full flex" action="{{ route('chat.sendMessage') }}" method="POST">
+        <div id="chatBox" class="flex-grow w-full h-full border-none rounded overflow-y-scroll bg-white">
+        </div>
+        <form id="messageForm" class="w-full" action="{{ route('chat.sendMessage') }}" method="POST">
             @csrf
+            <div class="chat-bar flex items-center bg-white border-t border-gray-200 p-4">
+                <button id="addFileButton" class="text-gray-600 hover:text-gray-800 mr-2">+</button>
+                <button id="emoticonButton" class="text-gray-600 hover:text-gray-800 mr-2">😊</button>
+                <input type="text" id="messageInput" name="message" class="flex-1 border border-gray-300 rounded-full px-4 py-2 mr-2" placeholder="Type a message" required>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full">Send</button>
+            </div>
             <input type="hidden" id="receiverId" name="receiver_id">
-            <input type="text" id="messageInput" name="message" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Send</button>
         </form>
     </div>
 </div>

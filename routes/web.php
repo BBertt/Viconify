@@ -27,6 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/chat/messages', [MsMessageController::class, 'sendMessage'])->name('chat.sendMessage');
     Route::post('/chat/add-friend', [MsMessageController::class, 'addFriend'])->name('chat.addFriend');
     Route::post('/chat/accept-friend/{friendListId}', [MsMessageController::class, 'acceptFriend'])->name('chat.acceptFriend');
+    Route::get('/profile', [MsUserController::class, 'show'])->name('profile.show');
+    Route::post('/profile', [MsUserController::class, 'update'])->name('profile.update');
 });
 
 Route::resource('/videos', MsVideoController::class);

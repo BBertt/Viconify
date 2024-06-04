@@ -27,6 +27,15 @@
                         @csrf
                         <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded">Logout</button>
                     </form>
+                    <a href="/profile">
+                        <div class="mt-1 overflow-hidden rounded-full h-11 w-11 flex-shrink-0">
+                            @if(Auth::user()->ProfileImage)
+                                <img src="{{Auth::user()->ProfileImage}}" alt="None" class="h-full object-cover w-full rounded-full">
+                            @else
+                                <img src="{{asset('Assets/DefaultProfile.png')}}" alt="None" class="h-full object-cover w-full rounded-full">
+                            @endif
+                        </div>
+                    </a>
                 @else
                     <a href="{{ route('login') }}" class="text-black">Login</a>
                     <a href="{{ route('Register') }}" class="text-black">Register</a>

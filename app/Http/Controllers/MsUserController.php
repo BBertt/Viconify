@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class MsUserController extends Controller
 {
@@ -79,4 +80,32 @@ class MsUserController extends Controller
         return redirect()->route('topup.form')->with('success', 'Top-up successful! Your new balance is Rp.' . $user->Balance);
     }
 
+    public function show()
+    {
+        $user = Auth::user();
+        return view('profile', compact('user'));
+    }
+
+    public function update(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'profile_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $path = null;
+        if ($request->hasFile('profile_image')) {
+            $uploadedFile = $request->file('profile_image');
+            if ($uploadedFile && $uploadedFile->isValid()) {
+                $path = $uploadedFile->store('users', 'public');
+            }
+        }
+
+        $user->ProfileImage = $path ? 'storage/' . $path : $user->ProfileImage;
+
+        $user->save();
+
+        return redirect()->back()->with('success', 'Profile updated successfully');
+    }
 }
