@@ -23,6 +23,9 @@
                 </ul>
             </div>
         @endif
+        @if (session('success'))
+            <div class="text-green-500 text-xl">{{ session('success') }}</div>
+        @endif
 
         <form action="{{ route('purchase') }}" method="POST" id="purchaseForm">
             @csrf

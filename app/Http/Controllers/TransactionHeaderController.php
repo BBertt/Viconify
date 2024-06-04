@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MsCart;
 use App\Models\TransactionHeader;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionHeaderController extends Controller
 {
@@ -34,6 +37,48 @@ class TransactionHeaderController extends Controller
         if (empty($cartItems)) {
             return redirect()->back()->withErrors(['error' => 'There are no items in your cart.']);
         }
+
+        $subTotal = 0;
+        foreach ($cartItems as $item) {
+            $cart = MsCart::with('product')->find($item['CartID']);
+            $subTotal += $cart->product->ProductPrice;
+        }
+
+        if (Auth::user()->Balance == 0 || $subTotal > Auth::user()->Balance) {
+            return redirect()->back()->withErrors(['error' => 'You Currently Do not have enough balance.']);
+        }
+
+        $transactionHeader = TransactionHeader::create([
+            'UserID' => auth()->id(),
+            'TransactionDate' => Carbon::now(),
+            'PaymentMethod' => 'Balance'
+        ]);
+        $transactionId = $transactionHeader->TransactionID;
+
+        // Methods for retreiving specific attributes from an array of items.
+
+        $cartIds = array_map(function($item) {
+            return $item['CartID'];
+        }, $cartItems);
+
+            // $cartId = array_column($cartItems, 'CartID');
+
+        // Call the update quantity function in ProductController
+        $productController = new MsProductController();
+        $productController->updateQuantities($cartItems);
+
+        // Call the create function in TransactionDetailController
+        $transactionDetailController = new TransactionDetailController();
+        $transactionDetailController->store($request, $transactionId);
+
+        // Call the delete function in MsCartController
+        $cartController = new MsCartController();
+        $cartController->deleteAll($cartIds);
+
+        // Additional logic for storing transaction header can go here
+
+        return back()->with('success', 'Purchase successful');
+
     }
 
     /**

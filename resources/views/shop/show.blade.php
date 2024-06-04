@@ -37,10 +37,6 @@
                         <small class="text-gray-600">Stock's left: {{ $product->Quantity }}</small>
                     </div>
                     <div class="mb-4">
-                        <label for="notes" class="block text-gray-700 text-sm font-bold mb-2">Notes</label>
-                        <textarea name="notes" id="notes" class="form-control w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" rows="3"></textarea>
-                    </div>
-                    <div class="mb-4">
                         <label for="subtotal" class="block text-gray-700 text-sm font-bold mb-2">Subtotal</label>
                         <input type="text" name="subtotal" id="subtotal" class="form-control w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" value="Rp {{ number_format($product->ProductPrice, 0, ',', '.') }}" readonly>
                     </div>

@@ -39,7 +39,7 @@ class MsCartController extends Controller
         ]);
 
         // Redirect to User's Cart
-        return redirect()->route('cart.index');
+        return redirect()->route('shop.index');
     }
 
     /**
@@ -73,5 +73,12 @@ class MsCartController extends Controller
     {
         $cart->delete();
         return back()->with('delete', 'your post was deleted');
+    }
+
+    public function deleteAll(array $cartIds) {
+        foreach ($cartIds as $cartId) {
+            $cart = MsCart::where('CartID', $cartId)->first();
+            $cart->delete();
+        }
     }
 }

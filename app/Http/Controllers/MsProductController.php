@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MsCart;
 use App\Models\MsProduct;
 use Illuminate\Http\Request;
 
@@ -62,5 +63,19 @@ class MsProductController extends Controller
     public function destroy(MsProduct $msProduct)
     {
         //
+    }
+
+    public function updateQuantities (array $cartItems) {
+        foreach ($cartItems as $item) {
+            // Find the cart item by its CartID
+            $cart = MsCart::with('product')->find($item['CartID']);
+            // Check if the cart item exists and has a related product
+            if ($cart && $cart->product) {
+                // Subtract the cart quantity from the product quantity
+                $cart->product->Quantity -= $item['Quantity'];
+                // Save the updated product
+                $cart->product->save();
+            }
+        }
     }
 }

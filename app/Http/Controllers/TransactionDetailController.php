@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MsCart;
 use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
 
@@ -26,9 +27,21 @@ class TransactionDetailController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $transactionId)
     {
-        //
+        $cartItems = $request->input('products', []);
+
+        foreach ($cartItems as $item) {
+            $cart = MsCart::with('product')->find($item['CartID']);
+            // Create a transaction detail record for each cart item
+            TransactionDetail::create([
+                'TransactionID' => $transactionId,
+                'ProductID' => $cart->product->ProductID,
+                'Quantity' => $item['Quantity'],
+                'Price' => $cart->product->ProductPrice,
+                'TransactionStatus' => 'Success'
+            ]);
+        }
     }
 
     /**

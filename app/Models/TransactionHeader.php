@@ -10,8 +10,14 @@ class TransactionHeader extends Model
 {
     use HasFactory;
 
+    protected $table = 'transaction_headers';
+
+    protected $primaryKey = 'TransactionID';
+
     protected $fillable = [
-        
+        'UserID',
+        'TransactionDate',
+        'PaymentMethod'
     ];
 
     public function transactionDetails() : HasMany

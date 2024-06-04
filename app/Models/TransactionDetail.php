@@ -11,6 +11,21 @@ class TransactionDetail extends Model
 {
     use HasFactory;
 
+    protected $table = 'transaction_details';
+    public $incrementing = false;
+
+    protected $primaryKey = ['TransactionID', 'ProductID'];
+
+    protected $fillable = [
+        'TransactionID',
+        'ProductID',
+        'Quantity',
+        'Price',
+        'TransactionStatus'
+    ];
+
+
+
     public function product() : BelongsTo
     {
         return $this->belongsTo(MsProduct::class, 'ProductID');
