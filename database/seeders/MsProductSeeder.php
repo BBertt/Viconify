@@ -86,35 +86,73 @@ class MsProductSeeder extends Seeder
         ]);
 
         MsProduct::create([
+            'ProductID' => 6,
             'UserID' => 1,
-            'ProductName' => 'Product 5',
-            'ProductPrice' => 500,
-            'ProductDescription' => 'Description for Product 4',
+            'ProductName' => 'Action Figure Kingkong Skull Island King Kong Gorilla Mainan',
+            'ProductPrice' => 68000,
+            'ProductDescription' => 'KING KONG GORILLA Action Figure
+
+            * Tinggi Figure : 17cm
+            * Figure Material : Karet (PVC)
+            * Standbase : No
+            * Kemasan : Loose Pack (Plastik OPP)
+            * Artikulasi : kepala, tangan, kaki',
+            'Quantity' => 5,
+        ]);
+
+        MsProduct::create([
+            'ProductID' => 7,
+            'UserID' => 1,
+            'ProductName' => 'Sepatu Sneakers Pria Tali Casual Gaya Import Premium Kets Original Keren - Hitam, 42',
+            'ProductPrice' => 165000,
+            'ProductDescription' => '📣📣 FREE BOX SEPATU
+
+            Sepatu Sneakers Import ini merupakan salah satu sepatu Premium Original, menggunakan bahan “PU Leather“ membuat sepatu ini nyaman & awet saat dipakai.',
             'Quantity' => 10,
         ]);
 
         MsProduct::create([
-            'UserID' => 1,
-            'ProductName' => 'Product 6',
-            'ProductPrice' => 600,
-            'ProductDescription' => 'Description for Product 4',
-            'Quantity' => 10,
+            'ProductID' => 8,
+            'UserID' => 2,
+            'ProductName' => 'Keola Korean Pom Beanie Hat |Topi Rajut Anak Bayi Korean New Born Baby - Pom Cream',
+            'ProductPrice' => 50000,
+            'ProductDescription' => 'Keola Korean Pom Beanie Hat | Topi Rajut Anak Bayi Korean New Born Baby
+
+            Keola Korean Pom Beanie Hat adalah Topi / Kupluk Bayi Bahan Rajut Dengan Korean Style yang Sangat Cocok Dikenakan Buah Hati Anda Agar Terlihat Semakin Lucu, Imut, Cantik, Ganteng.
+            Juga Bermanfaat Menghangatkan Kepala Buah Hati Anda di saat bepergian
+
+            Lingkar Kepala : 44-48cm Estimasi Usia : 3bln - 2 thn
+            Bahan Rajut',
+            'Quantity' => 5,
         ]);
 
         MsProduct::create([
+            'ProductID' => 9,
             'UserID' => 1,
-            'ProductName' => 'Product 7',
-            'ProductPrice' => 700,
-            'ProductDescription' => 'Description for Product 4',
-            'Quantity' => 10,
+            'ProductName' => 'manual salt pepper mill grinder wood / grinder bumbu dapur merica lada',
+            'ProductPrice' => 65000,
+            'ProductDescription' => 'grinder dapur dengan desain corak kayu
+            biasa digunakan untuk keperluan bumbu dapur seperti merica dan lada
+            dimensi 5,5x22cm (8inch)
+
+            material: wood, ceramic grinding core, acrylic',
+            'Quantity' => 45,
         ]);
 
         MsProduct::create([
-            'UserID' => 1,
-            'ProductName' => 'Product 8',
-            'ProductPrice' => 800,
-            'ProductDescription' => 'Description for Product 4',
-            'Quantity' => 10,
+            'ProductID' => 10,
+            'UserID' => 2,
+            'ProductName' => 'JERSEY TIMNAS INDONESIA HOME 2022-2023 MILLS REPLICA VERSION - JERSEY HOME, M',
+            'ProductPrice' => 68000,
+            'ProductDescription' => 'Dilengkapi Teknologi : ANTI STATIC AND WICKING
+
+            Dengan Pilihan Warna :
+            ( Red )
+
+            Material :
+            TEPO
+            100% POLYESTER',
+            'Quantity' => 98,
         ]);
     }
 }
