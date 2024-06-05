@@ -34,7 +34,7 @@
         <ul id="friendRequestList" class="mb-4">
             @foreach ($friendRequests as $friendRequest)
                 <li class="flex items-center p-2 border rounded mb-2">
-                    @if ($friendRequests->user->ProfileImage)
+                    @if ($friendRequest->user->ProfileImage)
                         <img src="{{ $friendRequests->user->ProfileImage }}" alt="Avatar" class="w-10 h-10 rounded-full mr-2">
                     @else
                         <img src="{{asset('Assets/DefaultProfile.png')}}" alt="img" class="w-10 h-10 rounded-full mr-2">
