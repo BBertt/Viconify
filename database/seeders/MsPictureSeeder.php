@@ -60,5 +60,65 @@ class MsPictureSeeder extends Seeder
             'ProductID' => 5,
             'PictureData' => 'product_images/product_5_1.png'
         ]);
+
+        MsPicture::create([
+            'PictureID' => 9,
+            'ProductID' => 6,
+            'PictureData' => 'product_images/product_6_1.png'
+        ]);
+
+        MsPicture::create([
+            'PictureID' => 10,
+            'ProductID' => 6,
+            'PictureData' => 'product_images/product_6_2.png'
+        ]);
+
+        MsPicture::create([
+            'PictureID' => 11,
+            'ProductID' => 7,
+            'PictureData' => 'product_images/product_7_1.png'
+        ]);
+
+        MsPicture::create([
+            'PictureID' => 12,
+            'ProductID' => 7,
+            'PictureData' => 'product_images/product_7_2.png'
+        ]);
+
+        MsPicture::create([
+            'PictureID' => 13,
+            'ProductID' => 8,
+            'PictureData' => 'product_images/product_8_1.png'
+        ]);
+
+        MsPicture::create([
+            'PictureID' => 14,
+            'ProductID' => 8,
+            'PictureData' => 'product_images/product_8_2.png'
+        ]);
+
+        MsPicture::create([
+            'PictureID' => 15,
+            'ProductID' => 9,
+            'PictureData' => 'product_images/product_9_1.png'
+        ]);
+
+        MsPicture::create([
+            'PictureID' => 16,
+            'ProductID' => 9,
+            'PictureData' => 'product_images/product_9_2.png'
+        ]);
+
+        MsPicture::create([
+            'PictureID' => 17,
+            'ProductID' => 10,
+            'PictureData' => 'product_images/product_10_1.png'
+        ]);
+
+        MsPicture::create([
+            'PictureID' => 18,
+            'ProductID' => 10,
+            'PictureData' => 'product_images/product_10_2.png'
+        ]);
     }
 }
