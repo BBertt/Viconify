@@ -35,7 +35,7 @@
             @foreach ($friendRequests as $friendRequest)
                 <li class="flex items-center p-2 border rounded mb-2">
                     @if ($friendRequest->user->ProfileImage)
-                        <img src="{{ $friendRequests->user->ProfileImage }}" alt="Avatar" class="w-10 h-10 rounded-full mr-2">
+                        <img src="{{ $friendRequest->user->ProfileImage }}" alt="Avatar" class="w-10 h-10 rounded-full mr-2">
                     @else
                         <img src="{{asset('Assets/DefaultProfile.png')}}" alt="img" class="w-10 h-10 rounded-full mr-2">
                     @endif
@@ -53,8 +53,8 @@
         <ul id="sentFriendRequestList" class="mb-4">
             @foreach ($sentFriendRequests as $sentRequest)
                 <li class="flex items-center p-2 border rounded mb-2">
-                    @if ($sentRequest->user->ProfileImage)
-                        <img src="{{ $sentRequest->user->ProfileImage }}" alt="Avatar" class="w-10 h-10 rounded-full mr-2">
+                    @if ($sentRequest->friend->ProfileImage)
+                        <img src="{{ $sentRequest->friend->ProfileImage }}" alt="Avatar" class="w-10 h-10 rounded-full mr-2">
                     @else
                         <img src="{{asset('Assets/DefaultProfile.png')}}" alt="img" class="w-10 h-10 rounded-full mr-2">
                     @endif

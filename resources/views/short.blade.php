@@ -15,9 +15,11 @@
             </div>
         </div>
         <div class="flex items-center space-x-4">
-            <svg class="text-black h-6 w-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18l-2 13H5L3 3zM5 6h14M9 9v6M15 9v6M6 21a1 1 0 100-2 1 1 0 000 2zm12 0a1 1 0 100-2 1 1 0 000 2z" />
-            </svg>
+            <a href="{{ route('cart.index') }}">
+                <svg class="text-black h-6 w-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18l-2 13H5L3 3zM5 6h14M9 9v6M15 9v6M6 21a1 1 0 100-2 1 1 0 000 2zm12 0a1 1 0 100-2 1 1 0 000 2z" />
+                </svg>
+            </a>
             @if(Auth::check())
                 <form action="{{ route('logout') }}" method="POST" class="inline">
                     @csrf
@@ -106,7 +108,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 @endif
             @endforeach
         </div>
@@ -142,7 +144,7 @@
         const scrollThreshold = 50; // Adjust this value as needed
         const videoHeight = videoContainers[0].offsetHeight;
         const scrollPosition = window.scrollY + window.innerHeight;
-        
+
         if (scrollPosition > videoHeight + scrollThreshold) {
             currentVideoIndex = (currentVideoIndex + 1) % videoContainers.length;
             showVideo(currentVideoIndex);

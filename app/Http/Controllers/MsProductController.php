@@ -37,6 +37,7 @@ class MsProductController extends Controller
      */
     public function show(MsProduct $msProduct)
     {
+        
         $msProduct->load('pictures', 'user');
         return view('shop.show', ['product' => $msProduct]);
     }
