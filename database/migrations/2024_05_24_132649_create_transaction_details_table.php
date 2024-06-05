@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('Price');
             $table->string('TransactionStatus', 255);
             $table->timestamps();
-            $table->primary(['TransactionID', 'ProductID', 'AuctionID']);
+            $table->primary(['TransactionID', 'ProductID']);
         });
     }
 

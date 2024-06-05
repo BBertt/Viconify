@@ -69,6 +69,12 @@ class MsUserController extends Controller
         return redirect()->route('HomePage');
     }
 
+    public function updateBalance(int $total) {
+        $user = MsUser::where('UserID', auth()->id())->first();
+        $user->Balance -= $total;
+        $user->save();
+    }
+
     public function processTopUp(Request $request)
     {
         $request->validate([

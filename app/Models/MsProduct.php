@@ -34,4 +34,14 @@ class MsProduct extends Model
     {
         return $this->belongsTo(MsUser::class, 'UserID');
     }
+
+    public function carts() : HasMany
+    {
+        return $this->hasMany(MsCart::class, 'ProductID');
+    }
+
+    public function transactionDetails() : HasMany
+    {
+        return $this->hasMany(TransactionDetail::class, 'ProductID');
+    }
 }
