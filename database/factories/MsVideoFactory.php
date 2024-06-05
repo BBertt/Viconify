@@ -26,7 +26,7 @@ class MsVideoFactory extends Factory
             'Views' => $this->faker->randomNumber(),
             'Like' => $this->faker->randomNumber(),
             'Dislike' => $this->faker->randomNumber(),
-            'VideoType' => $this->faker->randomElement(['Videos', 'Shorts']),
+            'VideoType' => $this->faker->randomElement(['Videos']),
         ];
     }
 }

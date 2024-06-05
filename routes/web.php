@@ -44,4 +44,8 @@ Route::resource('/videos', MsVideoController::class);
 Route::get('/shop', [MsProductController::class, 'index'])->name('shop.index');
 Route::get('/shop/{msProduct}', [MsProductController::class, 'show'])->name('shop.show');
 
-// Routingto Cart Pages
+Route::get('/shorts', [MsVideoController::class, 'showShorts'])->name('shorts');
+Route::get('/shorts/{id}', [MsVideoController::class, 'showShortsById'])->name('shorts.showShortsById');
+Route::post('/short/{video}/like', [MsVideoController::class, 'like'])->name('short.like');
+Route::post('/short/{video}/dislike', [MsVideoController::class, 'dislike'])->name('short.dislike');
+Route::post('/short/{video}/share', [MsVideoController::class, 'share'])->name('short.share');
