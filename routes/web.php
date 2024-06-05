@@ -13,7 +13,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/register', [RouteController::class, 'Register'])->name('Register');
     Route::post('/register', [MsUserController::class, 'register'])->name('registerform');
 
-    Route::get('/login', [RouteController::class, 'Login'])->name('login');
+    Route::get('/login', [RouteController::class, 'login'])->name('login');
     Route::post('/login', [MsUserController::class, 'login'])->name('loginform');
 });
 
@@ -33,6 +33,7 @@ Route::get('/shop/{msProduct}', [MsProductController::class, 'show'])->name('sho
 Route::post('/cart', [MsCartController::class, 'store'])->name('cart.store');
 
 Route::get('/shorts', [MsVideoController::class, 'showShorts'])->name('shorts');
+Route::get('/shorts/{id}', [MsVideoController::class, 'showShortsById'])->name('shorts.showShortsById');
 Route::post('/short/{video}/like', [MsVideoController::class, 'like'])->name('short.like');
 Route::post('/short/{video}/dislike', [MsVideoController::class, 'dislike'])->name('short.dislike');
 Route::post('/short/{video}/share', [MsVideoController::class, 'share'])->name('short.share');

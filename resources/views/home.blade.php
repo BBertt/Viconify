@@ -225,25 +225,25 @@
                         @php $shortCount = 0; @endphp
                         @foreach ($videos as $video)
                             @if($video->VideoType === 'Shorts' && $shortCount < 6)
-                                <div class="short-item relative bg-gray-200 rounded-lg overflow-hidden h-96 m-2 transform transition-transform duration-300 hover:scale-110 hover:shadow-lg hover:bg-[#f0f0f0]">
+                                <a href="{{ route('shorts.showShortsById', $video->VideoID) }}" class="short-item relative bg-gray-200 rounded-lg overflow-hidden h-96 m-2 transform transition-transform duration-300 hover:scale-110 hover:shadow-lg hover:bg-[#f0f0f0]">
                                     <img src="{{ asset($video->VideoImage) }}" alt="{{ $video->Title }}" class="w-full h-full object-cover">
                                     <div class="hover-content absolute inset-0 p-4 flex flex-col justify-end opacity-0 transition-opacity duration-300 hover:opacity-100">
                                         <div class="flex">
                                             <div class="mt-1 overflow-hidden rounded-full h-10 w-10 flex-shrink-0">
-                                                @if($videos[$i]->user->ProfileImage)
-                                                    <img src="{{$videos[$i]->user->ProfileImage}}" alt="{{ $videos[$i]->VideoImage }}" class="h-full object-cover w-full rounded-full">
+                                                @if($video->user->ProfileImage)
+                                                    <img src="{{$video->user->ProfileImage}}" alt="{{ $video->VideoImage }}" class="h-full object-cover w-full rounded-full">
                                                 @else
-                                                    <img src="{{asset('Assets/DefaultProfile.png')}}" alt="{{ $videos[$i]->VideoImage }}" class="h-full object-cover w-full rounded-full">
+                                                    <img src="{{asset('Assets/DefaultProfile.png')}}" alt="{{ $video->VideoImage }}" class="h-full object-cover w-full rounded-full">
                                                 @endif
                                             </div>
                                             <div class="pl-2 flex-1 max-w-full">
-                                                <h2 class="text-base text-gray-100 font-bold whitespace-nowrap overflow-hidden text-ellipsis p-0 m-0"><span>{{ Str::limit($videos[$i]->Title, 12, ' ...') }}</span></h2>
-                                                <p class="text-sm text-gray-300">{{ $videos[$i]->user->Name }}</p>
-                                                <span class="text-sm text-gray-300">{{ $videos[$i]->Views }} views</span>
+                                                <h2 class="text-base text-gray-100 font-bold whitespace-nowrap overflow-hidden text-ellipsis p-0 m-0"><span>{{ Str::limit($video->Title, 12, ' ...') }}</span></h2>
+                                                <p class="text-sm text-gray-300">{{ $video->user->Name }}</p>
+                                                <span class="text-sm text-gray-300">{{ $video->Views }} views</span>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                                 @php $shortCount++; @endphp
                             @endif
                         @endforeach
@@ -252,6 +252,7 @@
             </div>
         </div>
     </div>
+
 
     <div class="container mx-auto p-4 flex flex-col">
         <div class="flex justify-center w-full h-full">

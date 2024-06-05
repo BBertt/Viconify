@@ -47,9 +47,15 @@ class MsVideoController extends Controller
     public function showShorts()
     {
         // Fetch only videos with VideoType 'shorts'
-        $videos = MsVideo::where('VideoType', 'shorts')->get();
-        // dd($videos);
-        return view('short', compact('videos'));
+        $videos = MsVideo::where('VideoType', 'Shorts')->get();
+        $videoId = null;
+        return view('short', compact('videos', 'videoId'));
+    }
+    public function showShortsById(int $id)
+    {
+        $videos = MsVideo::all();
+        $videoId = MsVideo::findOrFail($id); 
+        return view('short', compact('videos', 'videoId'));
     }
     public function like(MsVideo $video)
     {
