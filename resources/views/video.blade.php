@@ -89,7 +89,7 @@
                     <div class="p-4">
                         <h1 class="text-2xl font-bold mb-2">{{ $video->Title }}</h1>
                         <div class="flex items-center space-x-4 mb-4">
-                            <img src="{{ $video->user->ProfileImage }}" alt="{{ $video->user->Name }}" class="w-10 h-10 rounded-full">
+                            <img src="{{ asset($video->user->ProfileImage) }}" alt="{{ $video->user->Name }}" class="w-10 h-10 rounded-full">
                             <div class="flex-grow">
                                 <h2 class="font-bold">{{ $video->user->Name }}</h2>
                             </div>
