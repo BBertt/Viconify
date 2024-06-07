@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         MsUser::factory(5)->create();
         $this->call([
             MsUserSeeder::class,
+            MsVideoSeeder::class,
             MsProductSeeder::class,
             MsVideoSeeder::class,
             MsPictureSeeder::class,
