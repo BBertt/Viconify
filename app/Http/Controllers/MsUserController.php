@@ -89,7 +89,10 @@ class MsUserController extends Controller
     public function show()
     {
         $user = Auth::user();
-        return view('profile', compact('user'));
+        $videos = $user->videos;
+        $products = $user->products;
+        $posts = $user->posts;
+        return view('profile', compact('user', 'videos', 'products', 'posts'));
     }
 
     public function update(Request $request)
