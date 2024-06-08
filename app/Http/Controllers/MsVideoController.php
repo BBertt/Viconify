@@ -63,6 +63,49 @@ class MsVideoController extends Controller
         return redirect()->back()->with('success', 'Video added successfully');
     }
 
+    public function storeshort(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'video_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:4800',
+        ]);
+
+        // dd('Video file:', [
+        //     'original_name' => $request->file('video_file')->getClientOriginalName(),
+        //     'mime_type' => $request->file('video_file')->getMimeType(),
+        //     'size' => $request->file('video_file')->getSize(),
+        //     'error' => $request->file('video_file')->getError(),
+        // ]);
+
+        $path = null;
+        if ($request->hasFile('video_file')) {
+            $uploadedFile = $request->file('video_file');
+            if ($uploadedFile && $uploadedFile->isValid()) {
+                $path = $uploadedFile->store('videos', 'public');
+            }
+        }
+        $videoPath = $path ? 'storage/' . $path : 'Unsuccessfull';
+        $path = null;
+        if ($request->hasFile('video_image')) {
+            $uploadedFile = $request->file('video_image');
+            if ($uploadedFile && $uploadedFile->isValid()) {
+                $path = $uploadedFile->store('videos', 'public');
+            }
+        }
+        $imagePath = $path ? 'storage/' . $path : 'Unsuccessfull';
+        MsVideo::create([
+            'UserID' => Auth::id(),
+            'VideoImage' => $imagePath,
+            'VideoLinkEmbedded' => $videoPath,
+            'Title' => $request->title,
+            'Description' => $request->description,
+            'PostTime' => now(),
+            'VideoType' => 'Shorts',
+        ]);
+        return redirect()->back()->with('success', 'Video added successfully');
+    }
+
     public function destroy($id)
     {
         $video = MsVideo::findOrFail($id);
@@ -104,12 +147,23 @@ class MsVideoController extends Controller
 
     public function show(int $VideoID)
     {
+        $video = MsVideo::findOrFail($VideoID);
+        $video->increment('Views');
+        $user = $video->user;
+
+        $userProducts = $user ? $user->products : collect();
+        $remainingProducts = $userProducts->count() < 5 ? MsProduct::where('UserID', '!=', $user->id)->take(5 - $userProducts->count())->get() : collect();
+
+        $mergedProducts = $userProducts->merge($remainingProducts)->take(5);
+
         return view('video', [
-            'video' => MsVideo::findOrFail($VideoID),
+            'video' => $video,
             'videos' => MsVideo::all(),
-            'products' => MsProduct::all()
+            'products' => MsProduct::all(),
+            'mergedProducts' => $mergedProducts
         ]);
     }
+
 
     public function showShorts()
     {

@@ -43,7 +43,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/video/update/{id}', [MsVideoController::class, 'update'])->name('video.update');
 
     Route::post('/video/store', [MsVideoController::class, 'store'])->name('video.store');
+    Route::post('/video/storeshort', [MsVideoController::class, 'storeshort'])->name('video.storeshort');
     Route::post('/product/store', [MsProductController::class, 'store'])->name('product.store');
+    Route::post('/post/store', [MsPostController::class, 'store'])->name('post.store');
+
     Route::post('/post/store', [MsPostController::class, 'store'])->name('post.store');
 });
 

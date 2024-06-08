@@ -67,7 +67,7 @@
             <button class="tab-link bg-blue-500 text-white font-bold py-2 px-4 rounded" onclick="showTab('videos')">Videos</button>
             <button class="tab-link bg-white text-black font-bold py-2 px-4 rounded border" onclick="showTab('posts')">Post</button>
             <button class="tab-link bg-white text-black font-bold py-2 px-4 rounded border" onclick="showTab('products')">Product</button>
-            <button class="tab-link bg-white text-black font-bold py-2 px-4 rounded border" onclick="showTab('products')">Transaction History</button>
+            <button class="tab-link bg-white text-black font-bold py-2 px-4 rounded border" onclick="showTab('transaction')">Transaction History</button>
             <div class="ml-auto relative inline-block text-left">
                 <button class="tab-link bg-white text-black font-bold py-2 px-4 rounded border" onclick="toggleAddDropdown()">
                     <i class="fas fa-plus"></i> Add
@@ -176,7 +176,7 @@
         <div id="addVideoModalShort" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" onclick="closeModalOnClickOutside(event, 'addVideoModalShort')">
             <div class="bg-white p-6 rounded-lg shadow-lg w-1/2" onclick="event.stopPropagation()">
                 <h2 class="text-xl font-bold mb-4">Add Short</h2>
-                <form action="{{ route('video.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('video.storeshort') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-4">
                         <label for="title" class="block text-gray-700">Title</label>
@@ -206,8 +206,17 @@
         <div id="posts" class="tab-content hidden">
             @foreach ($posts as $post)
                 <div class="post-item p-4 border rounded-lg mb-4">
-                    <h3 class="text-lg font-bold">{{ $post->title }}</h3>
-                    <p class="text-sm text-gray-600">{{ $post->content }}</p>
+                    <h3 class="text-lg font-bold">{{ $post->Title }}</h3>
+                    <p class="text-sm text-gray-600">{{ $post->Description }}</p>
+                    @if($post->pictures->isNotEmpty())
+                        <div class="flex space-x-4 mt-2">
+                            @foreach ($post->pictures as $picture)
+                                <div class="w-1/3 h-32 overflow-hidden">
+                                    <img src="{{ asset($picture->PictureData) }}" alt="Post Image" class="w-full h-full object-cover">
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
             @endforeach
         </div>
@@ -215,7 +224,7 @@
         <div id="addPostModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" onclick="closeModalOnClickOutside(event, 'addPostModal')">
             <div class="bg-white p-6 rounded-lg shadow-lg w-1/2" onclick="event.stopPropagation()">
                 <h2 class="text-xl font-bold mb-4">Add Post</h2>
-                <form action="{{ route('video.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-4">
                         <label for="title" class="block text-gray-700">Title</label>
@@ -226,8 +235,8 @@
                         <textarea name="description" id="description" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
                     </div>
                     <div class="mb-4">
-                        <label for="video_image" class="block text-gray-700">Post Image</label>
-                        <input type="file" name="video_image" id="video_image" class="block w-full" required>
+                        <label for="images" class="block text-gray-700">Post Images</label>
+                        <input type="file" name="images[]" id="images" class="block w-full" multiple required>
                     </div>
                     <div class="flex justify-end">
                         <button type="button" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2" onclick="closeModal('addPostModal')">Cancel</button>
@@ -273,6 +282,20 @@
                     </div>
                 </form>
             </div>
+        </div>
+
+        <!-- ------------------------------------------------------------------ Transaction History ----------------------------------------------------------------- -->
+        <div id="transaction" class="tab-content hidden">
+            <div>Transaction History</div>
+            @foreach ($products as $product)
+                <div class="product-item p-4 border rounded-lg mb-4 flex items-center">
+                    <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" class="w-20 h-20 rounded-lg object-cover">
+                    <div class="ml-4">
+                        <h3 class="text-lg font-bold">{{ $product->name }}</h3>
+                        <p class="text-sm text-gray-600">{{ $product->price }}</p>
+                    </div>
+                </div>
+            @endforeach
         </div>
 
     </div>

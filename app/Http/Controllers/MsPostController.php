@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MsPicture;
 use App\Models\MsPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MsPostController extends Controller
 {
@@ -28,7 +30,37 @@ class MsPostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        $post = MsPost::create([
+            'UserID' => Auth::id(),
+            'Title' => $request->title,
+            'Description' => $request->description,
+            'PostTime' => now(),
+        ]);
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                if ($image->isValid()) {
+                    $path = $image->store('post_images', 'public');
+                    MsPicture::create([
+                        'PostID' => $post->PostID,
+                        'PictureData' => 'storage/' . $path,
+                    ]);
+                } else {
+                    MsPicture::create([
+                        'PostID' => $post->PostID,
+                        'PictureData' => 'Unsuccessful',
+                    ]);
+                }
+            }
+        }
+
+        return redirect()->back()->with('success', 'Post added successfully');
     }
 
     /**

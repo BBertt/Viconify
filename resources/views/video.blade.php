@@ -52,8 +52,8 @@
                             <img src="{{ asset('Assets/PopularCategories.jpg') }}" alt="Popular Categories" class="rounded-lg">
                             <div class="overlay-content p-14">
                                 <div class="container mx-auto px-4 py-4">
-                                    <div class="grid grid-cols-4 gap-6">
-                                        @foreach ($products->slice(0, 4) as $product)
+                                    <div class="grid grid-cols-5 gap-6">
+                                        @foreach ($mergedProducts->slice(0, 5) as $product)
                                             <a href="{{ route('shop.show', $product) }}" class="product-link">
                                                 <div class="bg-white rounded-md shadow-md">
                                                     @if ($product->pictures->isNotEmpty())
@@ -64,7 +64,7 @@
                                                     <div class="flex w-full overflow-hidden">
                                                         <div class="mt-1 ml-1 overflow-hidden rounded-full h-10 w-10 flex-shrink-0">
                                                             @if($product->user->ProfileImage)
-                                                                <img src="{{ $product->user->ProfileImage }}" alt="{{ $product->user->Name }}" class="h-full object-cover w-full rounded-full">
+                                                                <img src="{{ asset($product->user->ProfileImage) }}" alt="{{ $product->user->Name }}" class="h-full object-cover w-full rounded-full">
                                                             @else
                                                                 <img src="{{ asset('Assets/DefaultProfile.png') }}" alt="{{ $product->user->Name }}" class="h-full object-cover w-full rounded-full">
                                                             @endif

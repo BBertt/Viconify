@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MsPost;
 use App\Models\MsUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,16 @@ use Illuminate\Support\Facades\Storage;
 
 class MsUserController extends Controller
 {
+    // Profile Page -> Add Item/Video/Post/Short/CRUD
+    public function show()
+    {
+        $user = Auth::user();
+        $videos = $user->videos;
+        $products = $user->products;
+        $posts = MsPost::with('pictures')->where('UserID', $user->UserID)->get();
+        return view('profile', compact('user', 'videos', 'products', 'posts'));
+    }
+
     // Untuk register
     public function register(Request $request)
     {
@@ -84,15 +95,6 @@ class MsUserController extends Controller
         $user->Balance += $request->input('amount');
         $user->save();
         return redirect()->route('topup.form')->with('success', 'Top-up successful! Your new balance is Rp.' . $user->Balance);
-    }
-
-    public function show()
-    {
-        $user = Auth::user();
-        $videos = $user->videos;
-        $products = $user->products;
-        $posts = $user->posts;
-        return view('profile', compact('user', 'videos', 'products', 'posts'));
     }
 
     public function update(Request $request)
