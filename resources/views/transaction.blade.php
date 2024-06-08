@@ -1,5 +1,4 @@
-
-@extends('shop-layout')
+@extends('components.shop-layout')
 @section('title', 'Transactions')
 @section('content')
 <div class="container mx-auto my-5 p-5 bg-gray-100">

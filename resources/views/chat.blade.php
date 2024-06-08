@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('components.layout')
 @section('title', 'Chat')
 @section('content')
 <header class="bg-[#E6F5FF] text-black p-4 flex flex-col items-center">

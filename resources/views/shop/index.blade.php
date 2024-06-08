@@ -1,4 +1,4 @@
-@extends('shop-layout')
+@extends('components.shop-layout')
 @section('title', 'Shop')
 @section('content')
     <div class="container mx-auto px-4 py-8">
