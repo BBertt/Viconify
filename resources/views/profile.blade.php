@@ -16,7 +16,7 @@
     </div>
 </header>
 
-<div class="w-full h-[94%] flex" style="background-color: #E6F5FF;">
+<div class="w-full h-[94%] flex">
     <div class="w-1/3 p-4">
         <div class="profile-container p-4 border rounded-xl bg-white">
             @if (session('success'))
@@ -59,7 +59,7 @@
     </div>
 
     <div class="w-2/3 p-4">
-        <div class="tabs flex justify-around mb-4">
+        <div class="tabs flex mb-4">
             <button class="tab-link bg-blue-500 text-white font-bold py-2 px-4 rounded" onclick="showTab('videos')">Videos</button>
             <button class="tab-link bg-white text-black font-bold py-2 px-4 rounded border" onclick="showTab('products')">Product</button>
             <button class="tab-link bg-white text-black font-bold py-2 px-4 rounded border" onclick="showTab('posts')">Post</button>
@@ -67,49 +67,14 @@
         </div>
 
         <div id="videos" class="tab-content">
-            <div class="container mx-auto p-4 flex flex-col">
-                <div class="flex justify-center w-full h-full">
-                    <div class="w-11/12 flex justify-center space-x-4">
-                        <div class="flex flex-wrap -mx-4">
-                            @php
-                            $videoCount = 0;
-                            $dbCount = 0;
-                            @endphp
-                            @for ($i = $videoCount; $i < count($videos); $i++)
-                                @if($videos[$i]->VideoType === 'Videos' && $videoCount < 4)
-                                    <div class="w-full md:w-1/2 lg:w-1/4 px-4 mb-8">
-                                        <div class="videocontainer bg-white rounded-lg overflow-hidden h-full hover:bg-gray-300 transition duration-300">
-                                            <a href="{{ route('videos.show', $videos[$i]->VideoID)}}">
-                                                <div class="relative overflow-hidden w-full h-50 sm:h-50 md:h-44 lg:h-32 xl:h-44 rounded-lg">
-                                                    <img src="{{$videos[$i]->VideoImage}}" alt="{{ $videos[$i]->VideoImage }}" class="w-full h-full object-cover">
-                                                    <div class="w-full h-full absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 hover:bg-opacity-50 transition duration-300">
-                                                        <div class="flex items-center justify-center w-full h-full text-white text-lg font-bold opacity-0 hover:opacity-100">Watch Now</div>
-                                                    </div>
-                                                </div>
-                                                <div class="flex flex-row p-2 pt-3">
-                                                    <div class="mt-1 overflow-hidden rounded-full h-10 w-10 flex-shrink-0">
-                                                        @if($videos[$i]->user->ProfileImage)
-                                                            <img src="{{$videos[$i]->user->ProfileImage}}" alt="{{ $videos[$i]->VideoImage }}" class="h-full object-cover w-full rounded-full">
-                                                        @else
-                                                            <img src="{{asset('Assets/DefaultProfile.png')}}" alt="{{ $videos[$i]->VideoImage }}" class="h-full object-cover w-full rounded-full">
-                                                        @endif
-                                                    </div>
-                                                    <div class="pl-2 flex-1 max-w-full">
-                                                        <h2 class="text-base font-bold whitespace-nowrap overflow-hidden text-ellipsis p-0 m-0"><span>{{ Str::limit($videos[$i]->Title, 32, ' ...') }}</span></h2>
-                                                        <p class="text-sm text-gray-600">{{ $videos[$i]->user->Name }}</p>
-                                                        <span class="text-sm text-gray-600">{{ $videos[$i]->Views }} views</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                @php $videoCount++; @endphp
-                                @php $dbCount = $i; @endphp
-                                @endif
-                            @endfor
+            <div class="w-full">
+                @foreach ($videos as $video)
+                    <div class="flex items-center p-4 border rounded mt-2 mb-2">
+                        <div class="overflow-hidden h-28 w-48 rounded">
+                            <img src="{{ asset($video->VideoImage) }}" alt="Video Image" class="w-full h-full object-cover">
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
 
@@ -136,7 +101,7 @@
             @endforeach
         </div>
 
-        
+
     </div>
 </div>
 
