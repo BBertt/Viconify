@@ -45,17 +45,20 @@
 @endsection
 
 @section('content')
-    <div class="bg-gray-100 flex justify-center items-center min-h-screen">
-        <div class="w-full h-full max-w-md mx-auto ">
+    <div class="relative bg-gray-100 flex justify-center items-center pt-4">
+        <div class="absolute top-4 right-4 z-20">
+            <a href="{{ url()->previous() }}" class=" bg-slate-300 text-white px-3 py-2 rounded-full">Back</a>
+        </div>
+        <div class="w-full h-full max-w-md mx-auto">
             <div id="videosWrapper" class="relative">
                 <!-- Redirect to short page for the first video -->
                 @if ($videoId)
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-6 video-container" data-video-id="{{ $videoId->VideoID }}">
-                        <div class="relative">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-6 video-container relative" data-video-id="{{ $videoId->VideoID }}">
+                        <div class="relative group">
                             <video class="w-full object-cover" controls muted autoplay loop style="height: 40rem" id="video-{{ $videoId->VideoID }}">
                                 <source src="{{ asset($videoId->VideoLinkEmbedded) }}" type="video/mp4">
                             </video>
-                            <div class="absolute bottom-16 left-0 w-full text-white p-4" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0));">
+                            <div class="video-overlay absolute bottom-16 left-0 w-full text-white p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0));">
                                 <div class="relative">
                                     <h2 class="text-lg font-bold truncate" id="title-{{ $videoId->VideoID }}">{{ $videoId->Title }}</h2>
                                     <p class="text-sm truncate" id="desc-{{ $videoId->VideoID }}">{{ $videoId->Description }}</p>
@@ -87,12 +90,12 @@
                 @endif
                 @foreach($videos as $video)
                     @if ($video->VideoType ==='Shorts')
-                        <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-6 video-container" data-video-id="{{ $video->VideoID }}">
-                            <div class="relative">
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-6 video-container relative" data-video-id="{{ $video->VideoID }}">
+                            <div class="relative group">
                                 <video class="w-full object-cover" controls muted autoplay loop style="height: 40rem" id="video-{{ $video->VideoID }}">
                                     <source src="{{ asset($video->VideoLinkEmbedded) }}" type="video/mp4">
                                 </video>
-                                <div class="absolute bottom-16 left-0 w-full text-white p-4" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0));">
+                                <div class="video-overlay absolute bottom-16 left-0 w-full text-white p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0));">
                                     <div class="relative">
                                         <h2 class="text-lg font-bold truncate" id="title-{{ $video->VideoID }}">{{ $video->Title }}</h2>
                                         <p class="text-sm truncate" id="desc-{{ $video->VideoID }}">{{ $video->Description }}</p>
@@ -108,20 +111,19 @@
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                                                     <path fill="none" d="M0 0h24v24H0z"/>
                                                     <path fill="currentColor" d="M15 3H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h6v4c0 .55.45 1 1 1h2c.83 0 1.54-.5 1.84-1.22l3.85-8.5c.09-.22.14-.45.14-.7V5c0-1.1-.9-2-2-2zm-1 12H5V5h9v10zm4 0h-1V5h1v10z"/>
-                                                </svg>
+                                            </svg>
                                             </button>
                                             <button class="focus:outline-none" onclick="shareVideo({{ $video->VideoID }})">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                                                     <path fill="none" d="M0 0h24v24H0z"/>
                                                     <path fill="currentColor" d="M18 16.08c-.76 0-1.44.3-1.96.77l-7.1-4.22a2.98 2.98 0 000-1.24l7.1-4.22A2.99 2.99 0 0018 7.91c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.03.47.08.69l-7.1 4.22A2.99 2.99 0 006 8.09c-1.66 0-3 1.34-3 3s1.34 3 3 3c.76 0 1.44-.3 1.96-.77l7.1 4.22c-.05.22-.08.45-.08.69 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/>
-                                                </svg>
+                                            </svg>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     @endif
                 @endforeach
             </div>
@@ -185,6 +187,14 @@
                     var seconds = Math.floor(video.currentTime % 60);
                     timestamp.textContent = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
                 });
+
+                // Show or hide overlay on mouse enter/leave
+                video.addEventListener('mouseenter', function() {
+                    video.closest('.group').querySelector('.video-overlay').classList.remove('opacity-0');
+                });
+                video.addEventListener('mouseleave', function() {
+                    video.closest('.group').querySelector('.video-overlay').classList.add('opacity-0');
+                });
             @endforeach
         });
 
@@ -240,6 +250,7 @@
         }
     </script>
 @endsection
+
 
 
 
