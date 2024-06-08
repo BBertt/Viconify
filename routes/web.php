@@ -36,6 +36,11 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/purchase', [TransactionHeaderController::class, 'store'])->name('purchase');
     Route::get('/transaction', [TransactionHeaderController::class, 'index'])->name('transaction');
+
+    Route::get('/shop/register', function() {
+        return view('shop.register');
+    })->name('shop.register.index');
+    Route::post('/shop/register', [MsUserController::class, 'registerShop'])->name('shop.register.store');
 });
 
 Route::resource('/videos', MsVideoController::class);

@@ -2,18 +2,6 @@
 @section('title', 'Top Up')
 @section('content')
 
-<header class="bg-[#E6F5FF] text-black p-4 flex flex-col items-center">
-    <div class="flex items-center justify-between w-full">
-        <div class="flex items-center space-x-4">
-            <a href= {{route('HomePage')}}>
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                </svg>
-            </a>
-            <span class="text-black font-bold text-xl">Top Up</span>
-        </div>
-</header>
-
 <div class="container mx-auto p-4">
     <div class="flex">
         <div class="w-1/2 p-10">

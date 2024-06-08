@@ -51,7 +51,11 @@
                                         <a href="/profile" class="hover:bg-slate-100 pl-4 pr-8 py-2 flex justify-center">
                                             Edit Profile
                                         </a>
-            
+                                        @if (Auth::user()->Role == 'user')
+                                            <a href="{{ route('shop.register.index') }}" class="hover:bg-slate-100 pl-4 pr-8 py-2 flex justify-center">
+                                                Register Shop
+                                            </a>
+                                        @endif
                                         <form action="{{ route('logout') }}" method="POST" class="block w-full">
                                             @csrf
                                             <button type="submit" class="w-full px-4 py-2 text-black font-bold hover:bg-slate-100">Logout</button>
