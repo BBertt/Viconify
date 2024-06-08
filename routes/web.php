@@ -41,8 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/shop/register', function() {
         return view('shop.register');
     })->name('shop.register.index');
-    
     Route::post('/shop/register', [MsUserController::class, 'registerShop'])->name('shop.register.store');
+
     Route::delete('/video/delete/{id}', [MsVideoController::class, 'destroy'])->name('video.delete');
     Route::get('/video/edit/{id}', [MsVideoController::class, 'edit'])->name('video.edit');
     Route::post('/video/update/{id}', [MsVideoController::class, 'update'])->name('video.update');

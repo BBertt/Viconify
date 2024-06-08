@@ -10,12 +10,18 @@
 
         <div class="mb-4">
             <label for="StoreName" class="block text-gray-700 font-bold mb-2">Store Name</label>
-            <input type="text" name="StoreName" id="StoreName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <input type="text" name="StoreName" id="StoreName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            @error('StoreName')
+                <p class="text-xs text-red-500">{{$message}}</p>
+            @enderror
         </div>
 
         <div class="mb-4">
             <label for="StoreDescription" class="block text-gray-700 font-bold mb-2">Store Description</label>
-            <textarea name="StoreDescription" id="StoreDescription" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
+            <textarea name="StoreDescription" id="StoreDescription" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+            @error('StoreDescription')
+                <p class="text-xs text-red-500">{{$message}}</p>
+            @enderror
         </div>
 
         {{-- <div class="mb-4">
@@ -28,12 +34,18 @@
 
         <div class="mb-4">
             <label for="StoreStartTime" class="block text-gray-700 font-bold mb-2">Store Start Time</label>
-            <input type="time" name="StoreStartTime" id="StoreStartTime" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <input type="time" name="StoreStartTime" id="StoreStartTime" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            @error('StoreStartTime')
+                <p class="text-xs text-red-500">{{$message}}</p>
+            @enderror
         </div>
 
         <div class="mb-4">
             <label for="StoreEndTime" class="block text-gray-700 font-bold mb-2">Store End Time</label>
-            <input type="time" name="StoreEndTime" id="StoreEndTime" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <input type="time" name="StoreEndTime" id="StoreEndTime" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            @error('StoreEndTime')
+                <p class="text-xs text-red-500">{{$message}}</p>
+            @enderror
         </div>
 
         {{-- <div class="mb-4">
