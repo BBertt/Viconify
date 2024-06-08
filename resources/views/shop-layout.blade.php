@@ -26,9 +26,20 @@
                     </div>
 
                     <div class="flex items-center space-x-4">
-                        <svg class="text-black h-6 w-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18l-2 13H5L3 3zM5 6h14M9 9v6M15 9v6M6 21a1 1 0 100-2 1 1 0 000 2zm12 0a1 1 0 100-2 1 1 0 000 2z" />
-                        </svg>
+                        <a href="{{ route('cart.index') }}">
+                            <svg class="text-black h-6 w-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18l-2 13H5L3 3zM5 6h14M9 9v6M15 9v6M6 21a1 1 0 100-2 1 1 0 000 2zm12 0a1 1 0 100-2 1 1 0 000 2z" />
+                            </svg>
+                        </a>
+                        <a href="{{ route('transaction') }}">
+                            <svg class="text-black h-6 w-6 cursor-pointer" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 2H14L18 6V22H6V2Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 2V6H18" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 12H16" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 16H16" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 8H10" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
+                        </a>
                         @if(Auth::check())
                             <form action="{{ route('logout') }}" method="POST" class="inline">
                                 @csrf
@@ -37,7 +48,7 @@
                             <a href="/profile">
                                 <div class="mt-1 overflow-hidden rounded-full h-11 w-11 flex-shrink-0">
                                     @if(Auth::user()->ProfileImage)
-                                        <img src="{{Auth::user()->ProfileImage}}" alt="None" class="h-full object-cover w-full rounded-full">
+                                        <img src="{{asset(Auth::user()->ProfileImage)}}" alt="None" class="h-full object-cover w-full rounded-full">
                                     @else
                                         <img src="{{asset('Assets/DefaultProfile.png')}}" alt="None" class="h-full object-cover w-full rounded-full">
                                     @endif

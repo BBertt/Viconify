@@ -18,9 +18,11 @@
             </div>
 
             <div class="flex items-center space-x-4">
-                <svg class="text-black h-6 w-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18l-2 13H5L3 3zM5 6h14M9 9v6M15 9v6M6 21a1 1 0 100-2 1 1 0 000 2zm12 0a1 1 0 100-2 1 1 0 000 2z" />
-                </svg>
+                <a href="{{ route('cart.index') }}">
+                    <svg class="text-black h-6 w-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18l-2 13H5L3 3zM5 6h14M9 9v6M15 9v6M6 21a1 1 0 100-2 1 1 0 000 2zm12 0a1 1 0 100-2 1 1 0 000 2z" />
+                    </svg>
+                </a>
                 @if(Auth::check())
                     <form action="{{ route('logout') }}" method="POST" class="inline">
                         @csrf
@@ -87,7 +89,7 @@
                     <div class="p-4">
                         <h1 class="text-2xl font-bold mb-2">{{ $video->Title }}</h1>
                         <div class="flex items-center space-x-4 mb-4">
-                            <img src="{{ $video->user->ProfileImage }}" alt="{{ $video->user->Name }}" class="w-10 h-10 rounded-full">
+                            <img src="{{ asset($video->user->ProfileImage) }}" alt="{{ $video->user->Name }}" class="w-10 h-10 rounded-full">
                             <div class="flex-grow">
                                 <h2 class="font-bold">{{ $video->user->Name }}</h2>
                             </div>

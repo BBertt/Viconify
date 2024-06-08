@@ -20,7 +20,7 @@ class RouteController extends Controller
         return view('register');
     }
 
-    public function Login(){
+    public function login(){
         return view('login');
     }
 

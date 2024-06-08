@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="flex items-center mb-4">
-                <img src="{{ asset('storage/' . $detail->product->user->ProfileImage) }}" alt="{{ $detail->product->user->StoreName }}" class="w-10 h-10 rounded-full mr-3">
+                <img src="{{ asset($detail->product->user->ProfileImage) }}" alt="{{ $detail->product->user->StoreName }}" class="w-10 h-10 rounded-full mr-3">
                 <div>
                     <p class="text-gray-700 font-bold">{{ $detail->product->user->StoreName }}</p>
                 </div>
