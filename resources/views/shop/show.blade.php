@@ -1,4 +1,4 @@
-@extends('shop-layout')
+@extends('components.shop-layout')
 @section('title', 'Product')
 @section('content')
     <a href="{{ route('shop.index') }}" class="block text-blue-500 mt-2">&larr; Back to shops</a>
