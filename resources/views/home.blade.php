@@ -89,7 +89,7 @@
 
             <!-- New Collection -->
             <div class="relative mt-8 flex justify-center">
-                <img src="{{ asset('Assets/HomeBanner.png') }}" alt="New Collection 2018" class="rounded-xl w-11/12 h-max">
+                <img src="{{ asset('Assets/HomeBanner1.jpg') }}" alt="New Collection 2018" class="rounded-xl w-11/12 h-max">
             </div>
         </div>
 

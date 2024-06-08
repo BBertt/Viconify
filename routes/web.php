@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MsCartController;
 use App\Http\Controllers\MsMessageController;
+use App\Http\Controllers\MsPostController;
 use App\Http\Controllers\MsProductController;
 use App\Http\Controllers\MsUserController;
 use App\Http\Controllers\MsVideoController;
@@ -40,7 +41,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/shop/register', function() {
         return view('shop.register');
     })->name('shop.register.index');
+    
     Route::post('/shop/register', [MsUserController::class, 'registerShop'])->name('shop.register.store');
+    Route::delete('/video/delete/{id}', [MsVideoController::class, 'destroy'])->name('video.delete');
+    Route::get('/video/edit/{id}', [MsVideoController::class, 'edit'])->name('video.edit');
+    Route::post('/video/update/{id}', [MsVideoController::class, 'update'])->name('video.update');
+
+    Route::post('/video/store', [MsVideoController::class, 'store'])->name('video.store');
+    Route::post('/video/storeshort', [MsVideoController::class, 'storeshort'])->name('video.storeshort');
+    Route::post('/product/store', [MsProductController::class, 'store'])->name('product.store');
+    Route::post('/post/store', [MsPostController::class, 'store'])->name('post.store');
+
+    Route::post('/post/store', [MsPostController::class, 'store'])->name('post.store');
 });
 
 Route::resource('/videos', MsVideoController::class);
