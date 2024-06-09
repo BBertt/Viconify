@@ -29,7 +29,22 @@ class MsProductController extends Controller
 
     public function store(Request $request)
     {
-        //
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                if ($image->isValid()) {
+                    $path = $image->store('post_images', 'public');
+                    MsPicture::create([
+                        'PostID' => $post->PostID,
+                        'PictureData' => 'storage/' . $path,
+                    ]);
+                } else {
+                    MsPicture::create([
+                        'PostID' => $post->PostID,
+                        'PictureData' => 'Unsuccessful',
+                    ]);
+                }
+            }
+        }
     }
 
     /**
@@ -37,7 +52,6 @@ class MsProductController extends Controller
      */
     public function show(MsProduct $msProduct)
     {
-        
         $msProduct->load('pictures', 'user');
         return view('shop.show', ['product' => $msProduct]);
     }
