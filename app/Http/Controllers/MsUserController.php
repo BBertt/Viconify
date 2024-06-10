@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MsPost;
 use App\Models\MsUser;
+use App\Models\TransactionHeader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +20,8 @@ class MsUserController extends Controller
         $videos = $user->videos;
         $products = $user->products;
         $posts = MsPost::with('pictures')->where('UserID', $user->UserID)->get();
-        return view('profile', compact('user', 'videos', 'products', 'posts'));
+        $transactionHeader = TransactionHeader::with('transactionDetails')->where('UserID', $user->UserID)->get();
+        return view('profile', compact('user', 'videos', 'products', 'posts', 'transactionHeader'));
     }
 
     // Untuk register
@@ -100,6 +102,42 @@ class MsUserController extends Controller
     public function update(Request $request)
     {
         $user = Auth::user();
+        if ($user->Role == 'user') {
+            $request->validate([
+                'profile_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                'name' => 'required',
+                'email' => 'required',
+                'phone_number' => 'required',
+                'address' => 'required',
+            ]);
+    
+            $user->Name = $request->name;
+            $user->email = $request->email;
+            $user->Address = $request->address;
+            $user->PhoneNumber = $request->phone_number;
+    
+            $path = null;
+            if ($request->hasFile('profile_image')) {
+                $uploadedFile = $request->file('profile_image');
+                if ($uploadedFile && $uploadedFile->isValid()) {
+                    $path = $uploadedFile->store('users', 'public');
+                }
+            }
+    
+            $user->ProfileImage = $path ? 'storage/' . $path : $user->ProfileImage;
+    
+            $user->save();
+        }
+        else{
+            $this->updateSeller($request);
+        }
+
+        return redirect()->route('profile.update')->with('success', 'Profile updated successfully');
+    }
+
+    public function updateSeller(Request $request)
+    {
+        $user = Auth::user();
 
         $request->validate([
             'profile_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -107,12 +145,22 @@ class MsUserController extends Controller
             'email' => 'required',
             'phone_number' => 'required',
             'address' => 'required',
+
+            'StoreName' => 'required',
+            'StoreDescription' => 'required',
+            'StoreStartTime' => 'required',
+            'StoreEndTime' => 'required',
         ]);
 
         $user->Name = $request->name;
         $user->email = $request->email;
         $user->Address = $request->address;
         $user->PhoneNumber = $request->phone_number;
+
+        auth()->user()->StoreDescription = $request->StoreDescription;
+        auth()->user()->StoreName = $request->StoreName;
+        auth()->user()->StoreStartTime = $request->StoreStartTime;
+        auth()->user()->StoreEndTime = $request->StoreEndTime;
 
         $path = null;
         if ($request->hasFile('profile_image')) {
@@ -125,7 +173,26 @@ class MsUserController extends Controller
         $user->ProfileImage = $path ? 'storage/' . $path : $user->ProfileImage;
 
         $user->save();
+    }
 
-        return redirect()->back()->with('success', 'Profile updated successfully');
+    public function registerShop(Request $request) {
+        // dd($request);
+        $request->validate([
+            'StoreName' => 'required',
+            'StoreDescription' => 'required',
+            'StoreStartTime' => 'required',
+            'StoreEndTime' => 'required',
+        ]);
+
+        auth()->user()->StoreDescription = $request->StoreDescription;
+        auth()->user()->StoreName = $request->StoreName;
+        auth()->user()->StoreStartTime = $request->StoreStartTime;
+        auth()->user()->StoreEndTime = $request->StoreEndTime;
+        auth()->user()->Role = 'seller';
+
+        auth()->user()->save();
+
+
+        return redirect()->route('HomePage');
     }
 }

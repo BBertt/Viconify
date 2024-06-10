@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\MsCart;
+use App\Models\MsPicture;
 use App\Models\MsProduct;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MsProductController extends Controller
 {
@@ -29,7 +31,42 @@ class MsProductController extends Controller
 
     public function store(Request $request)
     {
-        //
+        // dd($request);
+
+        $request->validate([
+            'ProductName' => 'required|string|max:255',
+            'ProductDescription' => 'required|string',
+            'ProductPrice' => 'required',
+            'Quantity' => 'required',
+            'ProductImages.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        $product = MsProduct::create([
+            'UserID' => Auth::id(),
+            'ProductName' => $request->ProductName,
+            'ProductDescription' => $request->ProductDescription,
+            'ProductPrice' => $request->ProductPrice,
+            'Quantity' => $request->Quantity
+        ]);
+
+        if ($request->hasFile('ProductImages')) {
+            foreach ($request->file('ProductImages') as $image) {
+                if ($image->isValid()) {
+                    $path = $image->store('product_images', 'public');
+                    MsPicture::create([
+                        'ProductID' => $product->ProductID,
+                        'PictureData' => $path,
+                    ]);
+                } else {
+                    MsPicture::create([
+                        'ProductID' => $product->ProductID,
+                        'PictureData' => 'Unsuccessful',
+                    ]);
+                }
+            }
+        }
+
+        return redirect()->back()->with('success', 'Product added successfully');
     }
 
     /**
@@ -37,7 +74,6 @@ class MsProductController extends Controller
      */
     public function show(MsProduct $msProduct)
     {
-        
         $msProduct->load('pictures', 'user');
         return view('shop.show', ['product' => $msProduct]);
     }
@@ -45,17 +81,43 @@ class MsProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MsProduct $msProduct)
+    public function edit($id)
     {
-        //
+        $product = MsProduct::findOrFail($id);
+        return response()->json($product);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MsProduct $msProduct)
+    public function update(Request $request, $id)
     {
-        //
+        $product = MsProduct::findOrFail($id);
+
+        $product->ProductName = $request->ProductName;
+        $product->ProductDescription = $request->ProductDescription;
+        $product->ProductPrice = $request->ProductPrice;
+        $product->Quantity = $request->Quantity;
+
+        if ($request->hasFile('ProductImages')) {
+            foreach ($request->file('ProductImages') as $image) {
+                if ($image->isValid()) {
+                    $path = $image->store('product_images', 'public');
+                    MsPicture::create([
+                        'ProductID' => $product->ProductID,
+                        'PictureData' => $path,
+                    ]);
+                } else {
+                    MsPicture::create([
+                        'ProductID' => $product->ProductID,
+                        'PictureData' => 'Unsuccessful',
+                    ]);
+                }
+            }
+        }
+        $product->save();
+
+        return redirect()->back()->with('success', 'Product updated successfully.');
     }
 
     /**
@@ -63,7 +125,8 @@ class MsProductController extends Controller
      */
     public function destroy(MsProduct $msProduct)
     {
-        //
+        $msProduct->delete();
+        return redirect()->back()->with('success', 'Product deleted successfully.');
     }
 
     public function updateQuantities (array $cartItems) {
