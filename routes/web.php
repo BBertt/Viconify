@@ -44,6 +44,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/shop/register', [MsUserController::class, 'registerShop'])->name('shop.register.store');
     Route::post('/product/store', [MsProductController::class, 'store'])->name('product.store');
     Route::delete('/product/{msProduct}', [MsProductController::class, 'destroy'])->name('product.destroy');
+    Route::get('/product/edit/{id}', [MsProductController::class, 'edit'])->name('product.edit');
+    Route::post('/product/update/{id}', [MsProductController::class, 'update'])->name('product.update');
 
     Route::delete('/video/delete/{id}', [MsVideoController::class, 'destroy'])->name('video.delete');
     Route::get('/video/edit/{id}', [MsVideoController::class, 'edit'])->name('video.edit');
@@ -51,7 +53,6 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/video/store', [MsVideoController::class, 'store'])->name('video.store');
     Route::post('/video/storeshort', [MsVideoController::class, 'storeshort'])->name('video.storeshort');
-    Route::post('/product/store', [MsProductController::class, 'store'])->name('product.store');
     Route::post('/post/store', [MsPostController::class, 'store'])->name('post.store');
 
     Route::post('/post/store', [MsPostController::class, 'store'])->name('post.store');

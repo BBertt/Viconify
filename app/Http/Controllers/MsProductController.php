@@ -81,17 +81,43 @@ class MsProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MsProduct $msProduct)
+    public function edit($id)
     {
-        //
+        $product = MsProduct::findOrFail($id);
+        return response()->json($product);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MsProduct $msProduct)
+    public function update(Request $request, $id)
     {
-        //
+        $product = MsProduct::findOrFail($id);
+
+        $product->ProductName = $request->ProductName;
+        $product->ProductDescription = $request->ProductDescription;
+        $product->ProductPrice = $request->ProductPrice;
+        $product->Quantity = $request->Quantity;
+
+        if ($request->hasFile('ProductImages')) {
+            foreach ($request->file('ProductImages') as $image) {
+                if ($image->isValid()) {
+                    $path = $image->store('product_images', 'public');
+                    MsPicture::create([
+                        'ProductID' => $product->ProductID,
+                        'PictureData' => $path,
+                    ]);
+                } else {
+                    MsPicture::create([
+                        'ProductID' => $product->ProductID,
+                        'PictureData' => 'Unsuccessful',
+                    ]);
+                }
+            }
+        }
+        $product->save();
+
+        return redirect()->back()->with('success', 'Product updated successfully.');
     }
 
     /**

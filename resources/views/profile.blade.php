@@ -318,7 +318,7 @@
                                     <p class="text-gray-500">{{ $product->user->StoreName }}</p>
                                     <p class="text-red-500 font-bold mt-2">Rp {{ number_format($product->ProductPrice, 0, ',', '.') }}</p>
                                     <div class="mt-2">
-                                        <button type="button" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600" onclick="showModal('editProductModal')">Edit</button>
+                                        <button type="button" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600" onclick="showEditProductModal('{{ $product->ProductID }}')">Edit</button>
                                         <button type="button" class="bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600" onclick="deleteProduct(this, '{{ route('product.destroy', ['msProduct' => $product->ProductID]) }}')">Delete</button>
                                     </div>
                                 </div>
@@ -362,40 +362,43 @@
                 </div>
             </div>
 
-            <div id="editProductModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" onclick="closeModalOnClickOutside(event, 'editProductModal')">
-                <div class="bg-white p-6 rounded-lg shadow-lg w-1/2" onclick="event.stopPropagation()">
-                    <h2 class="text-xl font-bold mb-4">Edit Product</h2>
-                    <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="mb-4">
-                            <label for="ProductName" class="block text-gray-700">Product Name</label>
-                            <input type="text" name="ProductName" id="ProductName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                        </div>
-                        <div class="mb-4">
-                            <label for="ProductDescription" class="block text-gray-700">Product Description</label>
-                            <textarea name="ProductDescription" id="ProductDescription" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
-                        </div>
-                        <div class="mb-4">
-                            <label for="ProductPrice" class="block text-gray-700">Product Price</label>
-                            <input type="number" name="ProductPrice" id="ProductPrice" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                        </div>
-                        <div class="mb-4">
-                            <label for="Quantity" class="block text-gray-700">Quantity</label>
-                            <input type="number" name="Quantity" id="Quantity" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label for="ProductImages" class="block text-gray-700">Product Images</label>
-                            <input type="file" name="ProductImages[]" id="ProductImages" class="block w-full" multiple required>
-                        </div>
-
-                        <div class="flex justify-end">
-                            <button type="button" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2" onclick="closeModal('editProductModal')">Cancel</button>
-                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Update Product</button>
-                        </div>
-                    </form>
+            <div id="editProductModal" class="fixed inset-0 overflow-y-auto hidden">
+                <div class="flex items-center justify-center min-h-screen px-4">
+                    <div class="fixed inset-0 transition-opacity">
+                        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                    </div>
+                    <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all max-w-lg w-full p-6">
+                        <h2 class="text-2xl font-bold mb-4">Edit Product</h2>
+                        <form id="editProductForm" action="#" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-4">
+                                <label for="ProductName" class="block text-gray-700">Product Name</label>
+                                <input type="text" id="editProductName" name="ProductName" class="block w-full border rounded px-2 py-1">
+                            </div>
+                            <div class="mb-4">
+                                <label for="ProductDescription" class="block text-gray-700">Product Description</label>
+                                <textarea id="editProductDescription" name="ProductDescription" class="block w-full border rounded px-2 py-1"></textarea>
+                            </div>
+                            <div class="mb-4">
+                                <label for="ProductPrice" class="block text-gray-700">Product Price</label>
+                                <input type="number" id="editProductPrice" name="ProductPrice" class="block w-full border rounded px-2 py-1">
+                            </div>
+                            <div class="mb-4">
+                                <label for="Quantity" class="block text-gray-700">Quantity</label>
+                                <input type="number" id="editQuantity" name="Quantity" class="block w-full border rounded px-2 py-1">
+                            </div>
+                            <div class="mb-4">
+                                <label for="ProductImages" class="block text-gray-700">Product Images</label>
+                                <input type="file" id="editProductImages" name="ProductImages[]" class="block w-full" multiple>
+                            </div>
+                            <div class="flex justify-end">
+                                <button type="button" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mr-2" onclick="closeEditModal()">Cancel</button>
+                                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Update</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            </div> 
 
             <!-- ------------------------------------------------------------------ Transaction History ----------------------------------------------------------------- -->
             <div id="transaction" class="tab-content hidden">
