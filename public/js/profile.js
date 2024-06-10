@@ -24,6 +24,7 @@ function showEditModal(videoId) {
 
 function closeEditModal() {
     document.getElementById('editModal').classList.add('hidden');
+    document.getElementById('editProductModal').classList.add('hidden');
 }
 
 //Add Dropdown
@@ -59,6 +60,8 @@ function closeAllModals() {
     document.getElementById('addVideoModal').classList.add('hidden');
     document.getElementById('addProductModal').classList.add('hidden');
     document.getElementById('addPostModal').classList.add('hidden');
+    document.getElementById('addVideoModalShort').classList.add('hidden');
+    
 }
 
 document.addEventListener('click', function(event) {

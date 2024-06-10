@@ -19,6 +19,7 @@ class MsProduct extends Model
     }
 
     protected $fillable = [
+        'UserID',
         'ProductName',
         'ProductPrice',
         'ProductDescription',

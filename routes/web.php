@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
     })->name('shop.register.index');
     Route::post('/shop/register', [MsUserController::class, 'registerShop'])->name('shop.register.store');
     Route::post('/product/store', [MsProductController::class, 'store'])->name('product.store');
+    Route::delete('/product/{msProduct}', [MsProductController::class, 'destroy'])->name('product.destroy');
 
     Route::delete('/video/delete/{id}', [MsVideoController::class, 'destroy'])->name('video.delete');
     Route::get('/video/edit/{id}', [MsVideoController::class, 'edit'])->name('video.edit');

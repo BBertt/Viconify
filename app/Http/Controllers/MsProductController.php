@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\MsCart;
+use App\Models\MsPicture;
 use App\Models\MsProduct;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MsProductController extends Controller
 {
@@ -29,22 +31,42 @@ class MsProductController extends Controller
 
     public function store(Request $request)
     {
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
+        // dd($request);
+
+        $request->validate([
+            'ProductName' => 'required|string|max:255',
+            'ProductDescription' => 'required|string',
+            'ProductPrice' => 'required',
+            'Quantity' => 'required',
+            'ProductImages.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        $product = MsProduct::create([
+            'UserID' => Auth::id(),
+            'ProductName' => $request->ProductName,
+            'ProductDescription' => $request->ProductDescription,
+            'ProductPrice' => $request->ProductPrice,
+            'Quantity' => $request->Quantity
+        ]);
+
+        if ($request->hasFile('ProductImages')) {
+            foreach ($request->file('ProductImages') as $image) {
                 if ($image->isValid()) {
-                    $path = $image->store('post_images', 'public');
+                    $path = $image->store('product_images', 'public');
                     MsPicture::create([
-                        'PostID' => $post->PostID,
-                        'PictureData' => 'storage/' . $path,
+                        'ProductID' => $product->ProductID,
+                        'PictureData' => $path,
                     ]);
                 } else {
                     MsPicture::create([
-                        'PostID' => $post->PostID,
+                        'ProductID' => $product->ProductID,
                         'PictureData' => 'Unsuccessful',
                     ]);
                 }
             }
         }
+
+        return redirect()->back()->with('success', 'Product added successfully');
     }
 
     /**
@@ -77,7 +99,8 @@ class MsProductController extends Controller
      */
     public function destroy(MsProduct $msProduct)
     {
-        //
+        $msProduct->delete();
+        return redirect()->back()->with('success', 'Product deleted successfully.');
     }
 
     public function updateQuantities (array $cartItems) {
