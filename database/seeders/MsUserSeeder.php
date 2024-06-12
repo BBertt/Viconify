@@ -21,8 +21,9 @@ class MsUserSeeder extends Seeder
             'email' => 'jerenico@gmail.com',
             'Address' => 'Silkwood Lt. 19',
             'PhoneNumber' => '0812543921',
-            'Role' => 'user',
-            'StoreName' => 'Franssesco'
+            'Role' => 'seller',
+            'StoreName' => 'Franssesco',
+            'StoreDescription' => 'I sell everything you need.'
         ]);
 
         MsUser::create([
@@ -32,8 +33,9 @@ class MsUserSeeder extends Seeder
             'email' => 'sebastian@gmail.com',
             'Address' => 'Sutera Jelita 7',
             'PhoneNumber' => '0812543921',
-            'Role' => 'user',
-            'StoreName' => 'Hairy Store'
+            'Role' => 'seller',
+            'StoreName' => 'Hairy Store',
+            'StoreDescription' => 'Preloved Items.'
         ]);
     }
 }

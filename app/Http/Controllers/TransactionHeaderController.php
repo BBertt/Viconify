@@ -15,7 +15,7 @@ class TransactionHeaderController extends Controller
      */
     public function index()
     {
-        $transactionHeader = TransactionHeader::with('transactionDetails')->where('UserID', Auth::id())->get();
+    $transactionHeader = TransactionHeader::with('transactionDetails')->where('UserID', Auth::id())->get();
 
         return view('transaction', compact('transactionHeader'));
     }

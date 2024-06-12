@@ -22,12 +22,25 @@ function showEditModal(videoId) {
         });
 }
 
+function showEditProductModal(productId) {
+    fetch(`/product/edit/${productId}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('editProductName').value = data.ProductName;
+            document.getElementById('editProductDescription').value = data.ProductDescription;
+            document.getElementById('editProductPrice').value = data.ProductPrice;
+            document.getElementById('editQuantity').value = data.Quantity;
+            document.getElementById('editProductForm').action = `/product/update/${productId}`;
+            document.getElementById('editProductModal').classList.remove('hidden');
+        });
+}
+
 function closeEditModal() {
     document.getElementById('editModal').classList.add('hidden');
+    document.getElementById('editProductModal').classList.add('hidden');
 }
 
 //Add Dropdown
-
 function toggleDropdown(element) {
     const dropdown = element.nextElementSibling;
     dropdown.classList.toggle('hidden');
@@ -54,11 +67,11 @@ function closeModal(modalId) {
     modal.classList.add('hidden');
 }
 
-
 function closeAllModals() {
     document.getElementById('addVideoModal').classList.add('hidden');
     document.getElementById('addProductModal').classList.add('hidden');
     document.getElementById('addPostModal').classList.add('hidden');
+    document.getElementById('addVideoModalShort').classList.add('hidden');
 }
 
 document.addEventListener('click', function(event) {

@@ -12,9 +12,6 @@ class TransactionDetail extends Model
     use HasFactory;
 
     protected $table = 'transaction_details';
-    public $incrementing = false;
-
-    protected $primaryKey = ['TransactionID', 'ProductID'];
 
     protected $fillable = [
         'TransactionID',
@@ -23,8 +20,6 @@ class TransactionDetail extends Model
         'Price',
         'TransactionStatus'
     ];
-
-
 
     public function product() : BelongsTo
     {
