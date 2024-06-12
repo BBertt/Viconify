@@ -256,7 +256,7 @@
 
         <!-- ------------------------------------------------------------------ Post Tab ----------------------------------------------------------------- -->
         <div id="posts" class="tab-content hidden">
-            <div class="container w-4/12 mx-auto mt-9 p-0 flex flex-col">
+            <div class="container w-5/12 mx-auto mt-9 p-0 flex flex-col">
                 @foreach ($posts as $post)
                     <div class="post-item p-4 border rounded-lg mb-4 relative group">
                         <div class="flex flex-row">
@@ -292,7 +292,7 @@
                             <div class="relative option-btn-container">
                                 <img src="{{ asset('Assets/OptionBtn.png') }}" alt="Options" class="w-5 h-5 option-btn cursor-pointer" onclick="toggleDropdown(this)">
                                 <div class="dropdown-menu hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg">
-                                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="showEditModal('{{ $post->PostID }}')">Update Post</a>
+                                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="showEditModal('{{ $post->PostID }}', '{{ $post->Title }}', '{{ $post->Description }}')">Update Post</a>
                                     <form action="{{ route('post.delete', ['id' => $post->PostID]) }}" method="POST" class="block">
                                         @csrf
                                         @method('DELETE')

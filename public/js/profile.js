@@ -101,6 +101,7 @@ function showTab(tabId) {
 
 function showEditModal(postId, title, description) {
     const editPostForm = document.getElementById('editPostForm');
+    console.log(title);
     editPostForm.setAttribute('action', `/posts/${postId}`);
     document.getElementById('editPostId').value = postId;
     document.getElementById('editPostTitle').value = title;
