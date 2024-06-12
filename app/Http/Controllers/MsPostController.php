@@ -9,20 +9,16 @@ use Illuminate\Support\Facades\Auth;
 
 class MsPostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $posts = MsPost::with(['user', 'pictures'])->get();
+        return view('post', compact('posts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id)
     {
-        //
+        $post = MsPost::with(['user', 'pictures', 'comments.user'])->findOrFail($id);
+        return response()->json($post);
     }
 
     /**
@@ -61,14 +57,6 @@ class MsPostController extends Controller
         }
 
         return redirect()->back()->with('success', 'Post added successfully');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(MsPost $msPost)
-    {
-        //
     }
 
     /**

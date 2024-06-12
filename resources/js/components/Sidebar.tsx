@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import { FiHome, FiVideo, FiBell, FiMenu, FiShoppingBag, FiFilm, FiFileText, FiActivity, FiPlay, FiPlayCircle, FiMessageCircle, FiMessageSquare, FiDollarSign } from 'react-icons/fi';
+import { FiHome, FiVideo, FiBell, FiMenu, FiShoppingBag, FiFilm, FiFileText, FiActivity, FiPlay, FiPlayCircle, FiMessageCircle, FiMessageSquare, FiDollarSign, FiCamera } from 'react-icons/fi';
 import { BiUser, BiHistory, BiLike, BiDollarCircle } from 'react-icons/bi';
 
 export function Sidebar() {
@@ -63,6 +63,13 @@ export function Sidebar() {
                 <span style={{ fontSize: '0.6rem' }} className={` pt-0.5 ${isOpen ? 'hidden' : 'block'}`}>Shop</span>
             </div>
             {isOpen && <span>Shop</span>}
+          </li>
+          <li className="flex items-center space-x-2 rounded-lg hover:bg-[#C1E5FF] cursor-pointer pl-4 pt-4 pb-4" onClick={() => handleNavigation('/posts')}>
+            <div className='flex flex-col justify-center items-center'>
+                <FiCamera className="text-2xl" />
+                <span style={{ fontSize: '0.6rem' }} className={` pt-0.5 ${isOpen ? 'hidden' : 'block'}`}>Post</span>
+            </div>
+            {isOpen && <span>Post</span>}
           </li>
           <li className="flex items-center space-x-2 rounded-lg hover:bg-[#C1E5FF] cursor-pointer pl-4 pt-4 pb-4" onClick={() => handleNavigation('/chat')}>
             <div className='flex flex-col justify-center items-center'>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MsCartController;
+use App\Http\Controllers\MsCommentController;
 use App\Http\Controllers\MsMessageController;
 use App\Http\Controllers\MsPostController;
 use App\Http\Controllers\MsProductController;
@@ -53,7 +54,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/post/store', [MsPostController::class, 'store'])->name('post.store');
 
     Route::post('/post/store', [MsPostController::class, 'store'])->name('post.store');
+
+    Route::post('/posts/{id}/comments', [MsCommentController::class, 'store'])->name('posts.storeComment');
 });
+Route::get('/posts', [MsPostController::class, 'index'])->name('posts.index');
+Route::get('/posts/{id}', [MsPostController::class, 'show'])->name('posts.show');
 
 Route::resource('/videos', MsVideoController::class);
 

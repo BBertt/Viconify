@@ -77,6 +77,8 @@
 }
 
 .product-link {
-    text-decoration: none; /* Remove underline from links */
-    color: inherit; /* Inherit text color */
+    text-decoration: none;
+    color: inherit;
 }
+
+
