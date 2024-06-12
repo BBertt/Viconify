@@ -141,9 +141,13 @@
                         <div class="overflow-hidden h-24 w-44 rounded">
                             <img src="{{ asset($video->VideoImage) }}" alt="Video Image" class="w-full h-full object-cover">
                         </div>
-                        <div class="flex flex-col ml-5 w-9/12">
+                        <div class="flex flex-col ml-5 w-8/12">
                             <h2 class="font-bold text-lg">{{ $video->Title }}</h2>
                             <h1>{{ Str::limit($video->Description, 200, ' ...') }}</h1>
+                        </div>
+                        <div class="flex flex-col ml-5 w-3/12">
+                            <h2 class="font-bold text-lg">Video Type</h2>
+                            <h1>{{ $video->VideoType }}</h1>
                         </div>
                         <div class="absolute top-4 right-4 flex flex-col items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             <div class="relative option-btn-container">
@@ -158,7 +162,10 @@
                                 </div>
                             </div>
                             <div class="relative share-btn-container mt-4">
-                                <img src="{{ asset('Assets/SharedBtn.png') }}" alt="Share" class="w-5 h-5 share-btn cursor-pointer">
+                                @php
+                                    $videoUrl = $video->VideoType == 'Shorts' ? url('shorts/' . $video->VideoID) : url('videos/' . $video->VideoID);
+                                @endphp
+                                <img src="{{ asset('Assets/SharedBtn.png') }}" alt="Share" class="w-5 h-5 share-btn cursor-pointer" onclick="copyToClipboard('{{ $videoUrl }}')">
                             </div>
                         </div>
                     </div>

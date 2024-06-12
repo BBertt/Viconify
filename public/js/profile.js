@@ -145,3 +145,15 @@ function prevSlide(postId) {
     const prevIndex = (activeSlide - 1 + slides.length) % slides.length;
     showSlide(postId, prevIndex);
 }
+
+function copyToClipboard(url) {
+    const tempInput = document.createElement('input');
+    tempInput.style.position = 'absolute';
+    tempInput.style.left = '-9999px';
+    tempInput.value = url;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+    alert('URL copied to clipboard: ' + url);
+}
