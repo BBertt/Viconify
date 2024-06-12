@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\MsPost;
+use App\Models\MsProduct;
 use App\Models\MsUser;
+use App\Models\MsVideo;
 use App\Models\TransactionHeader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -194,5 +196,11 @@ class MsUserController extends Controller
 
 
         return redirect()->route('HomePage');
+    }
+
+    public function showUser(MsUser $user) {
+        $videos = MsVideo::with('user')->where('UserID', $user->UserID)->get();
+        $products = MsProduct::with('pictures')->where('UserID', $user->UserID)->get();
+        return view('userPage', compact('user', 'videos', 'products'));
     }
 }

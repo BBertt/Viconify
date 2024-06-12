@@ -39,7 +39,7 @@ class TransactionDetailController extends Controller
                 'ProductID' => $cart->product->ProductID,
                 'Quantity' => $item['Quantity'],
                 'Price' => $cart->product->ProductPrice,
-                'TransactionStatus' => 'Success'
+                'TransactionStatus' => 'Pending'
             ]);
         }
     }
@@ -66,6 +66,21 @@ class TransactionDetailController extends Controller
     public function update(Request $request, TransactionDetail $transactionDetail)
     {
         //
+    }
+
+    public function updateStatus($transactionID, $productID) 
+    {
+        // Find the transaction detail
+        $detail = TransactionDetail::where('TransactionID', $transactionID)->where('ProductID', $productID)->first();
+
+            
+            // Update the status
+            $detail->TransactionStatus = "Success";
+            // dd($detail);
+            $detail->save();
+    
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Transaction status updated successfully.');
     }
 
     /**

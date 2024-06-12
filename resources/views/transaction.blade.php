@@ -10,9 +10,18 @@
                     <p class="text-gray-700">Shopping</p>
                     <p class="text-sm text-gray-500">{{ \Carbon\Carbon::parse($header->created_at)->format('d M Y') }}</p>
                 </div>
-                <div>
-                    <span class="bg-green-200 text-green-700 px-2 py-1 rounded">{{ $detail->TransactionStatus }}</span>
-                </div>
+                @if ($detail->TransactionStatus == 'Success')
+                    <div>
+                        <span class="bg-green-200 text-green-700 px-2 py-1 rounded">{{ $detail->TransactionStatus }}</span>
+                    </div>
+
+                @else
+
+                    <div>
+                        <span class="bg-orange-200 text-orange-500 px-2 py-1 rounded">{{ $detail->TransactionStatus }}</span>
+                    </div>
+                @endif
+                
             </div>
             <div class="flex items-center mb-4">
                 <img src="{{ asset($detail->product->user->ProfileImage) }}" alt="{{ $detail->product->user->StoreName }}" class="w-10 h-10 rounded-full mr-3">

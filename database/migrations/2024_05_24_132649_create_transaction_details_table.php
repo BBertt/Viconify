@@ -9,6 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('transaction_details', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('TransactionID')->constrained('transaction_headers', 'TransactionID')->onDelete('cascade');
             $table->foreignId('ProductID')->nullable()->constrained('ms_products', 'ProductID')->onDelete('cascade');
             $table->foreignId('AuctionID')->nullable()->constrained('ms_auctions', 'AuctionID')->onDelete('cascade');
@@ -16,7 +17,6 @@ return new class extends Migration
             $table->integer('Price');
             $table->string('TransactionStatus', 255);
             $table->timestamps();
-            $table->primary(['TransactionID', 'ProductID']);
         });
     }
 

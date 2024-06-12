@@ -412,9 +412,17 @@
                                             <p class="text-gray-700">Shopping</p>
                                             <p class="text-sm text-gray-500">{{ \Carbon\Carbon::parse($header->created_at)->format('d M Y') }}</p>
                                         </div>
-                                        <div>
-                                            <span class="bg-green-200 text-green-700 px-2 py-1 rounded">{{ $detail->TransactionStatus }}</span>
-                                        </div>
+                                        @if ($detail->TransactionStatus == 'Success')
+                                            <div>
+                                                <span class="bg-green-200 text-green-700 px-2 py-1 rounded">{{ $detail->TransactionStatus }}</span>
+                                            </div>
+
+                                        @else
+
+                                            <div>
+                                                <span class="bg-orange-200 text-orange-500 px-2 py-1 rounded">{{ $detail->TransactionStatus }}</span>
+                                            </div>
+                                        @endif
                                     </div>
                                     <div class="flex items-center mb-4">
                                         <div>
@@ -437,6 +445,13 @@
                                             <h2 class="text-2xl font-bold">Total: <span class="text-red-500 font-bold mt-2"> Rp {{ number_format($total, 0, ',', '.') }},00</span></h2>
                                         </div>
                                     </div>
+                                    @if ($detail->TransactionStatus == 'Pending')
+                                        <form action="{{ route('transaction.updateStatus', ['transactionID' => $detail->TransactionID, 'productID' => $detail->ProductID]) }}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600">Accept Order</button>
+                                        </form>
+                                    @endif
                                 </div>
                             @endif
                         @endforeach

@@ -8,7 +8,9 @@ use App\Http\Controllers\MsUserController;
 use App\Http\Controllers\MsVideoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RouteController;
+use App\Http\Controllers\TransactionDetailController;
 use App\Http\Controllers\TransactionHeaderController;
+use App\Models\TransactionDetail;
 
 Route::get('/', [RouteController::class, 'HomePage'])->name('HomePage');
 
@@ -37,6 +39,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/purchase', [TransactionHeaderController::class, 'store'])->name('purchase');
     Route::get('/transaction', [TransactionHeaderController::class, 'index'])->name('transaction');
+    Route::put('/transaction/updateStatus/{transactionID}/{productID}', [TransactionDetailController::class, 'updateStatus'])->name('transaction.updateStatus');
 
     Route::get('/shop/register', function() {
         return view('shop.register');
@@ -46,7 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/product/{msProduct}', [MsProductController::class, 'destroy'])->name('product.destroy');
     Route::get('/product/edit/{id}', [MsProductController::class, 'edit'])->name('product.edit');
     Route::post('/product/update/{id}', [MsProductController::class, 'update'])->name('product.update');
-
+    
     Route::delete('/video/delete/{id}', [MsVideoController::class, 'destroy'])->name('video.delete');
     Route::get('/video/edit/{id}', [MsVideoController::class, 'edit'])->name('video.edit');
     Route::post('/video/update/{id}', [MsVideoController::class, 'update'])->name('video.update');
@@ -64,8 +67,12 @@ Route::resource('/videos', MsVideoController::class);
 Route::get('/shop', [MsProductController::class, 'index'])->name('shop.index');
 Route::get('/shop/{msProduct}', [MsProductController::class, 'show'])->name('shop.show');
 
+// Shorts
 Route::get('/shorts', [MsVideoController::class, 'showShorts'])->name('shorts');
 Route::get('/shorts/{id}', [MsVideoController::class, 'showShortsById'])->name('shorts.showShortsById');
 Route::post('/short/{video}/like', [MsVideoController::class, 'like'])->name('short.like');
 Route::post('/short/{video}/dislike', [MsVideoController::class, 'dislike'])->name('short.dislike');
 Route::post('/short/{video}/share', [MsVideoController::class, 'share'])->name('short.share');
+
+// User Page
+Route::get('/UserPage/{user}', [MsUserController::class, 'showUser'])->name('userPage');
