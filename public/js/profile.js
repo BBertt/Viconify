@@ -98,3 +98,49 @@ function showTab(tabId) {
     event.target.classList.add('bg-blue-500', 'text-white');
     event.target.classList.remove('bg-white', 'text-black', 'border');
 }
+
+function showEditModal(postId, title, description) {
+    const editPostForm = document.getElementById('editPostForm');
+    editPostForm.setAttribute('action', `/posts/${postId}`);
+    document.getElementById('editPostId').value = postId;
+    document.getElementById('editPostTitle').value = title;
+    document.getElementById('editPostDescription').value = description;
+    document.getElementById('editPostModal').classList.remove('hidden');
+}
+
+function toggleDropdown(element) {
+    const dropdown = element.nextElementSibling;
+    dropdown.classList.toggle('hidden');
+}
+
+function closeModalOnClickOutside(event, modalId) {
+    const modal = document.getElementById(modalId);
+    if (event.target === modal) {
+        modal.classList.add('hidden');
+    }
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).classList.add('hidden');
+}
+
+function showSlide(postId, index) {
+    const slides = document.querySelectorAll(`#carousel-${postId} .carousel-item`);
+    slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+    });
+}
+
+function nextSlide(postId) {
+    const slides = document.querySelectorAll(`#carousel-${postId} .carousel-item`);
+    const activeSlide = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+    const nextIndex = (activeSlide + 1) % slides.length;
+    showSlide(postId, nextIndex);
+}
+
+function prevSlide(postId) {
+    const slides = document.querySelectorAll(`#carousel-${postId} .carousel-item`);
+    const activeSlide = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+    const prevIndex = (activeSlide - 1 + slides.length) % slides.length;
+    showSlide(postId, prevIndex);
+}

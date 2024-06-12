@@ -93,13 +93,13 @@
 
                     <div class="space-y-2">
                         <label for="name" class="block text-gray-700 font-semibold">Store Start Time</label>
-                        <input type="time" name="StoreStartTime" id="StoreStartTime" value="{{ $user->StoreStartTime }}" 
+                        <input type="time" name="StoreStartTime" id="StoreStartTime" value="{{ $user->StoreStartTime }}"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
 
                     <div class="space-y-2">
                         <label for="name" class="block text-gray-700 font-semibold">Store End Time</label>
-                        <input type="time" name="StoreEndTime" id="StoreEndTime" value="{{ $user->StoreEndTime }}" 
+                        <input type="time" name="StoreEndTime" id="StoreEndTime" value="{{ $user->StoreEndTime }}"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
 
@@ -108,7 +108,7 @@
             </div>
         </div>
     @endif
-    
+
     <div class="w-9/12 p-4 h-fit">
         <!-- ------------------------------------------------------------------ Button ----------------------------------------------------------------- -->
         <div class="tabs flex mb-4 w-full">
@@ -256,21 +256,80 @@
 
         <!-- ------------------------------------------------------------------ Post Tab ----------------------------------------------------------------- -->
         <div id="posts" class="tab-content hidden">
-            @foreach ($posts as $post)
-                <div class="post-item p-4 border rounded-lg mb-4">
-                    <h3 class="text-lg font-bold">{{ $post->Title }}</h3>
-                    <p class="text-sm text-gray-600">{{ $post->Description }}</p>
-                    @if($post->pictures->isNotEmpty())
-                        <div class="flex space-x-4 mt-2">
-                            @foreach ($post->pictures as $picture)
-                                <div class="w-1/3 h-32 overflow-hidden">
-                                    <img src="{{ asset($picture->PictureData) }}" alt="Post Image" class="w-full h-full object-cover">
-                                </div>
-                            @endforeach
+            <div class="container w-4/12 mx-auto mt-9 p-0 flex flex-col">
+                @foreach ($posts as $post)
+                    <div class="post-item p-4 border rounded-lg mb-4 relative group">
+                        <div class="flex flex-row">
+                            <div class="mt-1 overflow-hidden rounded-full h-10 w-10 flex-shrink-0">
+                                @if($post->user->ProfileImage)
+                                    <img src="{{$post->user->ProfileImage}}" alt="{{ $post->user->ProfileImage }}" class="h-full object-cover w-full rounded-full">
+                                @else
+                                    <img src="{{asset('Assets/DefaultProfile.png')}}" alt="{{ $post->user->ProfileImage }}" class="h-full object-cover w-full rounded-full">
+                                @endif
+                            </div>
+                            <div class="h-10 ml-2 flex items-center">
+                                <h3 class="text-lg font-bold">{{ $post->user->Name }}</h3>
+                            </div>
                         </div>
-                    @endif
-                </div>
-            @endforeach
+                        <h3 class="text-lg font-bold">{{ $post->Title }}</h3>
+                        <p class="text-sm text-gray-600 mb-2">{{ $post->Description }}</p>
+                        @if ($post->pictures->isNotEmpty())
+                            <div class="relative">
+                                <div class="carousel" id="carousel-{{ $post->PostID }}">
+                                    @foreach ($post->pictures as $index => $picture)
+                                        <div class="carousel-item {{ $index === 0 ? 'active' : '' }} w-full h-64 overflow-hidden rounded">
+                                            <img src="{{ asset($picture->PictureData) }}" alt="Post Image" class="w-full h-full object-cover">
+                                        </div>
+                                    @endforeach
+                                </div>
+                                @if ($post->pictures->count() > 1)
+                                    <button class="prev absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-1 rounded" onclick="prevSlide({{ $post->PostID }})">❮</button>
+                                    <button class="next absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-1 rounded" onclick="nextSlide({{ $post->PostID }})">❯</button>
+                                @endif
+                            </div>
+                        @endif
+                        <div class="absolute top-4 right-4 flex flex-col items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="relative option-btn-container">
+                                <img src="{{ asset('Assets/OptionBtn.png') }}" alt="Options" class="w-5 h-5 option-btn cursor-pointer" onclick="toggleDropdown(this)">
+                                <div class="dropdown-menu hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded shadow-lg">
+                                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="showEditModal('{{ $post->PostID }}')">Update Post</a>
+                                    <form action="{{ route('post.delete', ['id' => $post->PostID]) }}" method="POST" class="block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Delete Post</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="relative share-btn-container mt-4">
+                                <img src="{{ asset('Assets/SharedBtn.png') }}" alt="Share" class="w-5 h-5 share-btn cursor-pointer">
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div id="editPostModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" onclick="closeModalOnClickOutside(event, 'editPostModal')">
+            <div class="bg-white p-6 rounded-lg shadow-lg w-1/2" onclick="event.stopPropagation()">
+                <h2 class="text-xl font-bold mb-4">Edit Post</h2>
+                <form id="editPostForm" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="post_id" id="editPostId">
+                    <div class="mb-4">
+                        <label for="editPostTitle" class="block text-gray-700">Title</label>
+                        <input type="text" name="title" id="editPostTitle" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="editPostDescription" class="block text-gray-700">Description</label>
+                        <textarea name="description" id="editPostDescription" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="button" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2" onclick="closeModal('editPostModal')">Cancel</button>
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Update Post</button>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <div id="addPostModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" onclick="closeModalOnClickOutside(event, 'addPostModal')">
@@ -348,7 +407,7 @@
                             <label for="Quantity" class="block text-gray-700">Quantity</label>
                             <input type="number" name="Quantity" id="Quantity" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                         </div>
-                        
+
                         <div class="mb-4">
                             <label for="ProductImages" class="block text-gray-700">Product Images</label>
                             <input type="file" name="ProductImages[]" id="ProductImages" class="block w-full" multiple required>
@@ -398,7 +457,7 @@
                         </form>
                     </div>
                 </div>
-            </div> 
+            </div>
 
             <!-- ------------------------------------------------------------------ Transaction History ----------------------------------------------------------------- -->
             <div id="transaction" class="tab-content hidden">
@@ -465,21 +524,43 @@
 
 
 @push('scripts')
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
     <link rel="stylesheet" href="{{ asset('css/shop/layout.css') }}">
     <script src="{{ asset('js/profile.js') }}"></script>
     <script>
         function deleteProduct(button, url) {
-                const form = document.createElement('form');
-                form.action = url;
-                form.method = 'POST';
-                const csrfToken = '{{ csrf_token() }}';
-                form.innerHTML = `
-                    <input type="hidden" name="_token" value="${csrfToken}">
-                    <input type="hidden" name="_method" value="DELETE">
-                `;
-                document.body.appendChild(form);
-                form.submit();
-            }
+            const form = document.createElement('form');
+            form.action = url;
+            form.method = 'POST';
+            const csrfToken = '{{ csrf_token() }}';
+            form.innerHTML = `
+                <input type="hidden" name="_token" value="${csrfToken}">
+                <input type="hidden" name="_method" value="DELETE">
+            `;
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        function showSlide(postId, index) {
+            const slides = document.querySelectorAll(`#carousel-${postId} .carousel-item`);
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextSlide(postId) {
+            const slides = document.querySelectorAll(`#carousel-${postId} .carousel-item`);
+            const activeSlide = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+            const nextIndex = (activeSlide + 1) % slides.length;
+            showSlide(postId, nextIndex);
+        }
+
+        function prevSlide(postId) {
+            const slides = document.querySelectorAll(`#carousel-${postId} .carousel-item`);
+            const activeSlide = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+            const prevIndex = (activeSlide - 1 + slides.length) % slides.length;
+            showSlide(postId, prevIndex);
+        }
     </script>
 @endpush

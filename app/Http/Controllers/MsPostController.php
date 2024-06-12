@@ -70,16 +70,29 @@ class MsPostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MsPost $msPost)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string'
+        ]);
+
+        $post = MsPost::findOrFail($id);
+        $post->Title = $request->title;
+        $post->Description = $request->description;
+        $post->save();
+
+        return redirect()->back()->with('success', 'Post updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MsPost $msPost)
+    public function destroy($id)
     {
-        //
+        $post = MsPost::findOrFail($id);
+        $post->delete();
+
+        return redirect()->back()->with('success', 'Post deleted successfully');
     }
 }

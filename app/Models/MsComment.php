@@ -29,4 +29,19 @@ class MsComment extends Model
     {
         return $this->belongsTo(MsVideo::class, 'VideoID', 'VideoID');
     }
+
+    public function post()
+    {
+        return $this->belongsTo(MsPost::class, 'PostID', 'PostID');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(MsComment::class, 'CommentParentID', 'CommentID');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(MsComment::class, 'CommentParentID', 'CommentID');
+    }
 }

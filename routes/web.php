@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/product/{msProduct}', [MsProductController::class, 'destroy'])->name('product.destroy');
     Route::get('/product/edit/{id}', [MsProductController::class, 'edit'])->name('product.edit');
     Route::post('/product/update/{id}', [MsProductController::class, 'update'])->name('product.update');
-    
+
     Route::delete('/video/delete/{id}', [MsVideoController::class, 'destroy'])->name('video.delete');
     Route::get('/video/edit/{id}', [MsVideoController::class, 'edit'])->name('video.edit');
     Route::post('/video/update/{id}', [MsVideoController::class, 'update'])->name('video.update');
@@ -62,6 +62,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/post/store', [MsPostController::class, 'store'])->name('post.store');
 
     Route::post('/posts/{id}/comments', [MsCommentController::class, 'store'])->name('posts.storeComment');
+    Route::delete('/posts/{id}', [MsPostController::class, 'destroy'])->name('post.delete');
+    Route::put('/posts/{id}', [MsPostController::class, 'update'])->name('post.update');
 });
 Route::get('/posts', [MsPostController::class, 'index'])->name('posts.index');
 Route::get('/posts/{id}', [MsPostController::class, 'show'])->name('posts.show');

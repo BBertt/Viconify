@@ -20,13 +20,18 @@ class MsPost extends Model
         'Dislike',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(MsUser::class, 'UserID', 'UserID');
+    }
+
     public function pictures()
     {
         return $this->hasMany(MsPicture::class, 'PostID', 'PostID');
     }
 
-    public function user()
+    public function comments()
     {
-        return $this->belongsTo(MsUser::class, 'UserID');
+        return $this->hasMany(MsComment::class, 'PostID', 'PostID');
     }
 }
