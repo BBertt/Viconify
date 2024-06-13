@@ -22,7 +22,7 @@ class MsUserController extends Controller
         $videos = $user->videos;
         $products = $user->products;
         $posts = MsPost::with('pictures')->where('UserID', $user->UserID)->get();
-        $transactionHeader = TransactionHeader::with('transactionDetails')->where('UserID', $user->UserID)->get();
+        $transactionHeader = TransactionHeader::with('transactionDetails')->get();
         return view('profile', compact('user', 'videos', 'products', 'posts', 'transactionHeader'));
     }
 
@@ -112,12 +112,12 @@ class MsUserController extends Controller
                 'phone_number' => 'required',
                 'address' => 'required',
             ]);
-    
+
             $user->Name = $request->name;
             $user->email = $request->email;
             $user->Address = $request->address;
             $user->PhoneNumber = $request->phone_number;
-    
+
             $path = null;
             if ($request->hasFile('profile_image')) {
                 $uploadedFile = $request->file('profile_image');
@@ -125,9 +125,9 @@ class MsUserController extends Controller
                     $path = $uploadedFile->store('users', 'public');
                 }
             }
-    
+
             $user->ProfileImage = $path ? 'storage/' . $path : $user->ProfileImage;
-    
+
             $user->save();
         }
         else{
