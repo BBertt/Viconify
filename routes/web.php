@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MsAuctionController;
 use App\Http\Controllers\MsCartController;
 use App\Http\Controllers\MsCommentController;
 use App\Http\Controllers\MsMessageController;
@@ -73,6 +74,9 @@ Route::resource('/videos', MsVideoController::class);
 // Routing to Shop Pages
 Route::get('/shop', [MsProductController::class, 'index'])->name('shop.index');
 Route::get('/shop/{msProduct}', [MsProductController::class, 'show'])->name('shop.show');
+
+// Routing to Auction Pages
+Route::get('/shop/auction', [MsAuctionController::class, 'index'])->name('auction.index');
 
 // Shorts
 Route::get('/shorts', [MsVideoController::class, 'showShorts'])->name('shorts');

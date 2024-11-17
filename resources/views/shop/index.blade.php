@@ -6,7 +6,7 @@
         class="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-200">
         MarketPlace
         </a>
-        <a href="#" 
+        <a href="{{ route('auction.index') }}" 
         class="border border-blue-500 text-blue-500 font-semibold py-2 px-4 rounded hover:bg-blue-500 hover:text-white transition duration-200">
         Auction
         </a>

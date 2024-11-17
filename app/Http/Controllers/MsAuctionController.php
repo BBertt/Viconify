@@ -12,7 +12,8 @@ class MsAuctionController extends Controller
      */
     public function index()
     {
-        //
+        $auctions = MsAuction::with(['pictures', 'user'])->latest()->paginate(5);
+        return view('shop.auction-index', compact('auctions'));
     }
 
     /**

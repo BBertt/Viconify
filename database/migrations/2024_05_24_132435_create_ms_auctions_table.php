@@ -15,7 +15,7 @@ return new class extends Migration
             $table->integer('AuctionProductStartPrice');
             $table->integer('AuctionProductEndPrice');
             $table->text('AuctionProductDescription');
-            $table->time('AuctionProductEndTime');
+            $table->dateTime('AuctionProductEndTime');
             $table->integer('AuctionTopBid')->default(0);
             $table->foreignId('AuctionTopBidUserID')->nullable()->constrained('ms_users', 'UserID')->onDelete('cascade');
             $table->timestamps();

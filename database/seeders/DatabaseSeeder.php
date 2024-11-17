@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             MsProductSeeder::class,
             MsVideoSeeder::class,
             MsPictureSeeder::class,
+            MsAuctionSeeder::class,
         ]);
         MsComment::factory(200)->create();
     }
