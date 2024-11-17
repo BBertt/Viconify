@@ -1,6 +1,16 @@
 @extends('components.shop-layout')
 @section('title', 'Shop')
 @section('content')
+    <div class="flex m-4 space-x-4">
+        <a href="{{ route('shop.index') }}" 
+        class="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-200">
+        MarketPlace
+        </a>
+        <a href="#" 
+        class="border border-blue-500 text-blue-500 font-semibold py-2 px-4 rounded hover:bg-blue-500 hover:text-white transition duration-200">
+        Auction
+        </a>
+    </div>
     <div class="container mx-auto px-4 py-8">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             @foreach ($products as $product)

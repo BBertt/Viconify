@@ -14,7 +14,7 @@
                 <header class="bg-[#E6F5FF] text-black p-4 flex flex-col items-center">
                     <div class="flex items-center justify-between w-full">
                         <div class="flex items-center space-x-4">
-                            <img src="{{ asset('Assets/ViConifyLogo.png') }}" alt="ViConify Logo" class="h-8 w-auto">
+                            <img src="{{ asset('Assets/PrismLogo.png') }}" alt="ViConify Logo" class="h-12 w-auto">
                         </div>
 
                         @yield('searchBar')
