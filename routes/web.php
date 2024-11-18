@@ -71,12 +71,14 @@ Route::get('/posts/{id}', [MsPostController::class, 'show'])->name('posts.show')
 
 Route::resource('/videos', MsVideoController::class);
 
+// Routing to Auction Pages
+Route::get('/shop/auction', [MsAuctionController::class, 'index'])->name('auction.index');
+
 // Routing to Shop Pages
 Route::get('/shop', [MsProductController::class, 'index'])->name('shop.index');
 Route::get('/shop/{msProduct}', [MsProductController::class, 'show'])->name('shop.show');
 
-// Routing to Auction Pages
-Route::get('/shop/auction', [MsAuctionController::class, 'index'])->name('auction.index');
+
 
 // Shorts
 Route::get('/shorts', [MsVideoController::class, 'showShorts'])->name('shorts');

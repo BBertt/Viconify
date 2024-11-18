@@ -28,4 +28,9 @@ class MsPicture extends Model
     {
         return $this->belongsTo(MsProduct::class, 'ProductID', 'ProductID');
     }
+
+    public function auction()
+    {
+        return $this->belongsTo(MsAuction::class, 'AuctionID', 'AuctionID');
+    }
 }
