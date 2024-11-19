@@ -78,10 +78,10 @@ export function Register() {
         <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-0 md:p-8 shadow-input backdrop-blur-sm bg-white/70 dark:bg-black flex flex-row">
             <div className="w-[200rem]">
                 <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
-                    Welcome to ViConify
+                    Welcome to PRISM
                 </h2>
                 <div className="text-sm mx-px font-normal text-neutral-600 dark:text-neutral-400">
-                    Register to ViConify and enjoy your<FlipWords words={words} /> <br />
+                    Register to PRISM and enjoy your<FlipWords words={words} /> <br />
                 </div>
                 <form
                 className="my-6"

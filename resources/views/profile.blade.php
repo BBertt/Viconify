@@ -562,11 +562,11 @@
                 <div class="container mx-auto my-5 p-5 bg-gray-100">
                     @foreach ($transactionHeader as $header)
                         @foreach ($header->transactionDetails as $detail)
-                            @if ($detail->product->UserID == auth()->user()->UserID)
-                                <div class="bg-white shadow-md rounded p-6 mb-4">
-                                    <div class="flex justify-between items-center mb-4">
-                                        <div>
-                                            <p class="text-gray-700">Shopping</p>
+                            <div class="bg-white shadow-md rounded p-6 mb-4">
+                                <div class="flex justify-between items-center mb-4">
+                                    <div>
+                                        <p class="text-gray-700">Shopping</p>
+                            @if ($detail->ProductID != null && $detail->product->UserID == auth()->user()->UserID)
                                             <p class="text-sm text-gray-500">{{ \Carbon\Carbon::parse($header->created_at)->format('d M Y') }}</p>
                                         </div>
                                         @if ($detail->TransactionStatus == 'Success')
@@ -604,6 +604,50 @@
                                     </div>
                                     @if ($detail->TransactionStatus == 'Pending')
                                         <form action="{{ route('transaction.updateStatus', ['transactionID' => $detail->TransactionID, 'productID' => $detail->ProductID]) }}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600">Accept Order</button>
+                                        </form>
+                                    @endif
+                                </div>
+                            @elseif ($detail->AuctionID != null && $detail->auction->UserID == auth()->user()->UserID)
+                                            <p class="text-sm text-gray-500">{{ \Carbon\Carbon::parse($header->created_at)->format('d M Y') }}</p>
+                                        </div>
+                                        @if ($detail->TransactionStatus == 'Success')
+                                            <div>
+                                                <span class="bg-green-200 text-green-700 px-2 py-1 rounded">{{ $detail->TransactionStatus }}</span>
+                                            </div>
+
+                                        @else
+
+                                            <div>
+                                                <span class="bg-orange-200 text-orange-500 px-2 py-1 rounded">{{ $detail->TransactionStatus }}</span>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="flex items-center mb-4">
+                                        <div>
+                                            <p class="text-gray-700 font-bold"> Bought By: <span class="text-red-500 font-bold">{{ $header->user->Name }}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <div class="flex items-center mb-4">
+                                            <img src="{{ asset('storage/' . $detail->auction->pictures->first()->PictureData) }}" alt="{{ $detail->auction->AuctionProductName }}" class="w-16 h-16 rounded mr-4">
+                                            <div>
+                                                <p class="text-gray-800 font-bold">{{ $detail->auction->ProductName }}</p>
+                                                @php
+                                                    $total = $detail->Price * $detail->Quantity;
+                                                @endphp
+                                                <p class="text-sm text-gray-600">{{ $detail->Quantity }} barang x Rp{{ number_format($detail->auction->AuctionTopBid, 0, ',', '.') }}</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h2 class="text-2xl font-bold">Total: <span class="text-red-500 font-bold mt-2"> Rp {{ number_format($total, 0, ',', '.') }},00</span></h2>
+                                        </div>
+                                    </div>
+                                    @if ($detail->TransactionStatus == 'Pending')
+                                        <form action="{{ route('transaction.updateStatus', ['transactionID' => $detail->TransactionID, 'productID' => $detail->AuctionID]) }}" method="post">
                                             @csrf
                                             @method('PUT')
                                             <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600">Accept Order</button>

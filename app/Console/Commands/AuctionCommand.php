@@ -43,6 +43,11 @@ class AuctionCommand extends Command
         foreach ($auctions as $auction) {
             
             if ($auction->Status == 'Pending') {
+                if ($auction->AuctionTopBidUserID == null) {
+                    $auction->delete();
+                    return;
+                }
+
                 $user = MsUser::where('UserID', $auction->AuctionTopBidUserID)->first();
 
                 if ($user->Balance < $auction->AuctionTopBid) {
@@ -71,7 +76,7 @@ class AuctionCommand extends Command
                 $auction->status = 'Done';
                 $auction->save();
             }
-            
+
         }
 
         $this->info('Auctions Updated Successfully.');

@@ -72,8 +72,9 @@ class TransactionDetailController extends Controller
     {
         // Find the transaction detail
         $detail = TransactionDetail::where('TransactionID', $transactionID)->where('ProductID', $productID)->first();
-
-            
+        if (empty($detail)) {
+            $detail = TransactionDetail::where('TransactionID', $transactionID)->where('AuctionID', $productID)->first();
+        }
             // Update the status
             $detail->TransactionStatus = "Success";
             // dd($detail);
