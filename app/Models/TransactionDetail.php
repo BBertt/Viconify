@@ -22,13 +22,18 @@ class TransactionDetail extends Model
         'TransactionStatus'
     ];
 
-    public function product() : BelongsTo
+    public function product()
     {
         return $this->belongsTo(MsProduct::class, 'ProductID');
     }
 
-    public function transactionHeader() : BelongsTo
+    public function transactionHeader()
     {
         return $this->belongsTo(TransactionHeader::class, 'TransactionID');
+    }
+
+    public function auction()
+    {
+        return $this->belongsTo(MsAuction::class, 'AuctionID');
     }
 }

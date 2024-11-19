@@ -94,8 +94,17 @@ class MsAuctionController extends Controller
             $auction->Status = 'Done';
             $auction->save();
 
+            $user->Balance = $user->Balance - $bid;
+            $user->save();
+
             return redirect()->route('transaction');
         }
+
+        $auction->AuctionTopBid = $bid;
+        $auction->AuctionTopBidUserID = $user->UserID;
+        $auction->save();
+
+        return redirect()->back();
     }
 
     /**

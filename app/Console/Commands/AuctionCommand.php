@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\MsAuction;
+use App\Models\MsUser;
 use App\Models\TransactionDetail;
 use App\Models\TransactionHeader;
 use Carbon\Carbon;
@@ -32,6 +33,7 @@ class AuctionCommand extends Command
         $now = Carbon::now();
 
         $auctions = MsAuction::where('AuctionProductEndTime', '<=', $now)->get();
+        
 
         if ($auctions->isEmpty()) {
             $this->info('No Auctions to Update.');
@@ -39,8 +41,16 @@ class AuctionCommand extends Command
         }
 
         foreach ($auctions as $auction) {
+            $user = MsUser::where('UserID', $auction->AuctionTopBidUserID)->first();
 
-            if ($auction->AuctionTopBidUserID != NULL) {
+            if ($user->Balance < $auction->AuctionTopBid) {
+                $auction->delete();
+            }
+
+            else if ($auction->AuctionTopBidUserID != NULL) {
+                $user->Balance = $user->Balance - $auction->AuctionTopBid;
+                $user->save();
+
                 $transaction = TransactionHeader::create([
                     'UserID' => $auction->AuctionTopBidUserID,
                     'TransactionDate' => now(),
