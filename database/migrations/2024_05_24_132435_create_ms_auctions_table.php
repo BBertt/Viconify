@@ -18,6 +18,7 @@ return new class extends Migration
             $table->dateTime('AuctionProductEndTime');
             $table->integer('AuctionTopBid')->default(0);
             $table->foreignId('AuctionTopBidUserID')->nullable()->constrained('ms_users', 'UserID')->onDelete('cascade');
+            $table->string('Status');
             $table->timestamps();
         });
     }

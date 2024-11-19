@@ -20,6 +20,7 @@ class MsAuction extends Model
         'AuctionProductEndPrice',
         'AuctionProductDescription',
         'AuctionProductEndTime',
+        'Status',
     ];
 
     public function pictures()

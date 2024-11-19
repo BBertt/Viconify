@@ -26,7 +26,8 @@ class MsAuctionSeeder extends Seeder
             • Material Katun Twill Premium
             • Gender Pria Dan Wanita
             • Model Slimfit / reguler fit',
-            'AuctionProductEndTime' => now()->addDay(),
+            'AuctionProductEndTime' => now(),
+            'Status' => 'Pending',
         ]);
 
         MsPicture::create([

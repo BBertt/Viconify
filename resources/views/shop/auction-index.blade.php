@@ -32,7 +32,7 @@
                     <img src="{{ asset($auction->user->ProfileImage) }}" alt="{{ $auction->user->Name }}" class="w-10 h-10 rounded-full mr-4">
                     <p class="text-gray-500">{{ $auction->user->StoreName }}</p>
                 </a>
-                <p class="text-red-500 font-bold mt-2">Rp {{ number_format($auction->ProductPrice, 0, ',', '.') }}</p>
+                <p class="text-red-500 font-bold mt-2"><span class="text-black">Top Bid: </span>Rp {{ number_format($auction->AuctionTopBid, 0, ',', '.') }}</p>
             </div>
         @endforeach
     </div>
