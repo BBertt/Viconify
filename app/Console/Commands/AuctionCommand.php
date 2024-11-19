@@ -49,7 +49,7 @@ class AuctionCommand extends Command
 
                 TransactionDetail::create([
                     'TransactionID' => $transaction->TransactionID,
-                    'AuctionID' => $auction,
+                    'AuctionID' => $auction->AuctionID,
                     'Quantity' => 1,
                     'Price' => $auction->AuctionTopBid,
                     'TransactionStatus' => 'Pending',

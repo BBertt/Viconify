@@ -23,6 +23,8 @@
                 @endif
                 
             </div>
+
+            @if ($detail->ProductID != NULL)
             <div class="flex items-center mb-4">
                 <img src="{{ asset($detail->product->user->ProfileImage) }}" alt="{{ $detail->product->user->StoreName }}" class="w-10 h-10 rounded-full mr-3">
                 <div>
@@ -44,7 +46,7 @@
                     <h2 class="text-2xl font-bold">Total: <span class="text-red-500 font-bold mt-2"> Rp {{ number_format($total, 0, ',', '.') }},00</span></h2>
                 </div>
             </div>
-
+            @endif
         </div>
         @endforeach
     @endforeach

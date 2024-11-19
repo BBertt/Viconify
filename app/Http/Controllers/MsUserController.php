@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MsAuction;
 use App\Models\MsPost;
 use App\Models\MsProduct;
 use App\Models\MsUser;
@@ -201,6 +202,7 @@ class MsUserController extends Controller
     public function showUser(MsUser $user) {
         $videos = MsVideo::with('user')->where('UserID', $user->UserID)->get();
         $products = MsProduct::with('pictures')->where('UserID', $user->UserID)->get();
-        return view('userPage', compact('user', 'videos', 'products'));
+        $auctions = MsAuction::with('pictures')->where('UserID', $user->UserID)->get();
+        return view('userPage', compact('user', 'videos', 'products', 'auctions'));
     }
 }

@@ -1,7 +1,7 @@
 @extends('components.shop-layout')
 @section('title', 'Product')
 @section('content')
-    <a href="{{ route('shop.index') }}" class="block text-blue-500 mt-2">&larr; Back to shops</a>
+    <a href="{{ route('shop.index') }}" class="block text-blue-500 mt-2">&larr; Back to MarketPlace</a>
     <div class="container mx-auto py-8">
         <div class="flex flex-wrap md:flex-nowrap">
             <div class="w-full md:w-1/2 p-4 flex flex-col items-center">
