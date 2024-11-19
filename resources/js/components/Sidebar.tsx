@@ -32,7 +32,7 @@ export function Sidebar() {
     <div ref={sidebarRef} className={`flex flex-col h-screen bg-[#E6F5FF] text-black transition-all duration-300 fixed ${isOpen ? 'w-60' : 'w-16'}`}>
       <div className="flex items-center justify-between px-4 py-4">
         <FiMenu onClick={toggleSidebar} className="cursor-pointer text-2xl" />
-        {isOpen && <img src="/Assets/ViConifyLogo.png" alt="ViConify Logo" className="h-8" />}
+        {isOpen && <img src="/Assets/PrismLogo.png" alt="PRISM Logo" className="h-12 w-auto" />}
       </div>
       <nav className="flex-grow">
         <ul className="flex flex-col space-y-2">

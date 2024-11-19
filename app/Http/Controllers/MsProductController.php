@@ -57,11 +57,6 @@ class MsProductController extends Controller
                         'ProductID' => $product->ProductID,
                         'PictureData' => $path,
                     ]);
-                } else {
-                    MsPicture::create([
-                        'ProductID' => $product->ProductID,
-                        'PictureData' => 'Unsuccessful',
-                    ]);
                 }
             }
         }

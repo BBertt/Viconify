@@ -54,6 +54,7 @@ Route::middleware('auth')->group(function () {
 
     // Auction
     Route::post('/shop/auction/update/{AuctionID}', [MsAuctionController::class, 'update'])->name('auction.update');
+    Route::post('/auction/add', [MsAuctionController::class, 'store'])->name('auction.store');
 
     Route::delete('/video/delete/{id}', [MsVideoController::class, 'destroy'])->name('video.delete');
     Route::get('/video/edit/{id}', [MsVideoController::class, 'edit'])->name('video.edit');

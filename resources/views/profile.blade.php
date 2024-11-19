@@ -116,6 +116,7 @@
             <button class="tab-link bg-white text-black font-bold py-2 px-4 rounded border" onclick="showTab('posts')">Post</button>
             @if (auth()->user()->Role == 'seller')
                 <button class="tab-link bg-white text-black font-bold py-2 px-4 rounded border" onclick="showTab('products')">Product</button>
+                <button class="tab-link bg-white text-black font-bold py-2 px-4 rounded border" onclick="showTab('auctions')">Auction</button>
                 <button class="tab-link bg-white text-black font-bold py-2 px-4 rounded border" onclick="showTab('transaction')">Transaction History</button>
             @endif
             <div class="ml-auto relative inline-block text-left">
@@ -127,6 +128,7 @@
                     <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="showModal('addVideoModalShort')">Add Shorts</a>
                     @if (auth()->user()->Role == 'seller')
                         <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="showModal('addProductModal')">Add Product</a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="showModal('addAuctionModal')">Add Auction</a>
                     @endif
                     <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="showModal('addPostModal')">Add Post</a>
                 </div>
@@ -466,6 +468,95 @@
                 </div>
             </div>
 
+            <div id="products" class="tab-content hidden">
+                <div class="container mx-auto px-4 py-8">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        @foreach ($products as $product)
+                                <div class="bg-white p-4 rounded-lg shadow-md">
+                                    @if ($product->pictures->isNotEmpty())
+                                        <div class="product-image h-60 w-full mb-4 rounded-lg">
+                                            <img src="{{ asset('storage/' . $product->pictures->first()->PictureData) }}" alt="{{ $product->ProductName }}" class="h-60 w-full object-cover image1">
+                                            @if ($product->pictures->count() > 1)
+                                                <img src="{{ asset('storage/' . $product->pictures->skip(1)->first()->PictureData) }}" alt="{{ $product->ProductName }}" class="h-60 w-full object-cover image2">
+                                            @else
+                                                <img src="{{ asset('storage/' . $product->pictures->first()->PictureData) }}" alt="{{ $product->ProductName }}" class="h-60 w-full object-cover image2">
+                                            @endif
+                                        </div>
+                                    @endif
+                                    <h2 class="text-lg font-bold">{{ Str::limit($product->ProductName, 30, '...') }}</h2>
+                                    <p class="text-gray-500">{{ $product->user->StoreName }}</p>
+                                    <p class="text-red-500 font-bold mt-2">Rp {{ number_format($product->ProductPrice, 0, ',', '.') }}</p>
+                                    <div class="mt-2">
+                                        <button type="button" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600" onclick="showEditProductModal('{{ $product->ProductID }}')">Edit</button>
+                                        <button type="button" class="bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600" onclick="deleteProduct(this, '{{ route('product.destroy', ['msProduct' => $product->ProductID]) }}')">Delete</button>
+                                    </div>
+                                </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+            <!-- ---------------------------------------------------------------------------Auction Tab---------------------------------------------------------------------------------->
+            <div id="auctions" class="tab-content hidden">
+                <div class="container mx-auto px-4 py-8">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        @foreach ($auctions as $auction)
+                            <div class="bg-white p-4 rounded-lg shadow-md">
+                                @if ($auction->pictures->isNotEmpty())
+                                    <div class="product-image h-60 w-full mb-4 rounded-lg">
+                                        <img src="{{ asset('storage/' . $auction->pictures->first()->PictureData) }}" alt="{{ $auction->AuctionProductName }}" class="h-60 w-full object-cover image1">
+                                        @if ($auction->pictures->count() > 1)
+                                            <img src="{{ asset('storage/' . $auction->pictures->skip(1)->first()->PictureData) }}" alt="{{ $auction->AuctionProductName }}" class="h-60 w-full object-cover image2">
+                                        @else
+                                            <img src="{{ asset('storage/' . $auction->pictures->first()->PictureData) }}" alt="{{ $auction->AuctionProductName }}" class="h-60 w-full object-cover image2">
+                                        @endif
+                                    </div>
+                                @endif
+                                <h2 class="text-lg font-bold">{{ Str::limit($auction->AuctionProductName, 30, '...') }}</h2>
+                                <p class="text-gray-500">{{ $auction->user->StoreName }}</p>
+                                <p class="text-red-500 font-bold mt-2">Rp {{ number_format($auction->AuctionProductStartPrice, 0, ',', '.') }}</p>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <div id="addAuctionModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" onclick="closeModalOnClickOutside(event, 'addAuctionModal')">
+                <div class="bg-white p-6 rounded-lg shadow-lg w-1/2" onclick="event.stopPropagation()">
+                    <h2 class="text-xl font-bold mb-4">Add Auction</h2>
+                    <form action="{{ route('auction.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-4">
+                            <label for="AuctionProductName" class="block text-gray-700">Auction Product Name</label>
+                            <input type="text" name="AuctionProductName" id="AuctionProductName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="AuctionProductDescription" class="block text-gray-700">Auction Product Description</label>
+                            <textarea name="AuctionProductDescription" id="AuctionProductDescription" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label for="AuctionProductStartPrice" class="block text-gray-700">Starting Price</label>
+                            <input type="number" name="AuctionProductStartPrice" id="AuctionProductStartPrice" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="AuctionProductEndPrice" class="block text-gray-700">End Price</label>
+                            <input type="number" name="AuctionProductEndPrice" id="AuctionProductEndPrice" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="AuctionProductEndTime" class="block text-gray-700">End Time</label>
+                            <input type="datetime-local" name="AuctionProductEndTime" id="AuctionProductEndTime" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="ProductImages" class="block text-gray-700">Product Images</label>
+                            <input type="file" name="ProductImages[]" id="ProductImages" class="block w-full" multiple required>
+                        </div>
+            
+                        <div class="flex justify-end">
+                            <button type="button" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2" onclick="closeModal('addAuctionModal')">Cancel</button>
+                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Auction</button>
+                        </div>
+                    </form>
+                </div>
+            </div> 
             <!-- ------------------------------------------------------------------ Transaction History ----------------------------------------------------------------- -->
             <div id="transaction" class="tab-content hidden">
                 <div class="container mx-auto my-5 p-5 bg-gray-100">

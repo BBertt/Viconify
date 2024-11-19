@@ -24,7 +24,8 @@ class MsUserController extends Controller
         $products = $user->products;
         $posts = MsPost::with('pictures')->where('UserID', $user->UserID)->get();
         $transactionHeader = TransactionHeader::with('transactionDetails')->get();
-        return view('profile', compact('user', 'videos', 'products', 'posts', 'transactionHeader'));
+        $auctions = MsAuction::with('pictures')->where('UserID', $user->UserID)->get();
+        return view('profile', compact('user', 'videos', 'products', 'posts', 'transactionHeader', 'auctions'));
     }
 
     // Untuk register

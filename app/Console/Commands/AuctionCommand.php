@@ -41,33 +41,36 @@ class AuctionCommand extends Command
         }
 
         foreach ($auctions as $auction) {
-            $user = MsUser::where('UserID', $auction->AuctionTopBidUserID)->first();
+            
+            if ($auction->Status == 'Pending') {
+                $user = MsUser::where('UserID', $auction->AuctionTopBidUserID)->first();
 
-            if ($user->Balance < $auction->AuctionTopBid) {
-                $auction->delete();
+                if ($user->Balance < $auction->AuctionTopBid) {
+                    $auction->delete();
+                }
+            
+                else if ($auction->AuctionTopBidUserID != NULL) {
+                    $user->Balance = $user->Balance - $auction->AuctionTopBid;
+                    $user->save();
+
+                    $transaction = TransactionHeader::create([
+                        'UserID' => $auction->AuctionTopBidUserID,
+                        'TransactionDate' => now(),
+                        'PaymentMethod' => 'Balance',
+                    ]);
+
+                    TransactionDetail::create([
+                        'TransactionID' => $transaction->TransactionID,
+                        'AuctionID' => $auction->AuctionID,
+                        'Quantity' => 1,
+                        'Price' => $auction->AuctionTopBid,
+                        'TransactionStatus' => 'Pending',
+                    ]);
+                }
+
+                $auction->status = 'Done';
+                $auction->save();
             }
-
-            else if ($auction->AuctionTopBidUserID != NULL) {
-                $user->Balance = $user->Balance - $auction->AuctionTopBid;
-                $user->save();
-
-                $transaction = TransactionHeader::create([
-                    'UserID' => $auction->AuctionTopBidUserID,
-                    'TransactionDate' => now(),
-                    'PaymentMethod' => 'Balance',
-                ]);
-
-                TransactionDetail::create([
-                    'TransactionID' => $transaction->TransactionID,
-                    'AuctionID' => $auction->AuctionID,
-                    'Quantity' => 1,
-                    'Price' => $auction->AuctionTopBid,
-                    'TransactionStatus' => 'Pending',
-                ]);
-            }
-
-            $auction->status = 'Done';
-            $auction->save();
             
         }
 

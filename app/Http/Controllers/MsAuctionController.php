@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MsAuction;
+use App\Models\MsPicture;
 use App\Models\MsUser;
 use App\Models\TransactionDetail;
 use App\Models\TransactionHeader;
@@ -32,7 +33,38 @@ class MsAuctionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'AuctionProductName' => 'required|string|max:255',
+            'AuctionProductDescription' => 'required|string',
+            'AuctionProductStartPrice' => 'required',
+            'AuctionProductEndPrice' => 'required',
+            'AuctionProductEndTime' => 'required',
+            'ProductImages.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        $auction = MsAuction::create([
+            'UserID' => auth()->id(),
+            'AuctionProductName' => $request->AuctionProductName,
+            'AuctionProductDescription' => $request->AuctionProductDescription,
+            'AuctionProductStartPrice' => $request->AuctionProductStartPrice,
+            'AuctionProductEndPrice' => $request->AuctionProductEndPrice,
+            'AuctionProductEndTime' => $request->AuctionProductEndTime,
+            'Status' => 'Pending',
+        ]);
+
+        if ($request->hasFile('ProductImages')) {
+            foreach ($request->file('ProductImages') as $image) {
+                if ($image->isValid()) {
+                    $path = $image->store('product_images', 'public');
+                    MsPicture::create([
+                        'AuctionID' => $auction->AuctionID,
+                        'PictureData' => $path,
+                    ]);
+                }
+            }
+        }
+
+        return redirect()->back()->with('success', 'Auction added successfully');
     }
 
     /**
