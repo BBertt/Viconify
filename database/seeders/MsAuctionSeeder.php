@@ -16,23 +16,47 @@ class MsAuctionSeeder extends Seeder
     {
         $auction = MsAuction::create([
             'UserID' => 1,
-            'AuctionProductName' => 'UNIQLO Kemeja Pria Lengan Panjang Casual Slimfit',
-            'AuctionProductStartPrice' => 25000,
-            'AuctionProductEndPrice' => 175000,
-            'AuctionProductDescription' => 'Detail produk dari Kemeja lengan panjang pria terbaru
-            Merk UNIQLO
-            • Kerah kemeja
-            • Ready Stok
-            • Material Katun Twill Premium
-            • Gender Pria Dan Wanita
-            • Model Slimfit / reguler fit',
-            'AuctionProductEndTime' => now(),
+            'AuctionProductName' => '[Preloved] Monitor LG Flatron W1953SE',
+            'AuctionProductStartPrice' => 150000,
+            'AuctionProductEndPrice' => 1000000,
+            'AuctionProductDescription' => 'Monitor LG Flatron W1953SE (masih menyala dengan baik)
+- Pembelian Maret 2011
+- Layar 19 inci
+- Resolusi 1366x768 pixels
+- Tipe LCD: TN Panel
+- Kondisi fisik minim baret
+- No dead pixel
+
+Kelengkapan: Unit monitor, kabel power, kabel VGA, bonus adapter VGA-HDMI merek Orico
+
+Dus sudah tidak ada, akan dikirim menggunakan plastic wrap, styrofoam, dan bubblewrap. Silakan chat jika ada yang kurang jelas.',
+            'AuctionProductEndTime' => now()->addDay(),
             'Status' => 'Pending',
         ]);
 
         MsPicture::create([
             'AuctionID' => $auction->AuctionID,
-            'PictureData' => 'product_images/product_1_1.png'
+            'PictureData' => 'product_images/product_11_1.png'
+        ]);
+
+        $auction = MsAuction::create([
+            'UserID' => 2,
+            'AuctionProductName' => 'Stary Night Painting',
+            'AuctionProductStartPrice' => 2000000,
+            'AuctionProductEndPrice' => 10000000,
+            'AuctionProductDescription' => 'Painting of The Stary Night. Huge Size.',
+            'AuctionProductEndTime' => now()->addDay(),
+            'Status' => 'Pending',
+        ]);
+
+        MsPicture::create([
+            'AuctionID' => $auction->AuctionID,
+            'PictureData' => 'product_images/product_12_1.png'
+        ]);
+
+        MsPicture::create([
+            'AuctionID' => $auction->AuctionID,
+            'PictureData' => 'product_images/product_12_2.png'
         ]);
     }
 }
